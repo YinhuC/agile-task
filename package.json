@@ -10,7 +10,6 @@
     "test:server": "cd server && yarn test",
     "eject": "react-scripts eject",
     "typecheck": "tsc --noEmit",
-    "postinstall": "cd client && yarn install --ignore-optional && cd ../server && yarn install --ignore-optional && rm -rf ../node_modules",
-    "lint": "cd client && yarn lint && cd ../server & yarn lint"
+    "postinstall": "cd client && yarn install --ignore-optional && cd ../server && yarn install --ignore-optional && rm -rf ../node_modules"
   }
 }
