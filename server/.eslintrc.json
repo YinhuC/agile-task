@@ -1,0 +1,17 @@
+{
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier", "airbnb-typescript"],
+  "plugins": ["@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+
+  },
+  "rules": {
+    "@typescript-eslint/comma-dangle": "off"
+  },
+  "overrides": [
+    // Overrides for specific files or directories
+  ]
+}
