@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text, Button, Stack } from "@mantine/core";
 import { ThemeProvider } from "./ThemeProvider";
 

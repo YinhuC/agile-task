@@ -1,3 +1,4 @@
+import React from 'react';
 import { MantineProvider, MantineThemeOverride } from "@mantine/core";
 
 export const theme: MantineThemeOverride = {

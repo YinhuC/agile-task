@@ -1,0 +1,11 @@
+{
+  "name": "agile-task-server",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  }
+}
