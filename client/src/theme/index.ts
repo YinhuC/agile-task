@@ -3,7 +3,7 @@ import '../styles/fonts.css';
 import { sizes, title } from './components/title-styles';
 
 const theme: MantineThemeOverride = {
-  colorScheme: 'light',
+  colorScheme: 'dark',
   fontFamily: 'Inter, Arial, Helvetica, sans-serif',
   lineHeight: '120%',
   headings: {

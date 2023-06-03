@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from './providers/ThemeProvider';
 import { RouterProvider } from 'react-router-dom';
 import router from './config/routerConfig';
+import Header from './components/Header';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,6 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <ThemeProvider>
+      <Header />
       <RouterProvider router={router} />
     </ThemeProvider>
   </StrictMode>
