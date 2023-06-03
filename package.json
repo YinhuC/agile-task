@@ -1,10 +1,10 @@
 {
-  "name": "agile-task",
+  "name": "agile-tasker",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "cd client && yarn start",
-    "start:server": "cd server && yarn start",
+    "start:server": "cd server && yarn start:dev",
     "build": "cd client && yarn build",
     "test": "cd client && yarn test",
     "test:server": "cd server && yarn test",
