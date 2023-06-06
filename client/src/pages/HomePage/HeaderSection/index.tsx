@@ -11,7 +11,11 @@ import {
 
 function HeaderSection() {
   return (
-    <Container size='xl'>
+    <Container
+      size='lg'
+      sx={{ height: '60vh', display: 'flex', alignItems: 'center' }}
+      mb={100}
+    >
       <Flex
         direction='row'
         justify='center'
@@ -19,7 +23,7 @@ function HeaderSection() {
         gap={50}
         sx={{ width: '100%' }}
       >
-        <Stack sx={{ width: '45%' }}>
+        <Stack>
           <Title order={1} mb={10}>
             Unmatched Project Efficiency.
           </Title>
@@ -36,7 +40,7 @@ function HeaderSection() {
             </Button>
           </Flex>
         </Stack>
-        <Center sx={{ width: '45%' }}>Image</Center>
+        <Center sx={{ width: '50%' }}>Image</Center>
       </Flex>
     </Container>
   );

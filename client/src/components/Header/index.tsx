@@ -3,7 +3,7 @@ import { Container, Text, Button, Flex, Box } from '@mantine/core';
 
 const Header: React.FC = () => {
   return (
-    <Container size='xl'>
+    <Container size='lg'>
       <Flex
         p='md'
         justify='space-between'
