@@ -45,9 +45,7 @@ export class User {
   @BeforeUpdate()
   async hashPassword(): Promise<void> {
     const salt = await bcrypt.genSalt();
-    if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(this.password)) {
-      this.password = await bcrypt.hash(this.password, salt);
-    }
+    this.password = await bcrypt.hash(this.password, salt);
   }
 
   async checkPassword(plainPassword: string): Promise<boolean> {
