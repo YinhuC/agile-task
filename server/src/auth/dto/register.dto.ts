@@ -7,7 +7,7 @@ import {
 } from 'class-validator';
 import { MESSAGES, REGEXES } from 'src/utils/regex';
 
-export class CreateUserDto {
+export class RegisterDto {
   @IsNotEmpty()
   @IsEmail()
   @Length(2, 20)

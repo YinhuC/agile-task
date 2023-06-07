@@ -10,7 +10,6 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import { CreateUserDto } from '../dto/CreateUser.dto';
 import { UpdateUserDto } from '../dto/UpdateUser.dto';
 import { User } from '../user.entity';
 
@@ -26,12 +25,6 @@ export class UserController {
   @Get(':id')
   async findById(@Param('id') id: string): Promise<User> {
     return this.userService.findUserById(id);
-  }
-
-  @Post()
-  @UsePipes(ValidationPipe)
-  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.userService.createUser(createUserDto);
   }
 
   @Put(':id')
