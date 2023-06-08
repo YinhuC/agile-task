@@ -10,7 +10,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import { UpdateUserDto } from '../dto/UpdateUser.dto';
+import { UpdateUserDto } from '../dto/update-user';
 import { User } from '../user.entity';
 
 @Controller('users')
