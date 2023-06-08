@@ -3,7 +3,7 @@ import { UserService } from 'src/user/services/user.service';
 import { User } from 'src/user/user.entity';
 import { RegisterDto } from '../dto/register.dto';
 import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from '../interfaces/jwt.interface';
+import { JwtPayload } from '../utils/jwt.interface';
 
 @Injectable()
 export class AuthService {
