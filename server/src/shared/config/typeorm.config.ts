@@ -7,6 +7,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: process.env.REACT_APP_DB_USERNAME,
   password: process.env.REACT_APP_DB_PASSWORD,
   database: process.env.REACT_APP_DB_NAME,
-  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+  entities: [__dirname + '/../../**/*.entity{.ts,.js}'],
   synchronize: true,
 };

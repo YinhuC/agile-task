@@ -5,7 +5,7 @@ import {
   Length,
   Matches,
 } from 'class-validator';
-import { MESSAGES, REGEXES } from 'src/utils/regex';
+import { MESSAGES, REGEXES } from 'src/shared/utils/regex';
 
 export class RegisterDto {
   @IsNotEmpty()
