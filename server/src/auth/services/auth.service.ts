@@ -55,7 +55,7 @@ export class AuthService {
     return user;
   }
 
-  async generateToken(user: User) {
+  generateToken(user: User): string {
     const payload: JwtPayload = {
       email: user.email,
       sub: user.id,

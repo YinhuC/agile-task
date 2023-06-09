@@ -20,6 +20,12 @@ async function bootstrap() {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.enableCors({
+    origin: process.env.ALLOWED_ORIGINS?.split(/\s*,\s*/) ?? '*',
+    credentials: true,
+    exposedHeaders: ['Authorization'],
+  });
+
   await app.listen(3300);
 }
 bootstrap();

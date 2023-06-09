@@ -9,6 +9,7 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
   constructor(private authService: AuthService) {
     super({
       usernameField: 'email',
+      passReqToCallback: false,
     });
   }
 

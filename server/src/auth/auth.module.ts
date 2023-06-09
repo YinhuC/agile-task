@@ -16,6 +16,10 @@ import { SessionSerializer } from './utils/session.serializer';
       secret: process.env.REACT_APP_JWT_SECRET,
       signOptions: {
         expiresIn: '1d',
+        algorithm: 'HS384',
+      },
+      verifyOptions: {
+        algorithms: ['HS384'],
       },
     }),
   ],
