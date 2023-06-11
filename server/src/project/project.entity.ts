@@ -1,9 +1,11 @@
+import { Category } from 'src/category/category.entity';
 import { Group } from 'src/group/group.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -27,4 +29,7 @@ export class Project {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @OneToMany(() => Category, (category) => category.project)
+  categories: Category[];
 }

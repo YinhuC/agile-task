@@ -1,4 +1,4 @@
 import { Controller } from '@nestjs/common';
 
-@Controller('group')
+@Controller('groups')
 export class GroupController {}
