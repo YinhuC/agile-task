@@ -26,7 +26,7 @@ export class Group {
 
   @OneToOne(() => User, { createForeignKeyConstraints: false })
   @JoinColumn()
-  creator: User;
+  owner: User;
 
   @OneToMany(() => Project, (project) => project.group)
   projects: Project[];

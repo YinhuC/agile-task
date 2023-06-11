@@ -3,40 +3,62 @@ import {
   Controller,
   Get,
   Param,
-  Post,
   Put,
   Delete,
-  UsePipes,
-  ValidationPipe,
+  UseGuards,
+  Req,
+  Res,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { UpdateUserDto } from '../dto/update-user';
 import { User } from '../user.entity';
+import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
+import { Request, Response } from 'express';
+import { AuthUser } from '../decorators/user.decorator';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
+  @UseGuards(AuthenticatedGuard)
   async findAll(): Promise<User[]> {
-    return this.userService.findAllUsers();
+    const users = await this.userService.findAllUsers();
+    const usersWithoutPassword = users.map((user) => {
+      delete user.password;
+      return user;
+    });
+    return usersWithoutPassword;
   }
 
   @Get(':id')
+  @UseGuards(AuthenticatedGuard)
   async findById(@Param('id') id: number): Promise<User> {
-    return this.userService.findUserById(id);
+    const user = await this.userService.findUserById(id);
+    delete user.password;
+    return user;
   }
 
-  @Put(':id')
+  @Put()
+  @UseGuards(AuthenticatedGuard)
   async update(
-    @Param('id') id: number,
+    @AuthUser() user: User,
     @Body() updateUserDto: UpdateUserDto
   ): Promise<User> {
-    return this.userService.updateUser(id, updateUserDto);
+    return this.userService.updateUser(user.id, updateUserDto);
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: number): Promise<void> {
-    return this.userService.deleteUser(id);
+  @Delete()
+  @UseGuards(AuthenticatedGuard)
+  async deleteAccount(
+    @AuthUser() user: User,
+    @Req() req: Request,
+    @Res() res: Response
+  ): Promise<void> {
+    await this.userService.deleteUser(user.id);
+
+    req.logout((err) => {
+      return err ? res.sendStatus(400) : res.sendStatus(200);
+    });
   }
 }

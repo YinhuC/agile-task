@@ -31,6 +31,7 @@ export class User {
   password: string;
 
   @Column({ name: 'auth_method', nullable: true })
+  @Exclude()
   authMethod: string;
 
   @CreateDateColumn({ name: 'created_at' })

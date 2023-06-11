@@ -9,6 +9,8 @@ import {
   UseInterceptors,
   HttpStatus,
   HttpCode,
+  Req,
+  Res,
 } from '@nestjs/common';
 import { User } from 'src/user/user.entity';
 import { AuthService } from '../services/auth.service';
@@ -17,8 +19,8 @@ import { RegisterDto } from '../dto/register.dto';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { AuthUser } from 'src/user/decorators/user.decorator';
 import { TokenInterceptor } from '../utils/token.interceptor';
-import { SessionAuthGuard } from '../guards/session-auth.guard';
 import { AuthenticatedGuard } from '../guards/auth.guard';
+import { Request, Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -41,8 +43,16 @@ export class AuthController {
   }
 
   @Get('user')
-  @UseGuards(AuthenticatedGuard, SessionAuthGuard, JwtAuthGuard)
+  @UseGuards(AuthenticatedGuard, JwtAuthGuard)
   async user(@AuthUser() user: User): Promise<User> {
     return user;
+  }
+
+  @Post('logout')
+  @UseGuards(AuthenticatedGuard)
+  logout(@Req() req: Request, @Res() res: Response) {
+    req.logout((err) => {
+      return err ? res.sendStatus(400) : res.sendStatus(200);
+    });
   }
 }
