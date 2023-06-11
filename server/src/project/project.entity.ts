@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -22,6 +23,7 @@ export class Project {
   description: string;
 
   @ManyToOne(() => Group, (group) => group.projects)
+  @JoinColumn()
   group: Group;
 
   @CreateDateColumn({ name: 'created_at' })

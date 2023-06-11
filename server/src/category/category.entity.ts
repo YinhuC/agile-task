@@ -1,9 +1,12 @@
 import { Project } from 'src/project/project.entity';
+import { Task } from 'src/task/task.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -16,8 +19,12 @@ export class Category {
   name: string;
 
   @ManyToOne(() => Project, (project) => project.categories)
+  @JoinColumn()
   project: Project;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: number;
+
+  @OneToMany(() => Task, (task) => task.category)
+  tasks: Task[];
 }

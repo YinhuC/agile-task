@@ -1,9 +1,11 @@
+import { Category } from 'src/category/category.entity';
 import { Project } from 'src/project/project.entity';
 import { User } from 'src/user/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -20,12 +22,14 @@ export class Task {
   @Column()
   description: string;
 
-  @ManyToOne(() => Project, (project) => project.categories)
-  project: Project;
+  @ManyToOne(() => Category, (category) => category.tasks)
+  @JoinColumn()
+  category: Category;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: number;
 
-  @OneToOne(() => User, (user) => user.tasks)
+  @OneToOne(() => User, { createForeignKeyConstraints: false })
+  @JoinColumn()
   user: User;
 }
