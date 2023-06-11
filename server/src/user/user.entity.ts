@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
+import { Group } from 'src/group/group.entity';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +9,8 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity({ name: 'users' })
@@ -36,6 +39,10 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToMany(() => Group, (groups) => groups.users)
+  @JoinTable()
+  groups: Group[];
 
   constructor(data: Partial<User> = {}) {
     Object.assign(this, data);
