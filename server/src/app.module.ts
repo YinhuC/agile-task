@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { GroupController } from './group/group.controller';
 import { GroupModule } from './group/group.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { GroupModule } from './group/group.module';
     UserModule,
     AuthModule,
     GroupModule,
+    ProjectModule,
   ],
   controllers: [AppController, GroupController],
   providers: [AppService],
