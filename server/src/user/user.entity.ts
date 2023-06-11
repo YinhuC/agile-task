@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
 import { Group } from 'src/group/group.entity';
+import { Task } from 'src/task/task.entity';
 import {
   Column,
   CreateDateColumn,
@@ -11,6 +12,7 @@ import {
   BeforeUpdate,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 
 @Entity({ name: 'users' })
@@ -43,6 +45,9 @@ export class User {
   @ManyToMany(() => Group, (groups) => groups.users)
   @JoinTable()
   groups: Group[];
+
+  @OneToMany(() => Task, (task) => task.user)
+  tasks: Task[];
 
   constructor(data: Partial<User> = {}) {
     Object.assign(this, data);

@@ -7,6 +7,7 @@ import { PassportModule } from '@nestjs/passport';
 import { GroupModule } from './group/group.module';
 import { ProjectModule } from './project/project.module';
 import { CategoryModule } from './category/category.module';
+import { TaskModule } from './task/task.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CategoryModule } from './category/category.module';
     GroupModule,
     ProjectModule,
     CategoryModule,
+    TaskModule,
   ],
   controllers: [],
   providers: [],
