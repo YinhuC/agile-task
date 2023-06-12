@@ -19,7 +19,7 @@ export class Project {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @ManyToOne(() => Group, (group) => group.projects)

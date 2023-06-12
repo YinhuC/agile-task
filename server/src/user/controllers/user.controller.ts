@@ -8,6 +8,8 @@ import {
   UseGuards,
   Req,
   Res,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { UpdateUserDto } from '../dto/update-user';
@@ -34,9 +36,10 @@ export class UserController {
 
   @Put()
   @UseGuards(AuthenticatedGuard)
+  @UsePipes(ValidationPipe)
   async update(
     @AuthUser() user: User,
-    @Body() updateUserDto: UpdateUserDto
+    @Body() updateUserDto: Partial<UpdateUserDto>
   ): Promise<User> {
     return this.userService.updateUser(user.id, updateUserDto);
   }
