@@ -7,8 +7,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  BeforeInsert,
-  BeforeUpdate,
   ManyToMany,
 } from 'typeorm';
 
@@ -26,7 +24,7 @@ export class User {
   @Column()
   lastname: string;
 
-  @Column()
+  @Column({ select: false })
   @Exclude()
   password: string;
 
@@ -47,14 +45,8 @@ export class User {
     Object.assign(this, data);
   }
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  async hashPassword(): Promise<void> {
+  async setPassword(password: string): Promise<void> {
     const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(this.password, salt);
-  }
-
-  async checkPassword(plainPassword: string): Promise<boolean> {
-    return await bcrypt.compare(plainPassword, this.password);
+    this.password = await bcrypt.hash(password, salt);
   }
 }

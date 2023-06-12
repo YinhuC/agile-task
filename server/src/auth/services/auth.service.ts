@@ -14,8 +14,6 @@ export class AuthService {
 
   async register(registerDto: RegisterDto): Promise<User> {
     const user = await this.userService.create(registerDto);
-    delete user.password;
-
     return user;
   }
 
@@ -30,12 +28,11 @@ export class AuthService {
       );
     }
 
-    if (!(await user.checkPassword(password))) {
+    if (!(await this.userService.comparePassword(user, password))) {
       throw new UnauthorizedException(
         `Wrong password for user with email: ${email}`
       );
     }
-    delete user.password;
 
     return user;
   }
@@ -50,7 +47,6 @@ export class AuthService {
         `There isn't any user with email: ${payload.sub}`
       );
     }
-    delete user.password;
 
     return user;
   }

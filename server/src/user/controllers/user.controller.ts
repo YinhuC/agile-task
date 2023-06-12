@@ -23,20 +23,13 @@ export class UserController {
   @Get()
   @UseGuards(AuthenticatedGuard)
   async findAll(): Promise<User[]> {
-    const users = await this.userService.findAllUsers();
-    const usersWithoutPassword = users.map((user) => {
-      delete user.password;
-      return user;
-    });
-    return usersWithoutPassword;
+    return await this.userService.findAllUsers();
   }
 
   @Get(':id')
   @UseGuards(AuthenticatedGuard)
   async findById(@Param('id') id: number): Promise<User> {
-    const user = await this.userService.findUserById(id);
-    delete user.password;
-    return user;
+    return await this.userService.findUserById(id);
   }
 
   @Put()
