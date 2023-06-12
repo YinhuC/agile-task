@@ -6,9 +6,5 @@ export class CreateProjectDto {
   name: string;
 
   @IsNotEmpty()
-  @Length(0, 100)
-  description: string;
-
-  @IsNotEmpty()
   groupId: number;
 }

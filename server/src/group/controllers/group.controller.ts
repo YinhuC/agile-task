@@ -26,13 +26,13 @@ export class GroupController {
   @Get()
   @UseGuards(AuthenticatedGuard)
   async getAllGroups(): Promise<Group[]> {
-    return this.groupService.getAllGroups();
+    return await this.groupService.getAllGroups();
   }
 
   @Get(':id')
   @UseGuards(AuthenticatedGuard)
   async getGroupById(@Param('id') id: number): Promise<Group> {
-    return this.groupService.getGroupById(id);
+    return await this.groupService.getGroupById(id);
   }
 
   @Post()
@@ -42,7 +42,7 @@ export class GroupController {
     @AuthUser() user: User,
     @Body() createGroupDto: CreateGroupDTO
   ): Promise<Group> {
-    return this.groupService.createGroup(createGroupDto, user);
+    return await this.groupService.createGroup(createGroupDto, user);
   }
 
   @Put(':id')
@@ -52,12 +52,12 @@ export class GroupController {
     @Param('id') id: number,
     @Body() updateGroupDto: UpdateGroupDto
   ): Promise<Group> {
-    return this.groupService.updateGroup(id, updateGroupDto);
+    return await this.groupService.updateGroup(id, updateGroupDto);
   }
 
   @Delete(':id')
   @UseGuards(AuthenticatedGuard, OwnershipGuard)
   async deleteGroup(@Param('id') id: number): Promise<void> {
-    return this.groupService.deleteGroup(id);
+    return await this.groupService.deleteGroup(id);
   }
 }

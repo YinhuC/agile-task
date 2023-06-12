@@ -7,6 +7,8 @@ import {
   Body,
   Param,
   UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ProjectService } from '../services/project.service';
 import { CreateProjectDto } from '../dto/create-project.dto';
@@ -21,30 +23,32 @@ export class ProjectController {
   @Get()
   @UseGuards(AuthenticatedGuard)
   async getAllProjects(): Promise<Project[]> {
-    return this.projectService.getAllProjects();
+    return await this.projectService.getAllProjects();
   }
 
   @Get(':id')
   @UseGuards(AuthenticatedGuard)
   async getProjectById(@Param('id') id: number): Promise<Project> {
-    return this.projectService.getProjectById(id);
+    return await this.projectService.getProjectById(id);
   }
 
   @Post()
+  @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
   async createProject(
     @Body() createProjectDto: CreateProjectDto
   ): Promise<Project> {
-    return this.projectService.createProject(createProjectDto);
+    return await this.projectService.createProject(createProjectDto);
   }
 
   @Put(':id')
+  @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
   async updateProject(
     @Param('id') id: number,
     @Body() updateProjectDto: UpdateProjectDto
   ): Promise<Project> {
-    return this.projectService.updateProject(id, updateProjectDto);
+    return await this.projectService.updateProject(id, updateProjectDto);
   }
 
   @Delete(':id')

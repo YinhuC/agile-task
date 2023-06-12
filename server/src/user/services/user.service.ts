@@ -13,7 +13,7 @@ export class UserService {
   ) {}
 
   async findAllUsers(): Promise<User[]> {
-    return this.userRepository.find();
+    return await this.userRepository.find();
   }
 
   async findUserById(id: number): Promise<User> {
@@ -36,14 +36,13 @@ export class UserService {
     const user = this.userRepository.create(data);
     await user.setPassword(user.password);
     await this.userRepository.save(user);
-    // delete user.password;
     return user;
   }
 
   async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.findUserById(id);
     Object.assign(user, updateUserDto);
-    return this.userRepository.save(user);
+    return await this.userRepository.save(user);
   }
 
   async deleteUser(id: number): Promise<void> {
@@ -62,6 +61,6 @@ export class UserService {
       throw new NotFoundException('User not found');
     }
 
-    return bcrypt.compare(password, userWithPassword.password);
+    return await bcrypt.compare(password, userWithPassword.password);
   }
 }

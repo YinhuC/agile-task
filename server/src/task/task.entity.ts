@@ -18,7 +18,7 @@ export class Task {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @ManyToOne(() => Category, (category) => category.tasks)

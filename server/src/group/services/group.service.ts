@@ -14,7 +14,7 @@ export class GroupService {
   ) {}
 
   async getAllGroups(): Promise<Group[]> {
-    return this.groupRepository.find();
+    return await this.groupRepository.find();
   }
 
   async getGroupById(id: number): Promise<Group> {
@@ -46,7 +46,7 @@ export class GroupService {
       owner: user,
     };
     const newGroup = this.groupRepository.create(group);
-    return this.groupRepository.save(newGroup);
+    return await this.groupRepository.save(newGroup);
   }
 
   async updateGroup(

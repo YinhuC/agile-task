@@ -4,16 +4,18 @@ import { Repository } from 'typeorm';
 import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
 import { Project } from '../project.entity';
+import { GroupService } from 'src/group/services/group.service';
 
 @Injectable()
 export class ProjectService {
   constructor(
     @InjectRepository(Project)
-    private readonly projectRepository: Repository<Project>
+    private readonly projectRepository: Repository<Project>,
+    private readonly groupService: GroupService
   ) {}
 
   async getAllProjects(): Promise<Project[]> {
-    return this.projectRepository.find();
+    return await this.projectRepository.find();
   }
 
   async getProjectById(id: number): Promise<Project> {
@@ -25,8 +27,14 @@ export class ProjectService {
   }
 
   async createProject(createProjectDto: CreateProjectDto): Promise<Project> {
-    const project = this.projectRepository.create(createProjectDto);
-    return this.projectRepository.save(project);
+    const { groupId, ...projectDto } = createProjectDto;
+    const group = await this.groupService.getGroupById(groupId);
+    const project = {
+      ...projectDto,
+      group: group,
+    };
+    const newProject = this.projectRepository.create(project);
+    return this.projectRepository.save(newProject);
   }
 
   async updateProject(
