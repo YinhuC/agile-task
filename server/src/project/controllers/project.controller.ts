@@ -15,21 +15,30 @@ import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
 import { Project } from '../project.entity';
 import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
+import { GetProjectDto } from '../dto/get-project.dto';
+import { DeleteProjectDto } from '../dto/delete-project.dto';
 
 @Controller('projects')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @Get()
+  @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
-  async getAllProjects(): Promise<Project[]> {
-    return await this.projectService.getAllProjects();
+  async getAllProjects(
+    @Body() getProjectDto: GetProjectDto
+  ): Promise<Project[]> {
+    return await this.projectService.getAllProjects(getProjectDto.groupId);
   }
 
   @Get(':id')
+  @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
-  async getProjectById(@Param('id') id: number): Promise<Project> {
-    return await this.projectService.getProjectById(id);
+  async getProjectById(
+    @Param('id') id: number,
+    @Body() getProjectDto: GetProjectDto
+  ): Promise<Project> {
+    return await this.projectService.getProjectById(id, getProjectDto.groupId);
   }
 
   @Post()
@@ -52,8 +61,12 @@ export class ProjectController {
   }
 
   @Delete(':id')
+  @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
-  async deleteProject(@Param('id') id: number): Promise<void> {
-    await this.projectService.deleteProject(id);
+  async deleteProject(
+    @Param('id') id: number,
+    @Body() deleteProjectDto: DeleteProjectDto
+  ): Promise<void> {
+    await this.projectService.deleteProject(id, deleteProjectDto.groupId);
   }
 }

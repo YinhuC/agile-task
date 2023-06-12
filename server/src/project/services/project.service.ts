@@ -14,14 +14,18 @@ export class ProjectService {
     private readonly groupService: GroupService
   ) {}
 
-  async getAllProjects(): Promise<Project[]> {
-    return await this.projectRepository.find();
+  async getAllProjects(groupId: number): Promise<Project[]> {
+    return await this.projectRepository.find({
+      where: { group: { id: groupId } },
+    });
   }
 
-  async getProjectById(id: number): Promise<Project> {
-    const project = await this.projectRepository.findOne({ where: { id } });
+  async getProjectById(projectId: number, groupId: number): Promise<Project> {
+    const project = await this.projectRepository.findOne({
+      where: { id: projectId, group: { id: groupId } },
+    });
     if (!project) {
-      throw new NotFoundException(`Project with ID ${id} not found`);
+      throw new NotFoundException(`Project with ID ${projectId} not found`);
     }
     return project;
   }
@@ -34,20 +38,20 @@ export class ProjectService {
       group: group,
     };
     const newProject = this.projectRepository.create(project);
-    return this.projectRepository.save(newProject);
+    return await this.projectRepository.save(newProject);
   }
 
   async updateProject(
     id: number,
     updateProjectDto: UpdateProjectDto
   ): Promise<Project> {
-    const project = await this.getProjectById(id);
+    const project = await this.getProjectById(id, updateProjectDto.groupId);
     const updatedProject = { ...project, ...updateProjectDto };
-    return this.projectRepository.save(updatedProject);
+    return await this.projectRepository.save(updatedProject);
   }
 
-  async deleteProject(id: number): Promise<void> {
-    const project = await this.getProjectById(id);
+  async deleteProject(id: number, groupId: number): Promise<void> {
+    const project = await this.getProjectById(id, groupId);
     await this.projectRepository.remove(project);
   }
 }
