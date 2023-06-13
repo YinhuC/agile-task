@@ -17,15 +17,23 @@ import { Project } from '../project.entity';
 import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
 import { AuthUser } from 'src/user/decorators/user.decorator';
 import { User } from 'src/user/user.entity';
+import { GetProjectDto } from '../dto/get-project.dto';
 
 @Controller('projects')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @Get()
+  @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
-  async getAllProjects(@AuthUser() user: User): Promise<Project[]> {
-    return await this.projectService.getAllProjects(user);
+  async getGroupProjects(
+    @AuthUser() user: User,
+    @Body() getProjectDto: GetProjectDto
+  ): Promise<Project[]> {
+    return await this.projectService.getAllProjectsByGroupId(
+      user,
+      getProjectDto.groupId
+    );
   }
 
   @Get(':id')

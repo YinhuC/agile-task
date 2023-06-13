@@ -46,8 +46,8 @@ export class GroupController {
   }
 
   @Put(':id')
-  @UseGuards(AuthenticatedGuard, OwnershipGuard)
   @UsePipes(ValidationPipe)
+  @UseGuards(AuthenticatedGuard, OwnershipGuard)
   async updateGroup(
     @Param('id') id: number,
     @Body() updateGroupDto: UpdateGroupDto

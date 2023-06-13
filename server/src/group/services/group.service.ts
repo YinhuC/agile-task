@@ -5,12 +5,14 @@ import { Group } from '../group.entity';
 import { CreateGroupDTO } from '../dto/create-group.dto';
 import { User } from 'src/user/user.entity';
 import { UpdateGroupDto } from '../dto/update-group.dto';
+import { UserService } from 'src/user/services/user.service';
 
 @Injectable()
 export class GroupService {
   constructor(
     @InjectRepository(Group)
-    private readonly groupRepository: Repository<Group>
+    private readonly groupRepository: Repository<Group>,
+    private readonly userService: UserService
   ) {}
 
   async getAllGroups(): Promise<Group[]> {
@@ -69,5 +71,11 @@ export class GroupService {
   async isOwner(user: Partial<User>, groupId: number): Promise<boolean> {
     const group = await this.getGroupWithOwner(groupId);
     return group.owner.id === user.id;
+  }
+
+  async isMember(user: User, groupId: number): Promise<boolean> {
+    const groups = await this.userService.getUserGroups(user.id);
+    if (!groups) return false;
+    return groups.some((group) => group.id == groupId);
   }
 }

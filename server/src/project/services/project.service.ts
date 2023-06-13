@@ -10,24 +10,29 @@ import { UpdateProjectDto } from '../dto/update-project.dto';
 import { Project } from '../project.entity';
 import { GroupService } from 'src/group/services/group.service';
 import { User } from 'src/user/user.entity';
-import { UserService } from 'src/user/services/user.service';
 
 @Injectable()
 export class ProjectService {
   constructor(
     @InjectRepository(Project)
     private readonly projectRepository: Repository<Project>,
-    private readonly groupService: GroupService,
-    private readonly userService: UserService
+    private readonly groupService: GroupService
   ) {}
 
-  async getAllProjects(user: User): Promise<Project[]> {
-    const groups = await this.userService.getUserGroups(user.id);
-    if (!groups) return [];
-    const groupIds = groups.map((group) => group.id);
+  async getAllProjectsByGroupId(
+    user: User,
+    groupId: number
+  ): Promise<Project[]> {
+    const isMember = await this.groupService.isMember(user, groupId);
+    if (!isMember) {
+      throw new ForbiddenException(
+        'You have no access to projects from this group'
+      );
+    }
     return await this.projectRepository
       .createQueryBuilder('project')
-      .where('project.groupId IN (:...groupIds)', { groupIds })
+      .innerJoin('project.group', 'group')
+      .where('group.id = :groupId', { groupId })
       .getMany();
   }
 
@@ -39,7 +44,7 @@ export class ProjectService {
     if (!project) {
       throw new NotFoundException(`Project with ID ${projectId} not found`);
     }
-    const isMember = await this.isMember(user, project);
+    const isMember = await this.groupService.isMember(user, project.group.id);
     if (!isMember) {
       throw new ForbiddenException('You have no access to this project');
     }
@@ -70,11 +75,5 @@ export class ProjectService {
   async deleteProject(projectId: number, user: User): Promise<void> {
     const project = await this.getProjectById(projectId, user);
     await this.projectRepository.remove(project);
-  }
-
-  async isMember(user: User, project: Project): Promise<boolean> {
-    const groups = await this.userService.getUserGroups(user.id);
-    if (!groups) return false;
-    return groups.some((group) => group.id === project.group.id);
   }
 }

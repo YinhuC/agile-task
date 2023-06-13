@@ -6,7 +6,4 @@ export class UpdateProjectDto {
 
   @IsNotEmpty()
   groupId: number;
-
-  @IsNotEmpty()
-  projectId: number;
 }
