@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from '../user.entity';
 import { UpdateUserDto } from '../dto/update-user';
 import bcrypt from 'bcrypt';
+import { Group } from 'src/group/group.entity';
 
 @Injectable()
 export class UserService {
@@ -22,6 +23,17 @@ export class UserService {
       throw new NotFoundException('User not found');
     }
     return user;
+  }
+
+  async getUserGroups(id: number): Promise<Group[]> {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['groups'],
+    });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user.groups;
   }
 
   async findUserByEmail(email: string): Promise<User> {

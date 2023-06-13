@@ -5,7 +5,6 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
   ManyToMany,
   OneToMany,
   OneToOne,
@@ -21,7 +20,6 @@ export class Group {
   name: string;
 
   @ManyToMany(() => User, (user) => user.groups)
-  @JoinTable()
   users: User[];
 
   @OneToOne(() => User, { createForeignKeyConstraints: false })

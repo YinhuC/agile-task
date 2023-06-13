@@ -15,30 +15,26 @@ import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
 import { Project } from '../project.entity';
 import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
-import { GetProjectDto } from '../dto/get-project.dto';
-import { DeleteProjectDto } from '../dto/delete-project.dto';
+import { AuthUser } from 'src/user/decorators/user.decorator';
+import { User } from 'src/user/user.entity';
 
 @Controller('projects')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @Get()
-  @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
-  async getAllProjects(
-    @Body() getProjectDto: GetProjectDto
-  ): Promise<Project[]> {
-    return await this.projectService.getAllProjects(getProjectDto.groupId);
+  async getAllProjects(@AuthUser() user: User): Promise<Project[]> {
+    return await this.projectService.getAllProjects(user);
   }
 
   @Get(':id')
-  @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
   async getProjectById(
-    @Param('id') id: number,
-    @Body() getProjectDto: GetProjectDto
+    @AuthUser() user: User,
+    @Param('id') id: number
   ): Promise<Project> {
-    return await this.projectService.getProjectById(id, getProjectDto.groupId);
+    return await this.projectService.getProjectById(id, user);
   }
 
   @Post()
@@ -54,19 +50,19 @@ export class ProjectController {
   @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
   async updateProject(
+    @AuthUser() user: User,
     @Param('id') id: number,
     @Body() updateProjectDto: UpdateProjectDto
   ): Promise<Project> {
-    return await this.projectService.updateProject(id, updateProjectDto);
+    return await this.projectService.updateProject(id, updateProjectDto, user);
   }
 
   @Delete(':id')
-  @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
   async deleteProject(
-    @Param('id') id: number,
-    @Body() deleteProjectDto: DeleteProjectDto
+    @AuthUser() user: User,
+    @Param('id') id: number
   ): Promise<void> {
-    await this.projectService.deleteProject(id, deleteProjectDto.groupId);
+    await this.projectService.deleteProject(id, user);
   }
 }

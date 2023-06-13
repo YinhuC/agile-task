@@ -17,8 +17,10 @@ export class GroupService {
     return await this.groupRepository.find();
   }
 
-  async getGroupById(id: number): Promise<Group> {
-    const group = await this.groupRepository.findOne({ where: { id } });
+  async getGroupById(groupId: number): Promise<Group> {
+    const group = await this.groupRepository.findOne({
+      where: { id: groupId },
+    });
     if (!group) {
       throw new NotFoundException('Group not found');
     }
@@ -44,6 +46,7 @@ export class GroupService {
     const group = {
       ...createGroupDto,
       owner: user,
+      users: [user],
     };
     const newGroup = this.groupRepository.create(group);
     return await this.groupRepository.save(newGroup);

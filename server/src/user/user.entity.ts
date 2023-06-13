@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity({ name: 'users' })
@@ -39,6 +40,7 @@ export class User {
   updatedAt: Date;
 
   @ManyToMany(() => Group, (groups) => groups.users)
+  @JoinTable()
   groups: Group[];
 
   constructor(data: Partial<User> = {}) {
