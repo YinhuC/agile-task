@@ -61,10 +61,7 @@ export class GroupController {
 
   @Delete(':id')
   @UseGuards(AuthenticatedGuard, OwnershipGuard)
-  async deleteGroup(
-    @AuthUser() user: User,
-    @Param('id') id: number
-  ): Promise<void> {
-    return await this.groupService.deleteGroup(user, id);
+  async deleteGroup(@Param('id') id: number): Promise<void> {
+    return await this.groupService.deleteGroup(id);
   }
 }

@@ -64,9 +64,11 @@ export class GroupService {
     return this.groupRepository.save(group);
   }
 
-  async deleteGroup(user: User, id: number): Promise<void> {
-    const group = await this.getGroupById(user, id);
-    await this.groupRepository.remove(group);
+  async deleteGroup(id: number): Promise<void> {
+    const result = await this.groupRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Group with ID ${id} not found`);
+    }
   }
 
   private async getGroupWithOwner(id: number): Promise<Group> {

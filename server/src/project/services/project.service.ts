@@ -71,8 +71,10 @@ export class ProjectService {
   }
 
   async deleteProject(projectId: number): Promise<void> {
-    const project = await this.getProjectById(projectId);
-    await this.projectRepository.remove(project);
+    const result = await this.projectRepository.delete(projectId);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Project with ID ${projectId} not found`);
+    }
   }
 
   async isMember(user: Partial<User>, projectId: number): Promise<boolean> {
