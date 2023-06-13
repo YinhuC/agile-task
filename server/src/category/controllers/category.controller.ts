@@ -47,9 +47,10 @@ export class CategoryController {
   @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
   async createCategory(
+    @AuthUser() user: User,
     @Body() createCategoryDto: CreateCategoryDto
   ): Promise<Category> {
-    return await this.categoryService.createCategory(createCategoryDto);
+    return await this.categoryService.createCategory(user, createCategoryDto);
   }
 
   @Put(':id')

@@ -46,8 +46,11 @@ export class TaskController {
   @Post()
   @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
-  async createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
-    return await this.taskService.createTask(createTaskDto);
+  async createTask(
+    @AuthUser() user: User,
+    @Body() createTaskDto: CreateTaskDto
+  ): Promise<Task> {
+    return await this.taskService.createTask(user, createTaskDto);
   }
 
   @Put(':id')

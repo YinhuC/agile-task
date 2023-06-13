@@ -46,8 +46,16 @@ export class TaskService {
     return task;
   }
 
-  async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
+  async createTask(user: User, createTaskDto: CreateTaskDto): Promise<Task> {
     const { categoryId, ...taskDto } = createTaskDto;
+
+    const isMember = this.categoryService.isMember(user, categoryId);
+    if (!isMember) {
+      throw new ForbiddenException(
+        'You have rights to create a task for this category'
+      );
+    }
+
     const category = await this.categoryService.getCategoryById(categoryId);
     const task = {
       ...taskDto,

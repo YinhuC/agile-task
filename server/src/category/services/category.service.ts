@@ -47,9 +47,18 @@ export class CategoryService {
   }
 
   async createCategory(
+    user: User,
     createCategoryDto: CreateCategoryDto
   ): Promise<Category> {
     const { projectId, ...categoryDto } = createCategoryDto;
+
+    const isMember = this.projectService.isMember(user, projectId);
+    if (!isMember) {
+      throw new ForbiddenException(
+        'You have rights to create a category for this project'
+      );
+    }
+
     const project = await this.projectService.getProjectById(projectId);
     const category = {
       ...categoryDto,

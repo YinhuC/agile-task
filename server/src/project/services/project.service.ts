@@ -52,6 +52,14 @@ export class ProjectService {
     createProjectDto: CreateProjectDto
   ): Promise<Project> {
     const { groupId, ...projectDto } = createProjectDto;
+
+    const isMember = this.groupService.isMember(user, groupId);
+    if (!isMember) {
+      throw new ForbiddenException(
+        'You have rights to create a project for this group'
+      );
+    }
+
     const group = await this.groupService.getGroupById(user, groupId);
     const project = {
       ...projectDto,
