@@ -49,9 +49,10 @@ export class ProjectController {
   @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard)
   async createProject(
+    @AuthUser() user: User,
     @Body() createProjectDto: CreateProjectDto
   ): Promise<Project> {
-    return await this.projectService.createProject(createProjectDto);
+    return await this.projectService.createProject(user, createProjectDto);
   }
 
   @Put(':id')

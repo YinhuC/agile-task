@@ -51,9 +51,12 @@ export class ProjectService {
     return project;
   }
 
-  async createProject(createProjectDto: CreateProjectDto): Promise<Project> {
+  async createProject(
+    user: User,
+    createProjectDto: CreateProjectDto
+  ): Promise<Project> {
     const { groupId, ...projectDto } = createProjectDto;
-    const group = await this.groupService.getGroupById(groupId);
+    const group = await this.groupService.getGroupById(user, groupId);
     const project = {
       ...projectDto,
       group: group,

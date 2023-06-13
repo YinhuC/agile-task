@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Group } from '../group.entity';
@@ -15,11 +19,19 @@ export class GroupService {
     private readonly userService: UserService
   ) {}
 
-  async getAllGroups(): Promise<Group[]> {
-    return await this.groupRepository.find();
+  async getAllGroups(user: User): Promise<Group[]> {
+    return await this.groupRepository
+      .createQueryBuilder('group')
+      .leftJoin('group.users', 'user')
+      .where('user.id = :userId', { userId: user.id })
+      .getMany();
   }
 
-  async getGroupById(groupId: number): Promise<Group> {
+  async getGroupById(user: User, groupId: number): Promise<Group> {
+    const isMember = this.isMember(user, groupId);
+    if (!isMember) {
+      throw new ForbiddenException('You have no access to this group');
+    }
     const group = await this.groupRepository.findOne({
       where: { id: groupId },
     });
@@ -29,21 +41,9 @@ export class GroupService {
     return group;
   }
 
-  async getGroupWithOwner(id: number): Promise<Group> {
-    const group = await this.groupRepository
-      .createQueryBuilder('group')
-      .leftJoinAndSelect('group.owner', 'users')
-      .where('group.id = :id', { id })
-      .getOne();
-    if (!group) {
-      throw new NotFoundException('Group not found');
-    }
-    return group;
-  }
-
   async createGroup(
-    createGroupDto: CreateGroupDTO,
-    user: User
+    user: User,
+    createGroupDto: CreateGroupDTO
   ): Promise<Group> {
     const group = {
       ...createGroupDto,
@@ -55,17 +55,30 @@ export class GroupService {
   }
 
   async updateGroup(
+    user: User,
     id: number,
     updateGroupDto: UpdateGroupDto
   ): Promise<Group> {
-    const group = await this.getGroupById(id);
+    const group = await this.getGroupById(user, id);
     Object.assign(group, updateGroupDto);
     return this.groupRepository.save(group);
   }
 
-  async deleteGroup(id: number): Promise<void> {
-    const group = await this.getGroupById(id);
+  async deleteGroup(user: User, id: number): Promise<void> {
+    const group = await this.getGroupById(user, id);
     await this.groupRepository.remove(group);
+  }
+
+  private async getGroupWithOwner(id: number): Promise<Group> {
+    const group = await this.groupRepository
+      .createQueryBuilder('group')
+      .leftJoinAndSelect('group.owner', 'users')
+      .where('group.id = :id', { id })
+      .getOne();
+    if (!group) {
+      throw new NotFoundException('Group not found');
+    }
+    return group;
   }
 
   async isOwner(user: Partial<User>, groupId: number): Promise<boolean> {

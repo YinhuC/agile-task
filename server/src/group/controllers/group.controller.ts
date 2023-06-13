@@ -25,14 +25,17 @@ export class GroupController {
 
   @Get()
   @UseGuards(AuthenticatedGuard)
-  async getAllGroups(): Promise<Group[]> {
-    return await this.groupService.getAllGroups();
+  async getAllGroups(@AuthUser() user: User): Promise<Group[]> {
+    return await this.groupService.getAllGroups(user);
   }
 
   @Get(':id')
   @UseGuards(AuthenticatedGuard)
-  async getGroupById(@Param('id') id: number): Promise<Group> {
-    return await this.groupService.getGroupById(id);
+  async getGroupById(
+    @AuthUser() user: User,
+    @Param('id') id: number
+  ): Promise<Group> {
+    return await this.groupService.getGroupById(user, id);
   }
 
   @Post()
@@ -42,22 +45,26 @@ export class GroupController {
     @AuthUser() user: User,
     @Body() createGroupDto: CreateGroupDTO
   ): Promise<Group> {
-    return await this.groupService.createGroup(createGroupDto, user);
+    return await this.groupService.createGroup(user, createGroupDto);
   }
 
   @Put(':id')
   @UsePipes(ValidationPipe)
   @UseGuards(AuthenticatedGuard, OwnershipGuard)
   async updateGroup(
+    @AuthUser() user: User,
     @Param('id') id: number,
     @Body() updateGroupDto: UpdateGroupDto
   ): Promise<Group> {
-    return await this.groupService.updateGroup(id, updateGroupDto);
+    return await this.groupService.updateGroup(user, id, updateGroupDto);
   }
 
   @Delete(':id')
   @UseGuards(AuthenticatedGuard, OwnershipGuard)
-  async deleteGroup(@Param('id') id: number): Promise<void> {
-    return await this.groupService.deleteGroup(id);
+  async deleteGroup(
+    @AuthUser() user: User,
+    @Param('id') id: number
+  ): Promise<void> {
+    return await this.groupService.deleteGroup(user, id);
   }
 }
