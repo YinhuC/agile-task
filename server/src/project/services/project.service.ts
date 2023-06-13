@@ -36,17 +36,13 @@ export class ProjectService {
       .getMany();
   }
 
-  async getProjectById(user: User, projectId: number): Promise<Project> {
+  async getProjectById(projectId: number): Promise<Project> {
     const project = await this.projectRepository.findOne({
       where: { id: projectId },
       relations: ['group'],
     });
     if (!project) {
       throw new NotFoundException(`Project with ID ${projectId} not found`);
-    }
-    const isMember = await this.groupService.isMember(user, project.group.id);
-    if (!isMember) {
-      throw new ForbiddenException('You have no access to this project');
     }
     return project;
   }
@@ -66,17 +62,21 @@ export class ProjectService {
   }
 
   async updateProject(
-    user: User,
     projectId: number,
     updateProjectDto: UpdateProjectDto
   ): Promise<Project> {
-    const project = await this.getProjectById(user, projectId);
+    const project = await this.getProjectById(projectId);
     const updatedProject = { ...project, ...updateProjectDto };
     return await this.projectRepository.save(updatedProject);
   }
 
-  async deleteProject(user: User, projectId: number): Promise<void> {
-    const project = await this.getProjectById(user, projectId);
+  async deleteProject(projectId: number): Promise<void> {
+    const project = await this.getProjectById(projectId);
     await this.projectRepository.remove(project);
+  }
+
+  async isMember(user: Partial<User>, projectId: number): Promise<boolean> {
+    const project = await this.getProjectById(projectId);
+    return await this.groupService.isMember(user, project.group.id);
   }
 }

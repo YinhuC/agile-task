@@ -86,7 +86,7 @@ export class GroupService {
     return group.owner.id === user.id;
   }
 
-  async isMember(user: User, groupId: number): Promise<boolean> {
+  async isMember(user: Partial<User>, groupId: number): Promise<boolean> {
     const groups = await this.userService.getUserGroups(user.id);
     if (!groups) return false;
     return groups.some((group) => group.id == groupId);
