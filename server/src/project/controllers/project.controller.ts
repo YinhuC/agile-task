@@ -42,7 +42,7 @@ export class ProjectController {
     @AuthUser() user: User,
     @Param('id') id: number
   ): Promise<Project> {
-    return await this.projectService.getProjectById(id, user);
+    return await this.projectService.getProjectById(user, id);
   }
 
   @Post()
@@ -63,7 +63,7 @@ export class ProjectController {
     @Param('id') id: number,
     @Body() updateProjectDto: UpdateProjectDto
   ): Promise<Project> {
-    return await this.projectService.updateProject(id, updateProjectDto, user);
+    return await this.projectService.updateProject(user, id, updateProjectDto);
   }
 
   @Delete(':id')
@@ -72,6 +72,6 @@ export class ProjectController {
     @AuthUser() user: User,
     @Param('id') id: number
   ): Promise<void> {
-    await this.projectService.deleteProject(id, user);
+    await this.projectService.deleteProject(user, id);
   }
 }

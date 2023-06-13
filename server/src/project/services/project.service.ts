@@ -36,7 +36,7 @@ export class ProjectService {
       .getMany();
   }
 
-  async getProjectById(projectId: number, user: User): Promise<Project> {
+  async getProjectById(user: User, projectId: number): Promise<Project> {
     const project = await this.projectRepository.findOne({
       where: { id: projectId },
       relations: ['group'],
@@ -66,17 +66,17 @@ export class ProjectService {
   }
 
   async updateProject(
+    user: User,
     projectId: number,
-    updateProjectDto: UpdateProjectDto,
-    user: User
+    updateProjectDto: UpdateProjectDto
   ): Promise<Project> {
-    const project = await this.getProjectById(projectId, user);
+    const project = await this.getProjectById(user, projectId);
     const updatedProject = { ...project, ...updateProjectDto };
     return await this.projectRepository.save(updatedProject);
   }
 
-  async deleteProject(projectId: number, user: User): Promise<void> {
-    const project = await this.getProjectById(projectId, user);
+  async deleteProject(user: User, projectId: number): Promise<void> {
+    const project = await this.getProjectById(user, projectId);
     await this.projectRepository.remove(project);
   }
 }
