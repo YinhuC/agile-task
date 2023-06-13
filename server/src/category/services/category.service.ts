@@ -70,7 +70,6 @@ export class CategoryService {
 
   async deleteCategory(id: number): Promise<void> {
     const result = await this.categoryRepository.delete(id);
-
     if (result.affected === 0) {
       throw new NotFoundException(`Category with ID ${id} not found`);
     }
