@@ -18,7 +18,7 @@ import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
 import { AuthUser } from 'src/user/decorators/user.decorator';
 import { User } from 'src/user/user.entity';
 import { GetProjectDto } from '../dto/get-project.dto';
-import { MemberGuard } from '../guards/member.guard';
+import { ProjectMemberGuard } from '../guards/project-member.guard';
 
 @Controller('projects')
 export class ProjectController {
@@ -38,7 +38,7 @@ export class ProjectController {
   }
 
   @Get(':id')
-  @UseGuards(AuthenticatedGuard, MemberGuard)
+  @UseGuards(AuthenticatedGuard, ProjectMemberGuard)
   async getProjectById(@Param('id') id: number): Promise<Project> {
     return await this.projectService.getProjectById(id);
   }
@@ -55,7 +55,7 @@ export class ProjectController {
 
   @Put(':id')
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthenticatedGuard, MemberGuard)
+  @UseGuards(AuthenticatedGuard, ProjectMemberGuard)
   async updateProject(
     @Param('id') id: number,
     @Body() updateProjectDto: UpdateProjectDto
@@ -64,7 +64,7 @@ export class ProjectController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthenticatedGuard, MemberGuard)
+  @UseGuards(AuthenticatedGuard, ProjectMemberGuard)
   async deleteProject(@Param('id') id: number): Promise<void> {
     await this.projectService.deleteProject(id);
   }

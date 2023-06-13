@@ -55,7 +55,7 @@ export class ProjectService {
     const group = await this.groupService.getGroupById(user, groupId);
     const project = {
       ...projectDto,
-      group: group,
+      group,
     };
     const newProject = this.projectRepository.create(project);
     return await this.projectRepository.save(newProject);

@@ -6,16 +6,16 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { User } from '../../user/user.entity';
-import { ProjectService } from '../services/project.service';
+import { CategoryService } from '../services/category.service';
 
 @Injectable()
-export class MemberGuard implements CanActivate {
-  constructor(private projectService: ProjectService) {}
+export class CategoryMemberGuard implements CanActivate {
+  constructor(private categoryService: CategoryService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request: Request = context.switchToHttp().getRequest();
     const user: Partial<User> = request.user;
-    const isMember = await this.projectService.isMember(
+    const isMember = await this.categoryService.isMember(
       user,
       parseInt(request.params.id)
     );
