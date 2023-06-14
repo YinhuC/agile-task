@@ -14,11 +14,11 @@ export class RegisterDto {
   email: string;
 
   @IsNotEmpty()
-  @Length(0, 20)
+  @Length(1, 20)
   firstname: string;
 
   @IsNotEmpty()
-  @Length(0, 20)
+  @Length(1, 20)
   lastname: string;
 
   @IsDefined()

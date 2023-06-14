@@ -6,10 +6,10 @@ export class UpdateUserDto {
   @Length(2, 20)
   email?: string;
 
-  @Length(0, 20)
+  @Length(1, 20)
   firstname?: string;
 
-  @Length(0, 20)
+  @Length(1, 20)
   lastname?: string;
 
   @Matches(REGEXES.PASSWORD_REGEX, { message: MESSAGES.PASSWORD_REGEX_MESSAGE })
