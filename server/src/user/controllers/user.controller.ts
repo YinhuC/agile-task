@@ -23,16 +23,6 @@ import { AuthUser } from '../decorators/user.decorator';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get()
-  async findAll(): Promise<User[]> {
-    return await this.userService.findAllUsers();
-  }
-
-  @Get(':id')
-  async findById(@Param('id') id: number): Promise<User> {
-    return await this.userService.findUserById(id);
-  }
-
   @Put()
   @UsePipes(ValidationPipe)
   async update(

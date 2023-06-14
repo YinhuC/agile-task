@@ -21,7 +21,9 @@ export class Task {
   @Column({ nullable: true })
   description: string;
 
-  @ManyToOne(() => Category, (category) => category.tasks)
+  @ManyToOne(() => Category, (category) => category.tasks, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   category: Category;
 

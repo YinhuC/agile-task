@@ -18,7 +18,9 @@ export class Category {
   @Column()
   name: string;
 
-  @ManyToOne(() => Project, (project) => project.categories)
+  @ManyToOne(() => Project, (project) => project.categories, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   project: Project;
 

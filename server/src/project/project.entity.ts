@@ -22,7 +22,9 @@ export class Project {
   @Column({ nullable: true })
   description: string;
 
-  @ManyToOne(() => Group, (group) => group.projects)
+  @ManyToOne(() => Group, (group) => group.projects, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn()
   group: Group;
 
