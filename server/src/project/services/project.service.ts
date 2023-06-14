@@ -60,7 +60,7 @@ export class ProjectService {
       );
     }
 
-    const group = await this.groupService.getGroupById(user, groupId);
+    const group = await this.groupService.getGroupById(groupId);
     const project = {
       ...projectDto,
       group,

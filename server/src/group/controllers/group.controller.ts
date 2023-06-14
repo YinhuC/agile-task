@@ -18,6 +18,7 @@ import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
 import { AuthUser } from 'src/user/decorators/user.decorator';
 import { User } from 'src/user/user.entity';
 import { UpdateGroupDto } from '../dto/update-group.dto';
+import { GroupMemberGuard } from '../guards/group-member.guard';
 
 @UseGuards(AuthenticatedGuard)
 @Controller('groups')
@@ -30,11 +31,9 @@ export class GroupController {
   }
 
   @Get(':id')
-  async getGroupById(
-    @AuthUser() user: User,
-    @Param('id') id: number
-  ): Promise<Group> {
-    return await this.groupService.getGroupById(user, id);
+  @UseGuards(GroupMemberGuard)
+  async getGroupById(@Param('id') id: number): Promise<Group> {
+    return await this.groupService.getGroupById(id);
   }
 
   @Post()
@@ -50,11 +49,10 @@ export class GroupController {
   @UsePipes(ValidationPipe)
   @UseGuards(OwnershipGuard)
   async updateGroup(
-    @AuthUser() user: User,
     @Param('id') id: number,
     @Body() updateGroupDto: UpdateGroupDto
   ): Promise<Group> {
-    return await this.groupService.updateGroup(user, id, updateGroupDto);
+    return await this.groupService.updateGroup(id, updateGroupDto);
   }
 
   @Delete(':id')

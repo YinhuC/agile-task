@@ -27,11 +27,7 @@ export class GroupService {
       .getMany();
   }
 
-  async getGroupById(user: User, groupId: number): Promise<Group> {
-    const isMember = this.isMember(user, groupId);
-    if (!isMember) {
-      throw new ForbiddenException('You have no access to this group');
-    }
+  async getGroupById(groupId: number): Promise<Group> {
     const group = await this.groupRepository.findOne({
       where: { id: groupId },
     });
@@ -55,20 +51,17 @@ export class GroupService {
   }
 
   async updateGroup(
-    user: User,
     id: number,
     updateGroupDto: UpdateGroupDto
   ): Promise<Group> {
-    const group = await this.getGroupById(user, id);
+    const group = await this.getGroupById(id);
     Object.assign(group, updateGroupDto);
     return this.groupRepository.save(group);
   }
 
   async deleteGroup(id: number): Promise<void> {
-    const result = await this.groupRepository.delete(id);
-    if (result.affected === 0) {
-      throw new NotFoundException(`Group with ID ${id} not found`);
-    }
+    const group = await this.getGroupById(id);
+    await this.groupRepository.remove(group);
   }
 
   private async getGroupWithOwner(id: number): Promise<Group> {
