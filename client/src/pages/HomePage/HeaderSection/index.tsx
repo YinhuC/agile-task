@@ -8,6 +8,7 @@ import {
   Text,
   Button,
 } from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 function HeaderSection() {
   return (
@@ -32,12 +33,16 @@ function HeaderSection() {
             of Physical Proximity.
           </Text>
           <Flex>
-            <Button size='md' mr='0.5rem'>
-              Puchase Now
-            </Button>
-            <Button size='md' variant='outline'>
-              Learn More
-            </Button>
+            <Link to={'/login'}>
+              <Button size='md' mr='0.5rem'>
+                Puchase Now
+              </Button>
+            </Link>
+            <Link to={'/login'}>
+              <Button size='md' variant='outline'>
+                Learn More
+              </Button>
+            </Link>
           </Flex>
         </Stack>
         <Center sx={{ width: '50%' }}>Image</Center>
