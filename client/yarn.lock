@@ -2113,6 +2113,19 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
+"@tabler/icons-react@^2.22.0":
+  version "2.22.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-react/-/icons-react-2.22.0.tgz#c3c4dfd63bf389c0cc6ad99d223603a0adb611d1"
+  integrity sha512-9udRxrbsbWzUETur4jmbZQIZkH7jVA2GU7YnKYS7ZCUjdOHZZEhmsfJ/Gdbzz0gSRC3mU7SDMsKejun/IBjvpQ==
+  dependencies:
+    "@tabler/icons" "2.22.0"
+    prop-types "^15.7.2"
+
+"@tabler/icons@2.22.0":
+  version "2.22.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.22.0.tgz#1d2d56503e6485faa920b8f9aaf55e1f745cda25"
+  integrity sha512-lOsGHqRPIKNARMWHHFkUUJH78C8ptQmUcDnumFBUI4YLRKFouKa7uAZL3ZfuH0HjDpOhsnWqUYZ7FhMCLcGpAQ==
+
 "@testing-library/dom@^8.5.0":
   version "8.20.0"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-8.20.0.tgz#914aa862cef0f5e89b98cc48e3445c4c921010f6"
@@ -7784,7 +7797,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.8.1:
+prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==

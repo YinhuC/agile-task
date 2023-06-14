@@ -2,6 +2,8 @@ import { MantineThemeOverride } from '@mantine/core';
 import '../styles/fonts.css';
 import { sizes, title } from './components/title-styles';
 import { text } from './components/text-styles';
+import { textInput } from './components/text-input-styles';
+import { passwordInput } from './components/password-input-styles';
 
 const theme: MantineThemeOverride = {
   colorScheme: 'light',
@@ -12,7 +14,7 @@ const theme: MantineThemeOverride = {
     sizes: sizes,
     fontWeight: 400,
   },
-  components: { ...title, ...text },
+  components: { ...title, ...text, ...textInput, ...passwordInput },
 };
 
 export default theme;
