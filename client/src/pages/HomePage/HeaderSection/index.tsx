@@ -35,7 +35,7 @@ function HeaderSection() {
             <Button size='md' mr='0.5rem'>
               Puchase Now
             </Button>
-            <Button size='md' variant='white'>
+            <Button size='md' variant='outline'>
               Learn More
             </Button>
           </Flex>
