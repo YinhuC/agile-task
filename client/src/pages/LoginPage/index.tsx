@@ -44,16 +44,15 @@ function LoginPage() {
       px={20}
     >
       <Title order={2} mb={15}>
-        Login
+        Login.
       </Title>
-      <Text mb={70}>Sign in to your account to continue</Text>
+      <Text mb={50}>Access your team projects by logging in.</Text>
       <Box miw={300} w='18%' mb={60}>
         <form onSubmit={form.onSubmit((values) => console.log(values))}>
           <TextInput
             mb={20}
             icon={<IconAt />}
-            label='Email'
-            placeholder='Your email'
+            placeholder='Email'
             required
             {...form.getInputProps('email')}
           />
@@ -61,7 +60,6 @@ function LoginPage() {
             mb={30}
             icon={<IconPassword />}
             placeholder='Password'
-            label='Password'
             required
             {...form.getInputProps('password')}
           />
