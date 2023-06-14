@@ -18,24 +18,22 @@ import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
 import { Request, Response } from 'express';
 import { AuthUser } from '../decorators/user.decorator';
 
+@UseGuards(AuthenticatedGuard)
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  @UseGuards(AuthenticatedGuard)
   async findAll(): Promise<User[]> {
     return await this.userService.findAllUsers();
   }
 
   @Get(':id')
-  @UseGuards(AuthenticatedGuard)
   async findById(@Param('id') id: number): Promise<User> {
     return await this.userService.findUserById(id);
   }
 
   @Put()
-  @UseGuards(AuthenticatedGuard)
   @UsePipes(ValidationPipe)
   async update(
     @AuthUser() user: User,
@@ -45,7 +43,6 @@ export class UserController {
   }
 
   @Delete()
-  @UseGuards(AuthenticatedGuard)
   async deleteAccount(
     @AuthUser() user: User,
     @Req() req: Request,

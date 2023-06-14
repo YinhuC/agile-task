@@ -19,18 +19,17 @@ import { AuthUser } from 'src/user/decorators/user.decorator';
 import { User } from 'src/user/user.entity';
 import { UpdateGroupDto } from '../dto/update-group.dto';
 
+@UseGuards(AuthenticatedGuard)
 @Controller('groups')
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
   @Get()
-  @UseGuards(AuthenticatedGuard)
   async getAllGroups(@AuthUser() user: User): Promise<Group[]> {
     return await this.groupService.getAllGroups(user);
   }
 
   @Get(':id')
-  @UseGuards(AuthenticatedGuard)
   async getGroupById(
     @AuthUser() user: User,
     @Param('id') id: number
@@ -40,7 +39,6 @@ export class GroupController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthenticatedGuard)
   async createGroup(
     @AuthUser() user: User,
     @Body() createGroupDto: CreateGroupDTO
@@ -50,7 +48,7 @@ export class GroupController {
 
   @Put(':id')
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthenticatedGuard, OwnershipGuard)
+  @UseGuards(OwnershipGuard)
   async updateGroup(
     @AuthUser() user: User,
     @Param('id') id: number,
@@ -60,7 +58,7 @@ export class GroupController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthenticatedGuard, OwnershipGuard)
+  @UseGuards(OwnershipGuard)
   async deleteGroup(@Param('id') id: number): Promise<void> {
     return await this.groupService.deleteGroup(id);
   }

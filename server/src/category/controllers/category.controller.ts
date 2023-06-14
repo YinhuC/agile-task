@@ -20,13 +20,13 @@ import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
 import { CategoryMemberGuard } from '../guards/category-member.guard';
 import { GetCategoryDto } from '../dto/get-category.dto';
 
+@UseGuards(AuthenticatedGuard)
 @Controller('categories')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthenticatedGuard)
   async getProjectCategories(
     @AuthUser() user: User,
     @Body() getCategoryDto: GetCategoryDto
@@ -38,14 +38,13 @@ export class CategoryController {
   }
 
   @Get(':id')
-  @UseGuards(AuthenticatedGuard, CategoryMemberGuard)
+  @UseGuards(CategoryMemberGuard)
   async getCategoryById(@Param('id') id: number): Promise<Category> {
     return await this.categoryService.getCategoryById(id);
   }
 
   @Post()
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthenticatedGuard)
   async createCategory(
     @AuthUser() user: User,
     @Body() createCategoryDto: CreateCategoryDto
@@ -55,7 +54,7 @@ export class CategoryController {
 
   @Put(':id')
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthenticatedGuard, CategoryMemberGuard)
+  @UseGuards(CategoryMemberGuard)
   async updateCategory(
     @Param('id') id: number,
     @Body() updateCategoryDto: UpdateCategoryDto
@@ -64,7 +63,7 @@ export class CategoryController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthenticatedGuard, CategoryMemberGuard)
+  @UseGuards(CategoryMemberGuard)
   async deleteCategory(@Param('id') id: number): Promise<void> {
     await this.categoryService.deleteCategory(id);
   }

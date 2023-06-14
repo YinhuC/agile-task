@@ -20,13 +20,13 @@ import { User } from 'src/user/user.entity';
 import { GetProjectDto } from '../dto/get-project.dto';
 import { ProjectMemberGuard } from '../guards/project-member.guard';
 
+@UseGuards(AuthenticatedGuard)
 @Controller('projects')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @Get()
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthenticatedGuard)
   async getGroupProjects(
     @AuthUser() user: User,
     @Body() getProjectDto: GetProjectDto
@@ -38,14 +38,13 @@ export class ProjectController {
   }
 
   @Get(':id')
-  @UseGuards(AuthenticatedGuard, ProjectMemberGuard)
+  @UseGuards(ProjectMemberGuard)
   async getProjectById(@Param('id') id: number): Promise<Project> {
     return await this.projectService.getProjectById(id);
   }
 
   @Post()
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthenticatedGuard)
   async createProject(
     @AuthUser() user: User,
     @Body() createProjectDto: CreateProjectDto
@@ -55,7 +54,7 @@ export class ProjectController {
 
   @Put(':id')
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthenticatedGuard, ProjectMemberGuard)
+  @UseGuards(ProjectMemberGuard)
   async updateProject(
     @Param('id') id: number,
     @Body() updateProjectDto: UpdateProjectDto
@@ -64,7 +63,7 @@ export class ProjectController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthenticatedGuard, ProjectMemberGuard)
+  @UseGuards(ProjectMemberGuard)
   async deleteProject(@Param('id') id: number): Promise<void> {
     await this.projectService.deleteProject(id);
   }
