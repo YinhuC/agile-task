@@ -16,7 +16,6 @@ import { User } from 'src/user/user.entity';
 import { AuthService } from '../services/auth.service';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { RegisterDto } from '../dto/register.dto';
-import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { AuthUser } from 'src/user/decorators/user.decorator';
 import { TokenInterceptor } from '../utils/token.interceptor';
 import { AuthenticatedGuard } from '../guards/auth.guard';
@@ -30,7 +29,7 @@ export class AuthController {
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(ValidationPipe)
   @UseInterceptors(TokenInterceptor)
-  async create(@Body() registerDto: RegisterDto): Promise<User> {
+  async register(@Body() registerDto: RegisterDto): Promise<User> {
     return this.authService.register(registerDto);
   }
 
@@ -43,7 +42,7 @@ export class AuthController {
   }
 
   @Get('user')
-  @UseGuards(AuthenticatedGuard, JwtAuthGuard)
+  @UseGuards(AuthenticatedGuard)
   async user(@AuthUser() user: User): Promise<User> {
     return user;
   }

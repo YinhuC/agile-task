@@ -26,6 +26,6 @@ async function bootstrap() {
     exposedHeaders: ['Authorization'],
   });
 
-  await app.listen(3300);
+  await app.listen(process.env.REACT_APP_API_PORT);
 }
 bootstrap();
