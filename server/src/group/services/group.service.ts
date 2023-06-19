@@ -80,6 +80,7 @@ export class GroupService {
 
   async isOwner(user: Partial<User>, groupId: number): Promise<boolean> {
     const group = await this.getGroupWithOwner(groupId);
+    if (!group.owner) return false;
     return group.owner.id === user.id;
   }
 

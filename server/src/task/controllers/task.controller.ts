@@ -7,8 +7,6 @@ import {
   Put,
   Delete,
   UseGuards,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { Task } from '../task.entity';
 import { TaskService } from '../services/task.service';
@@ -26,7 +24,6 @@ export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @Get()
-  @UsePipes(ValidationPipe)
   async getCategoryTasks(
     @AuthUser() user: User,
     @Body() getTaskDto: GetTaskDto
@@ -44,7 +41,6 @@ export class TaskController {
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
   async createTask(
     @AuthUser() user: User,
     @Body() createTaskDto: CreateTaskDto
@@ -53,7 +49,6 @@ export class TaskController {
   }
 
   @Put(':id')
-  @UsePipes(ValidationPipe)
   @UseGuards(TaskMemberGuard)
   async updateTask(
     @Param('id') id: number,

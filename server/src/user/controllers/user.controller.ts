@@ -1,15 +1,11 @@
 import {
   Body,
   Controller,
-  Get,
-  Param,
   Put,
   Delete,
   UseGuards,
   Req,
   Res,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { UpdateUserDto } from '../dto/update-user';
@@ -24,7 +20,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Put()
-  @UsePipes(ValidationPipe)
   async update(
     @AuthUser() user: User,
     @Body() updateUserDto: Partial<UpdateUserDto>

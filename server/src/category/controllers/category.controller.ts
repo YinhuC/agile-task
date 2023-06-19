@@ -7,8 +7,6 @@ import {
   Put,
   Delete,
   UseGuards,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { Category } from '../category.entity';
 import { CategoryService } from '../services/category.service';
@@ -26,7 +24,6 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
-  @UsePipes(ValidationPipe)
   async getProjectCategories(
     @AuthUser() user: User,
     @Body() getCategoryDto: GetCategoryDto
@@ -44,7 +41,6 @@ export class CategoryController {
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
   async createCategory(
     @AuthUser() user: User,
     @Body() createCategoryDto: CreateCategoryDto
@@ -53,7 +49,6 @@ export class CategoryController {
   }
 
   @Put(':id')
-  @UsePipes(ValidationPipe)
   @UseGuards(CategoryMemberGuard)
   async updateCategory(
     @Param('id') id: number,

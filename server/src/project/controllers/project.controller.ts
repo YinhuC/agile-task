@@ -7,8 +7,6 @@ import {
   Body,
   Param,
   UseGuards,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { ProjectService } from '../services/project.service';
 import { CreateProjectDto } from '../dto/create-project.dto';
@@ -26,7 +24,6 @@ export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @Get()
-  @UsePipes(ValidationPipe)
   async getGroupProjects(
     @AuthUser() user: User,
     @Body() getProjectDto: GetProjectDto
@@ -44,7 +41,6 @@ export class ProjectController {
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
   async createProject(
     @AuthUser() user: User,
     @Body() createProjectDto: CreateProjectDto
@@ -53,7 +49,6 @@ export class ProjectController {
   }
 
   @Put(':id')
-  @UsePipes(ValidationPipe)
   @UseGuards(ProjectMemberGuard)
   async updateProject(
     @Param('id') id: number,

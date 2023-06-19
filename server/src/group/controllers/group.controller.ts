@@ -7,8 +7,6 @@ import {
   Put,
   Delete,
   UseGuards,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { Group } from '../group.entity';
 import { GroupService } from '../services/group.service';
@@ -37,7 +35,6 @@ export class GroupController {
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
   async createGroup(
     @AuthUser() user: User,
     @Body() createGroupDto: CreateGroupDTO
@@ -46,7 +43,6 @@ export class GroupController {
   }
 
   @Put(':id')
-  @UsePipes(ValidationPipe)
   @UseGuards(OwnershipGuard)
   async updateGroup(
     @Param('id') id: number,
