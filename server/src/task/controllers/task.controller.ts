@@ -23,7 +23,7 @@ import { GetTaskDto } from '../dto/get-task.dto';
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-  @Get()
+  @Post('all')
   async getCategoryTasks(
     @AuthUser() user: User,
     @Body() getTaskDto: GetTaskDto

@@ -23,7 +23,7 @@ import { GetCategoryDto } from '../dto/get-category.dto';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @Get()
+  @Post('all')
   async getProjectCategories(
     @AuthUser() user: User,
     @Body() getCategoryDto: GetCategoryDto

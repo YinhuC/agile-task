@@ -23,7 +23,7 @@ import { ProjectMemberGuard } from '../guards/project-member.guard';
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
-  @Get()
+  @Post('all')
   async getGroupProjects(
     @AuthUser() user: User,
     @Body() getProjectDto: GetProjectDto
