@@ -17,6 +17,7 @@ import { AuthUser } from 'src/user/decorators/user.decorator';
 import { User } from 'src/user/user.entity';
 import { UpdateGroupDto } from '../dto/update-group.dto';
 import { GroupMemberGuard } from '../guards/group-member.guard';
+import { GroupResponse } from '../utils/group.types';
 
 @UseGuards(AuthenticatedGuard)
 @Controller('groups')
@@ -38,7 +39,7 @@ export class GroupController {
   async createGroup(
     @AuthUser() user: User,
     @Body() createGroupDto: CreateGroupDTO
-  ): Promise<Group> {
+  ): Promise<GroupResponse> {
     return await this.groupService.createGroup(user, createGroupDto);
   }
 
@@ -47,7 +48,7 @@ export class GroupController {
   async updateGroup(
     @Param('id') id: number,
     @Body() updateGroupDto: UpdateGroupDto
-  ): Promise<Group> {
+  ): Promise<GroupResponse> {
     return await this.groupService.updateGroup(id, updateGroupDto);
   }
 

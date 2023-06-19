@@ -4,4 +4,6 @@ export class CreateGroupDTO {
   @IsNotEmpty()
   @Length(0, 20)
   name: string;
+
+  emails?: string[];
 }

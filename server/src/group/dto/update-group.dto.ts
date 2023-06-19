@@ -1,7 +1,9 @@
-import { IsNotEmpty, Length } from 'class-validator';
+import { IsOptional, MaxLength } from 'class-validator';
 
 export class UpdateGroupDto {
-  @IsNotEmpty()
-  @Length(0, 20)
-  name: string;
+  @IsOptional()
+  @MaxLength(20)
+  name?: string;
+
+  emails?: string[];
 }

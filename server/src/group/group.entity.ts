@@ -19,7 +19,9 @@ export class Group {
   @Column()
   name: string;
 
-  @ManyToMany(() => User, (user) => user.groups)
+  @ManyToMany(() => User, (user) => user.groups, {
+    onDelete: 'CASCADE',
+  })
   users: User[];
 
   @OneToOne(() => User, { createForeignKeyConstraints: false })
