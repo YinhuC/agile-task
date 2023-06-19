@@ -5,10 +5,10 @@ import { AxiosRequestConfig } from 'axios';
 
 const config: AxiosRequestConfig = { withCredentials: true };
 
-export const postRegisterAuth = (data: RegisterParams) =>
+export const postAuthRegister = (data: RegisterParams) =>
   axiosClient.post('/auth/register', data, config);
 
-export const postLoginUser = (data: LoginParams) =>
+export const postAuthLogin = (data: LoginParams) =>
   axiosClient.post(`/auth/login`, data, config);
 
 export const getAuthUser = () => axiosClient.get<User>(`/auth/user`, config);

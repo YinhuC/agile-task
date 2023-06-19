@@ -13,7 +13,7 @@ import { IconAt, IconCheck, IconPassword, IconX } from '@tabler/icons-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MESSAGES, REGEXES } from '../../utils/regex';
 import { RegisterParams } from '../../types/auth.types';
-import { postRegisterAuth } from '../../api/auth.api';
+import { postAuthRegister } from '../../api/auth.api';
 import { notifications } from '@mantine/notifications';
 
 function RegisterPage() {
@@ -46,7 +46,7 @@ function RegisterPage() {
   const navigate = useNavigate();
   const onSubmit = async (values: RegisterParams) => {
     try {
-      await postRegisterAuth(values);
+      await postAuthRegister(values);
       navigate('/login');
       notifications.cleanQueue();
       notifications.show({
