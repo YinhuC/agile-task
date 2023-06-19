@@ -9,9 +9,12 @@ import {
   Box,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconAt, IconPassword } from '@tabler/icons-react';
-import { Link } from 'react-router-dom';
+import { IconAt, IconCheck, IconPassword, IconX } from '@tabler/icons-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { MESSAGES, REGEXES } from '../../utils/regex';
+import { RegisterParams } from '../../types/auth.types';
+import { postRegisterAuth } from '../../api/auth.api';
+import { notifications } from '@mantine/notifications';
 
 function RegisterPage() {
   const form = useForm({
@@ -40,6 +43,32 @@ function RegisterPage() {
     },
   });
 
+  const navigate = useNavigate();
+  const onSubmit = async (values: RegisterParams) => {
+    try {
+      await postRegisterAuth(values);
+      navigate('/login');
+      notifications.cleanQueue();
+      notifications.show({
+        title: 'Account Created Successfully!',
+        message:
+          'Congratulations! Your user account has been successfully created. Welcome to our platform and get ready to explore!',
+        color: 'green',
+        icon: <IconCheck />,
+      });
+    } catch (err) {
+      console.log(err);
+      notifications.cleanQueue();
+      notifications.show({
+        title: 'Account Creation Error',
+        message:
+          'An error occurred during the account creation process. Please double-check the provided information and try again.',
+        color: 'red',
+        icon: <IconX />,
+      });
+    }
+  };
+
   return (
     <Flex
       h='100%'
@@ -58,7 +87,11 @@ function RegisterPage() {
         Create your account today and embark on a collaborative journey.
       </Text>
       <Box miw={300} w='24%' mb={60}>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <form
+          onSubmit={form.onSubmit(({ confirmPassword, ...values }) =>
+            onSubmit(values)
+          )}
+        >
           <TextInput
             mb={20}
             placeholder='First Name'

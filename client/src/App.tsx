@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './store';
+import { Notifications } from '@mantine/notifications';
 
 type Props = {};
 
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <Providers>
+      <Notifications />
       {!isLoginPage && !isRegisterPage && <Header />}
       <Routes>
         <Route path='/' element={<HomePage />} />
