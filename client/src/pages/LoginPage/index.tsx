@@ -9,28 +9,51 @@ import {
   Box,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconAt, IconPassword } from '@tabler/icons-react';
-import { Link } from 'react-router-dom';
+import { IconAt, IconPassword, IconX } from '@tabler/icons-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { postAuthLogin } from '../../api/auth.api';
+import { LoginParams } from '../../types/auth.types';
+import { AxiosError } from 'axios';
+import { notifications } from '@mantine/notifications';
 
 function LoginPage() {
-  // TODO: integrate with API to check if user credentials
-  const todo = false;
   const form = useForm({
     initialValues: {
       email: '',
       password: '',
     },
     validate: {
-      email: (value) =>
-        todo
-          ? null
-          : 'Email not found. Please make sure you entered the correct email address.',
-      password: (value) =>
-        todo
-          ? null
-          : 'Incorrect password. Please check your password and try again.',
+      email: () => null,
+      password: () => null,
     },
   });
+
+  const navigate = useNavigate();
+  const onSubmit = async (values: LoginParams) => {
+    try {
+      await postAuthLogin(values);
+      navigate('/boards');
+    } catch (err) {
+      const axiosError = err as AxiosError;
+      if (axiosError.response?.status === 401) {
+        notifications.cleanQueue();
+        notifications.show({
+          title: 'Invalid email or password.',
+          message: 'Please check your credentials and try again.',
+          color: 'red',
+          icon: <IconX />,
+        });
+      } else {
+        notifications.cleanQueue();
+        notifications.show({
+          title: 'An error occurred.',
+          message: 'Please try again later.',
+          color: 'red',
+          icon: <IconX />,
+        });
+      }
+    }
+  };
 
   return (
     <Flex
@@ -48,7 +71,7 @@ function LoginPage() {
       </Title>
       <Text mb={50}>Access your team projects by logging in.</Text>
       <Box miw={300} w='18%' mb={60}>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
           <TextInput
             mb={20}
             icon={<IconAt />}
