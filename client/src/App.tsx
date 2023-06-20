@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './store';
 import { Notifications } from '@mantine/notifications';
+import BoardPage from './pages/BoardPage';
 
 type Props = {};
 
@@ -32,6 +33,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
+        <Route path='/boards' element={<BoardPage />} />
       </Routes>
     </Providers>
   );

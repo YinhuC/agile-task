@@ -17,14 +17,18 @@ const Header: React.FC = () => {
           Logo
         </Text>
         <Box>
-          <Link to={'/login'}>
-            <Button size='md' variant='outline' mr='0.5rem'>
-              Sign In
-            </Button>
-          </Link>
-          <Link to={'/login'}>
-            <Button size='md'>Buy Now</Button>
-          </Link>
+          <Button
+            component={Link}
+            size='md'
+            variant='outline'
+            mr='0.5rem'
+            to={'/login'}
+          >
+            Sign In
+          </Button>
+          <Button component={Link} size='md' to={'/login'}>
+            Buy Now
+          </Button>
         </Box>
       </Flex>
     </Container>

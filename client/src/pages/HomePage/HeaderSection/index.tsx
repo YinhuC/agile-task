@@ -33,16 +33,12 @@ function HeaderSection() {
             of Physical Proximity.
           </Text>
           <Flex>
-            <Link to={'/login'}>
-              <Button size='md' mr='0.5rem'>
-                Puchase Now
-              </Button>
-            </Link>
-            <Link to={'/login'}>
-              <Button size='md' variant='outline'>
-                Learn More
-              </Button>
-            </Link>
+            <Button component={Link} size='md' mr='0.5rem' to={'/login'}>
+              Puchase Now
+            </Button>
+            <Button component={Link} size='md' variant='outline' to={'/login'}>
+              Learn More
+            </Button>
           </Flex>
         </Stack>
         <Center sx={{ width: '50%' }}>Image</Center>
