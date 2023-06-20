@@ -1,3 +1,5 @@
+import { Group } from './group.types';
+
 export type User = {
   id: number;
   email: string;
@@ -6,6 +8,10 @@ export type User = {
   authMethod: string;
   createdAt: string;
   updatedAt: string;
+};
+
+export type UserWithGroups = User & {
+  Groups: Group[];
 };
 
 export type UpdateUserParams = {
