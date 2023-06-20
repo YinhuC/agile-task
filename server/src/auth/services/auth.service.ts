@@ -18,11 +18,15 @@ export class AuthService {
 
   async register(registerDto: RegisterDto): Promise<User> {
     const { email } = registerDto;
-    const existingUser = await this.userService.findUserByEmail(email);
+    let existingUser: User;
+    try {
+      existingUser = await this.userService.findUserByEmail(email);
+    } catch (err) {}
     if (existingUser) {
       throw new BadRequestException('User with this email already exists');
     }
     const user = await this.userService.create(registerDto);
+    delete user.password;
     return user;
   }
 
