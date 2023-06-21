@@ -5,7 +5,7 @@ import {
   deleteCategoryThunk,
   fetchCategoriesThunk,
   updateCategoryThunk,
-} from './category.actions';
+} from './category.thunks';
 
 export interface CategoryState {
   categories: Category[];
@@ -15,7 +15,7 @@ const initialState: CategoryState = {
   categories: [],
 };
 
-export const categoriesSlice = createSlice({
+export const categorySlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
@@ -65,6 +65,6 @@ export const categoriesSlice = createSlice({
 });
 
 export const { addCategory, removeCategory, updateCategory } =
-  categoriesSlice.actions;
+  categorySlice.actions;
 
-export default categoriesSlice.reducer;
+export default categorySlice.reducer;

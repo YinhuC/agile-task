@@ -5,7 +5,7 @@ import {
   deleteGroupThunk,
   fetchGroupsThunk,
   updateGroupThunk,
-} from './group.actions';
+} from './group.thunks';
 
 export interface GroupState {
   groups: Group[];

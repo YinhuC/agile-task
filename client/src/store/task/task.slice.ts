@@ -5,7 +5,7 @@ import {
   deleteTaskThunk,
   fetchTasksThunk,
   updateTaskThunk,
-} from './task.actions';
+} from './task.thunks';
 
 export interface TaskState {
   tasks: Task[];
@@ -15,7 +15,7 @@ const initialState: TaskState = {
   tasks: [],
 };
 
-export const tasksSlice = createSlice({
+export const taskSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
@@ -62,6 +62,6 @@ export const tasksSlice = createSlice({
   },
 });
 
-export const { addTask, removeTask, updateTask } = tasksSlice.actions;
+export const { addTask, removeTask, updateTask } = taskSlice.actions;
 
-export default tasksSlice.reducer;
+export default taskSlice.reducer;

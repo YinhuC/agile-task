@@ -1,9 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import groupsReducer from './group/group.slice';
+import groups from './group/group.slice';
+import projects from './project/project.slice';
+import categories from './category/category.slice';
+import tasks from './task/task.slice';
 
 export const store = configureStore({
   reducer: {
-    groups: groupsReducer,
+    groups,
+    projects,
+    categories,
+    tasks,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

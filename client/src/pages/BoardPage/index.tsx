@@ -4,7 +4,7 @@ import ProjectGrid from '../../components/ProjectGrid';
 import ProjectCard from '../../components/ProjectCard';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
-import { fetchGroupsThunk } from '../../store/group/group.actions';
+import { fetchGroupsThunk } from '../../store/group/group.thunks';
 
 function BoardPage() {
   const dispatch = useDispatch<AppDispatch>();

@@ -5,7 +5,7 @@ import {
   deleteProjectThunk,
   fetchProjectsThunk,
   updateProjectThunk,
-} from './project.actions';
+} from './project.thunks';
 
 export interface ProjectState {
   projects: Project[];
