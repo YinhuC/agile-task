@@ -6,7 +6,7 @@ import {
   UpdateCategoryParams,
 } from '../../types/category.types';
 
-export const fetchCateogoriesThunk = createAsyncThunk(
+export const fetchCategoriesThunk = createAsyncThunk(
   'categories/fetch',
   (params: GetCategoriesParams) => {
     return API.category.getAllCategories(params);
