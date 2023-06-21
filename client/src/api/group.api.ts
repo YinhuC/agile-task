@@ -9,7 +9,7 @@ import { AxiosRequestConfig } from 'axios';
 
 const config: AxiosRequestConfig = { withCredentials: true };
 
-export const getGroups = () => axiosClient.post<Group[]>('/groups', config);
+export const getGroups = () => axiosClient.get<Group[]>('/groups', config);
 
 export const createGroup = (data: CreateGroupParams) =>
   axiosClient.post<GroupResponse>('/groups', data, config);

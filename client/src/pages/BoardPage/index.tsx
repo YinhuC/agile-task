@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Title } from '@mantine/core';
 import ProjectGrid from '../../components/ProjectGrid';
 import ProjectCard from '../../components/ProjectCard';
-import { getGroups } from '../../api/group.api';
+import { fetchGroupsThunk } from '../../store/group/groupSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
 
 function BoardPage() {
-  const groups = getGroups();
-  console.log(groups);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchGroupsThunk());
+  }, [dispatch]);
+
   return (
     <Container size='lg'>
       <Title order={2} mb={30}>
