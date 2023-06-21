@@ -7,6 +7,7 @@ export type CreateGroupParams = {
 };
 
 export type UpdateGroupParams = {
+  id: string;
   name?: string;
   users?: string[];
 };
