@@ -1,6 +1,5 @@
-# Agile Task App
+# Agile Tasker App
 
-==============
 
 Welcome to the Agile Tasker App! This application helps you manage your tasks and stay organized in an agile manner.
 
@@ -12,6 +11,7 @@ Before getting started, make sure you have the following software installed on y
 
 - Node.js (v14 or later)
 - Yarn package manager
+- PostgreSQL
 
 # Getting Started
 
@@ -19,35 +19,59 @@ Before getting started, make sure you have the following software installed on y
 
 To run the Agile Task App locally, follow these steps:
 
-1.  Clone the repository:
+**1.**  Clone the repository:
 
-    `git clone https://github.com/your-username/agile-tasker.git`
+    git clone https://github.com/your-username/agile-tasker.git
 
-2.  Navigate to the project directory:
+**2.**  Start PostgreSQL and create a new database
 
-    `cd agile-tasker`
+**3.**  Navigate to the project directory:
 
-3.  Install dependencies for both the client and server:
+    cd agile-tasker
 
-    `yarn install`
+**4.**  Rename `.env.example` to `.env` and update values or create your own in the root directory, variables provided below
 
-4.  Start the server:
+        REACT_APP_DB_NAME =
+        REACT_APP_DB_USERNAME = 
+        REACT_APP_DB_PASSWORD = 
+        REACT_APP_DB_HOST = 
+        REACT_APP_DB_PORT = 
+        REACT_APP_SECRET = 
+        
+        REACT_APP_API_PORT = 
+        REACT_APP_API_URL =
+    
+   - `REACT_APP_DB_NAME`: This should be set to the name of the database you created in PostgreSQL.
+   - `REACT_APP_DB_USERNAME`: This should be set to the username of your PostgreSQL server. By default, the username is usually set to "postgres".
+   - `REACT_APP_DB_PASSWORD`: This should be set to the password you set when you first started PostgreSQL.
+   - `REACT_APP_DB_HOST`: This should be set to the hostname for your PostgreSQL database server.
+   - `REACT_APP_DB_PORT`: This should be set to the port number on which your PostgreSQL database server is running. By default, PostgreSQL uses port 5432.
+   - `REACT_APP_SECRET`: This should be set to a secret key used for authentication and session management. Just any random string will do.
+   - `REACT_APP_API_PORT`: This should be set to the port number on which your Node.js server will run. It can be any available port number of your choice.
+   - `REACT_APP_API_URL`: This should be set to the URL of your Node.js server. In a local development environment, it can be set to `http://localhost:<port>`, where `<port>` is the value you set for `REACT_APP_API_PORT`.
 
-    `yarn start:server`
 
-5.  Start the client:
+**5.**  Install dependencies for both the client and server:
 
-    `yarn start`
+    yarn install
 
-6.  Open your browser and visit [http://localhost:3000](http://localhost:3000/) to see the app in action.
+**6.**  Start the server:
 
-7.  Run the server tests:
+    yarn start:server
 
-    `yarn test:server`
+**7**.  Start the client:
 
-8.  Run the client tests:
+    yarn start
 
-    `yarn test`
+**8.**  Open your browser and visit [http://localhost:3000](http://localhost:3000/) to see the app in action.
+
+**9.**  Run the server tests:
+
+    yarn test:server
+
+**10.**  Run the client tests:
+
+    yarn test
 
 # Folder Structure
 
@@ -56,6 +80,6 @@ To run the Agile Task App locally, follow these steps:
 The project has the following folder structure:
 
 - `/client`: Contains the frontend React application.
-- `/server`: Contains the backend server using Node.js and Express.
+- `/server`: Contains the backend server using Node.js and NestJS.
 
 Feel free to explore each folder to understand their specific implementations.
