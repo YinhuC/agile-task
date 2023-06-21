@@ -15,7 +15,7 @@ const initialState: GroupState = {
   groups: [],
 };
 
-export const groupsSlice = createSlice({
+export const groupSlice = createSlice({
   name: 'groups',
   initialState,
   reducers: {
@@ -63,6 +63,6 @@ export const groupsSlice = createSlice({
     });
   },
 });
-export const { addGroup, removeGroup, updateGroup } = groupsSlice.actions;
+export const { addGroup, removeGroup, updateGroup } = groupSlice.actions;
 
-export default groupsSlice.reducer;
+export default groupSlice.reducer;
