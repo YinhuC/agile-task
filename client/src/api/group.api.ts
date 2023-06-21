@@ -5,17 +5,13 @@ import {
   UpdateGroupParams,
 } from '../types/group.types';
 import { axiosClient } from './client.api';
-import { AxiosRequestConfig } from 'axios';
 
-const config: AxiosRequestConfig = { withCredentials: true };
-
-export const getGroups = () => axiosClient.get<Group[]>('/groups', config);
+export const getGroups = () => axiosClient.get<Group[]>('/groups');
 
 export const createGroup = (data: CreateGroupParams) =>
-  axiosClient.post<GroupResponse>('/groups', data, config);
+  axiosClient.post<GroupResponse>('/groups', data);
 
 export const updateGroup = (data: UpdateGroupParams, id: string) =>
-  axiosClient.put<GroupResponse>(`/groups/${id}`, data, config);
+  axiosClient.put<GroupResponse>(`/groups/${id}`, data);
 
-export const deleteGroup = (id: string) =>
-  axiosClient.delete(`/groups/${id}`, config);
+export const deleteGroup = (id: string) => axiosClient.delete(`/groups/${id}`);

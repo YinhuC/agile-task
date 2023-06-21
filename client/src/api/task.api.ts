@@ -5,18 +5,14 @@ import {
   UpdateTaskParams,
 } from '../types/task.types';
 import { axiosClient } from './client.api';
-import { AxiosRequestConfig } from 'axios';
-
-const config: AxiosRequestConfig = { withCredentials: true };
 
 export const getAllTasks = (data: GetTasksParams) =>
-  axiosClient.post<Task[]>('/tasks/all', data, config);
+  axiosClient.post<Task[]>('/tasks/all', data);
 
 export const createTask = (data: CreateTaskParams) =>
-  axiosClient.post<Task>('/tasks', data, config);
+  axiosClient.post<Task>('/tasks', data);
 
 export const updateTask = (data: UpdateTaskParams, id: string) =>
-  axiosClient.put<Task>(`/tasks/${id}`, data, config);
+  axiosClient.put<Task>(`/tasks/${id}`, data);
 
-export const deleteTask = (id: string) =>
-  axiosClient.delete(`/tasks/${id}`, config);
+export const deleteTask = (id: string) => axiosClient.delete(`/tasks/${id}`);
