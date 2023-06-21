@@ -1,17 +1,18 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Group } from '../../types/group.types';
-import { fetchGroupsThunk } from './group.actions';
+import {
+  createGroupThunk,
+  deleteGroupThunk,
+  fetchGroupsThunk,
+  updateGroupThunk,
+} from './group.actions';
 
 export interface GroupState {
   groups: Group[];
-  isLoading: boolean;
-  error: string | null;
 }
 
 const initialState: GroupState = {
   groups: [],
-  isLoading: false,
-  error: null,
 };
 
 export const groupsSlice = createSlice({
@@ -38,24 +39,30 @@ export const groupsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchGroupsThunk.pending, (state) => {
-      state.isLoading = true;
-      state.error = null;
-    });
-
     builder.addCase(fetchGroupsThunk.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = null;
       state.groups = action.payload.data;
     });
 
-    builder.addCase(fetchGroupsThunk.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.error.message ?? 'Failed to fetch groups.';
+    builder.addCase(createGroupThunk.fulfilled, (state, action) => {
+      state.groups.unshift(action.payload.data);
+    });
+
+    builder.addCase(updateGroupThunk.fulfilled, (state, action) => {
+      const index = state.groups.findIndex(
+        (group) => group.id === action.payload.data.id
+      );
+      if (index !== -1) {
+        state.groups[index] = action.payload.data;
+      }
+    });
+
+    builder.addCase(deleteGroupThunk.fulfilled, (state, action) => {
+      state.groups = state.groups.filter(
+        (group) => group.id !== action.payload.data.id
+      );
     });
   },
 });
-
 export const { addGroup, removeGroup, updateGroup } = groupsSlice.actions;
 
 export default groupsSlice.reducer;
