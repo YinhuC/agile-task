@@ -12,7 +12,7 @@ export const getAllCategories = (data: GetCategoriesParams) =>
 export const createCategory = (data: CreateCategoryParams) =>
   axiosClient.post<Category>('/categories', data);
 
-export const updateCategory = (data: UpdateCategoryParams, id: string) =>
+export const updateCategory = ({ id, ...data }: UpdateCategoryParams) =>
   axiosClient.put<Category>(`/categories/${id}`, data);
 
 export const deleteCategory = (id: string) =>
