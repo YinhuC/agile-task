@@ -27,7 +27,7 @@ export class AuthController {
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(TokenInterceptor)
   async register(@Body() registerDto: RegisterDto): Promise<User> {
-    return this.authService.register(registerDto);
+    return await this.authService.register(registerDto);
   }
 
   @Post('login')

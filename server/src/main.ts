@@ -4,19 +4,23 @@ import session from 'express-session';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors({ origin: 'http://localhost:3000', credentials: true });
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api');
-  app.use(cookieParser(process.env.REACT_APP_JWT_SECRET));
+  app.use(cookieParser(process.env.REACT_APP_SECRET));
   app.use(
     session({
-      secret: process.env.REACT_APP_JWT_SECRET,
+      secret: process.env.REACT_APP_SECRET,
       resave: false,
       saveUninitialized: false,
+      name: 'SESSION_ID',
+      cookie: {
+        maxAge: 86400000,
+      },
     })
   );
   app.use(passport.initialize());
