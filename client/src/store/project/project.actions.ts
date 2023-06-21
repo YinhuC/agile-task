@@ -2,12 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import API from '../../api';
 import {
   CreateProjectParams,
+  GetProjectsParams,
   UpdateProjectParams,
 } from '../../types/project.types';
 
 export const fetchProjectsThunk = createAsyncThunk(
   'projects/fetch',
-  (params: CreateProjectParams) => {
+  (params: GetProjectsParams) => {
     return API.project.getAllProjects(params);
   }
 );
