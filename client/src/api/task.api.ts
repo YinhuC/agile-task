@@ -12,7 +12,7 @@ export const getAllTasks = (data: GetTasksParams) =>
 export const createTask = (data: CreateTaskParams) =>
   axiosClient.post<Task>('/tasks', data);
 
-export const updateTask = (data: UpdateTaskParams, id: string) =>
+export const updateTask = ({ id, ...data }: UpdateTaskParams) =>
   axiosClient.put<Task>(`/tasks/${id}`, data);
 
 export const deleteTask = (id: string) => axiosClient.delete(`/tasks/${id}`);

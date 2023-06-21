@@ -11,6 +11,7 @@ export type CreateTaskParams = {
 };
 
 export type UpdateTaskParams = {
+  id: string;
   name: string;
 };
 
