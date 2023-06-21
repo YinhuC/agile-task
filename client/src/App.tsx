@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { useLocation, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from './providers/ThemeProvider';
 import Header from './components/Header';
@@ -9,31 +9,44 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './store';
 import { Notifications } from '@mantine/notifications';
 import BoardPage from './pages/BoardPage';
+import { AuthContext } from './utils/context/AuthContext';
+import { User } from './types/user.types';
+import AuthRoute from './components/AuthRoute';
 
-type Props = {};
+type Props = {
+  user?: User;
+  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+};
 
-function Providers({ children }: PropsWithChildren & Props) {
+function Providers({ children, user, setUser }: PropsWithChildren & Props) {
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ user, setUser }}>
+          {children}
+        </AuthContext.Provider>
+      </ThemeProvider>
     </ReduxProvider>
   );
 }
 
 function App() {
+  const [user, setUser] = useState<User>();
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isRegisterPage = location.pathname === '/register';
 
   return (
-    <Providers>
+    <Providers user={user} setUser={setUser}>
       <Notifications />
       {!isLoginPage && !isRegisterPage && <Header />}
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
-        <Route path='/boards' element={<BoardPage />} />
+        <Route element={<AuthRoute />}>
+          <Route path='/boards/:id' element={<BoardPage />} />
+        </Route>
       </Routes>
     </Providers>
   );

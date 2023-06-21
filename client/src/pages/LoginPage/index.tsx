@@ -15,6 +15,7 @@ import { postAuthLogin } from '../../api/auth.api';
 import { LoginParams } from '../../types/auth.types';
 import { AxiosError } from 'axios';
 import { notifications } from '@mantine/notifications';
+import { User } from '../../types/user.types';
 
 function LoginPage() {
   const form = useForm({
@@ -31,8 +32,8 @@ function LoginPage() {
   const navigate = useNavigate();
   const onSubmit = async (values: LoginParams) => {
     try {
-      await postAuthLogin(values);
-      navigate('/boards');
+      const user: User = (await postAuthLogin(values)).data;
+      navigate(`/boards/${user.id}`);
     } catch (err) {
       const axiosError = err as AxiosError;
       notifications.cleanQueue();
