@@ -35,8 +35,8 @@ function LoginPage() {
       navigate('/boards');
     } catch (err) {
       const axiosError = err as AxiosError;
+      notifications.cleanQueue();
       if (axiosError.response?.status === 401) {
-        notifications.cleanQueue();
         notifications.show({
           title: 'Invalid email or password.',
           message: 'Please check your credentials and try again.',
@@ -44,7 +44,6 @@ function LoginPage() {
           icon: <IconX />,
         });
       } else {
-        notifications.cleanQueue();
         notifications.show({
           title: 'An error occurred.',
           message: 'Please try again later.',

@@ -15,6 +15,7 @@ import { MESSAGES, REGEXES } from '../../utils/regex';
 import { RegisterParams } from '../../types/auth.types';
 import { postAuthRegister } from '../../api/auth.api';
 import { notifications } from '@mantine/notifications';
+import { AxiosError } from 'axios';
 
 function RegisterPage() {
   const form = useForm({
@@ -57,15 +58,24 @@ function RegisterPage() {
         icon: <IconCheck />,
       });
     } catch (err) {
-      console.log(err);
+      const axiosError = err as AxiosError;
       notifications.cleanQueue();
-      notifications.show({
-        title: 'Account Creation Error',
-        message:
-          'An error occurred during the account creation process. Please double-check the provided information and try again.',
-        color: 'red',
-        icon: <IconX />,
-      });
+      if (axiosError.response?.status === 400) {
+        notifications.show({
+          title: 'Email Already Registered.',
+          message: 'Please use a different email to register and try again.',
+          color: 'red',
+          icon: <IconX />,
+        });
+      } else {
+        notifications.show({
+          title: 'Account Creation Error',
+          message:
+            'An error occurred during the account creation process. Please double-check the provided information and try again.',
+          color: 'red',
+          icon: <IconX />,
+        });
+      }
     }
   };
 
