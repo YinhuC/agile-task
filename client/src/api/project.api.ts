@@ -12,7 +12,7 @@ export const getAllProjects = (data: GetProjectsParams) =>
 export const createProject = (data: CreateProjectParams) =>
   axiosClient.post<Project>('/projects', data);
 
-export const updateProject = (data: UpdateProjectParams, id: string) =>
+export const updateProject = ({ id, ...data }: UpdateProjectParams) =>
   axiosClient.put<Project>(`/projects/${id}`, data);
 
 export const deleteProject = (id: string) =>

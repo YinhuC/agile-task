@@ -11,6 +11,7 @@ export type CreateProjectParams = {
 };
 
 export type UpdateProjectParams = {
+  id: string;
   name: string;
 };
 
