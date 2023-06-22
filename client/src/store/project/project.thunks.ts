@@ -3,15 +3,20 @@ import API from '../../api';
 import {
   CreateProjectParams,
   GetProjectsParams,
+  Project,
   UpdateProjectParams,
 } from '../../types/project.types';
 
-export const fetchProjectsThunk = createAsyncThunk(
-  'projects/fetch',
-  (params: GetProjectsParams) => {
-    return API.project.getAllProjects(params);
-  }
-);
+export interface FetchProjectsPayload {
+  data: Project[];
+}
+
+export const fetchProjectsThunk = createAsyncThunk<
+  FetchProjectsPayload,
+  GetProjectsParams
+>('projects/fetch', (params: GetProjectsParams) => {
+  return API.project.getAllProjects(params);
+});
 
 export const createProjectThunk = createAsyncThunk(
   'projects/create',

@@ -23,8 +23,7 @@ export class GroupService {
   async getAllGroups(user: User): Promise<Group[]> {
     return await this.groupRepository
       .createQueryBuilder('group')
-      .leftJoinAndSelect('group.users', 'user')
-      .leftJoinAndSelect('group.projects', 'project')
+      .leftJoin('group.users', 'user')
       .where('user.id = :userId', { userId: user.id })
       .getMany();
   }
