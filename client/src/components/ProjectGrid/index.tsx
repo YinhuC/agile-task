@@ -9,7 +9,7 @@ type ProjectGridProps = {
 function ProjectGrid({ children, groupName }: ProjectGridProps) {
   return (
     <>
-      <Title order={3} mb={20}>
+      <Title order={3} mb={20} mt={50}>
         {groupName}
       </Title>
       <SimpleGrid
