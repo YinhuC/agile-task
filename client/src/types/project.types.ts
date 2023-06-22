@@ -22,8 +22,5 @@ export type Project = {
   group?: Group;
   createdAt: string;
   updatedAt: string;
-};
-
-export type ProjectWithCategories = Project & {
-  categories: Category[];
+  categories?: Category[];
 };

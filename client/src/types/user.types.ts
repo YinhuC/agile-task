@@ -8,10 +8,7 @@ export type User = {
   authMethod: string;
   createdAt: string;
   updatedAt: string;
-};
-
-export type UserWithGroups = User & {
-  Groups: Group[];
+  Groups?: Group[];
 };
 
 export type UpdateUserParams = {

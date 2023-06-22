@@ -17,17 +17,11 @@ export type Group = {
   name: string;
   createdAt: string;
   owner?: User;
+  projects?: Project[];
+  users?: User[];
 };
 
 export type GroupResponse = Group & {
   users: User[];
   notFoundUsers: string[];
-};
-
-export type GroupWithUsers = Group & {
-  users: User[];
-};
-
-export type GroupWithProjects = Group & {
-  projects: Project[];
 };

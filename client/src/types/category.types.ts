@@ -20,8 +20,5 @@ export type Category = {
   name: string;
   project?: Project;
   createdAt: string;
-};
-
-export type CategoryWithTasks = Category & {
-  tasks: Task[];
+  tasks?: Task[];
 };

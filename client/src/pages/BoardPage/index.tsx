@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import { Container, Title } from '@mantine/core';
 import ProjectGrid from '../../components/ProjectGrid';
 import ProjectCard from '../../components/ProjectCard';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
 import { fetchGroupsThunk } from '../../store/group/group.thunks';
 
 function BoardPage() {
   const dispatch = useDispatch<AppDispatch>();
+
+  const groups = useSelector((state: RootState) => state.groups.groups);
+  console.log(groups);
 
   useEffect(() => {
     dispatch(fetchGroupsThunk());
