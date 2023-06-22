@@ -16,6 +16,9 @@ export class Category {
   id: number;
 
   @Column()
+  index: number;
+
+  @Column()
   name: string;
 
   @ManyToOne(() => Project, (project) => project.categories, {

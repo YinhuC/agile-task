@@ -51,10 +51,15 @@ export class CategoryController {
   @Put(':id')
   @UseGuards(CategoryMemberGuard)
   async updateCategory(
+    @AuthUser() user: User,
     @Param('id') id: number,
     @Body() updateCategoryDto: UpdateCategoryDto
   ): Promise<Category> {
-    return await this.categoryService.updateCategory(id, updateCategoryDto);
+    return await this.categoryService.updateCategory(
+      user,
+      id,
+      updateCategoryDto
+    );
   }
 
   @Delete(':id')

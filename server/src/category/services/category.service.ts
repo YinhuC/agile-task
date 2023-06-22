@@ -1,10 +1,11 @@
 import {
+  BadRequestException,
   ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, getManager } from 'typeorm';
 import { Category } from '../category.entity';
 import { CreateCategoryDto } from '../dto/create-category.dto';
 import { UpdateCategoryDto } from '../dto/update-category.dto';
@@ -41,7 +42,7 @@ export class CategoryService {
       relations: ['project'],
     });
     if (!project) {
-      throw new NotFoundException(`Project with ID ${categoryId} not found`);
+      throw new NotFoundException(`Category with ID ${categoryId} not found`);
     }
     return project;
   }
@@ -59,21 +60,48 @@ export class CategoryService {
       );
     }
 
+    const existingCategories = await this.getAllCategoriesByProjectId(
+      user,
+      projectId
+    );
+    const nextIndex =
+      existingCategories.length > 0 ? existingCategories.length : 0;
+
     const project = await this.projectService.getProjectById(projectId);
+
     const category = {
       ...categoryDto,
       project,
+      index: nextIndex,
     };
     const newCategory = this.categoryRepository.create(category);
     return await this.categoryRepository.save(newCategory);
   }
 
   async updateCategory(
+    user: User,
     categoryId: number,
     updateCategoryDto: UpdateCategoryDto
   ): Promise<Category> {
     const category = await this.getCategoryById(categoryId);
     const updatedCategory = { ...category, ...updateCategoryDto };
+
+    if (updateCategoryDto.index) {
+      const categories = await this.getAllCategoriesByProjectId(
+        user,
+        category.project.id
+      );
+      if (updateCategoryDto.index > categories.length) {
+        throw new BadRequestException(
+          'Index cannot be bigger than the current length of categories'
+        );
+      }
+      for (let i = updatedCategory.index; i < categories.length; i++) {
+        categories[i].index++;
+      }
+      updatedCategory.index = updateCategoryDto.index;
+    }
+
     return await this.categoryRepository.save(updatedCategory);
   }
 
