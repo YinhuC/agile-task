@@ -65,7 +65,7 @@ export class CategoryService {
       projectId
     );
     const nextIndex =
-      existingCategories.length > 0 ? existingCategories.length : 0;
+      existingCategories.length > 0 ? existingCategories.length + 1 : 1;
 
     const project = await this.projectService.getProjectById(projectId);
 
@@ -91,15 +91,34 @@ export class CategoryService {
         user,
         category.project.id
       );
+
       if (updateCategoryDto.index > categories.length) {
         throw new BadRequestException(
           'Index cannot be bigger than the current length of categories'
         );
       }
-      for (let i = updatedCategory.index; i < categories.length; i++) {
-        categories[i].index++;
+
+      const oldIndex = category.index;
+      const newIndex = updateCategoryDto.index;
+
+      if (oldIndex < newIndex) {
+        for (let i = oldIndex + 1; i <= newIndex; i++) {
+          const categoryToUpdate = categories.find((cat) => cat.index === i);
+          if (categoryToUpdate) {
+            categoryToUpdate.index--;
+          }
+        }
+      } else if (oldIndex > newIndex) {
+        for (let i = newIndex; i < oldIndex; i++) {
+          const categoryToUpdate = categories.find((cat) => cat.index === i);
+          if (categoryToUpdate) {
+            categoryToUpdate.index++;
+          }
+        }
       }
-      updatedCategory.index = updateCategoryDto.index;
+
+      await this.categoryRepository.save(categories);
+      updatedCategory.index = newIndex;
     }
 
     return await this.categoryRepository.save(updatedCategory);

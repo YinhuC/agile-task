@@ -51,10 +51,11 @@ export class TaskController {
   @Put(':id')
   @UseGuards(TaskMemberGuard)
   async updateTask(
+    @AuthUser() user: User,
     @Param('id') id: number,
     @Body() updateTaskDto: UpdateTaskDto
   ): Promise<Task> {
-    return await this.taskService.updateTask(id, updateTaskDto);
+    return await this.taskService.updateTask(user, id, updateTaskDto);
   }
 
   @Delete(':id')
