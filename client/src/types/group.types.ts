@@ -10,6 +10,7 @@ export type UpdateGroupParams = {
   id: string;
   name?: string;
   users?: string[];
+  owner?: User;
 };
 
 export type Group = {

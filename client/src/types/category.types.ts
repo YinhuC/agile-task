@@ -12,7 +12,8 @@ export type CreateCategoryParams = {
 
 export type UpdateCategoryParams = {
   id: string;
-  name: string;
+  name?: string;
+  index?: number;
 };
 
 export type Category = {
