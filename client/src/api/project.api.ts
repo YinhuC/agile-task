@@ -9,6 +9,8 @@ import { axiosClient } from './client.api';
 export const getAllProjects = (data: GetProjectsParams) =>
   axiosClient.post<Project[]>('/projects/all', data);
 
+export const getProject = (id: string) => axiosClient.get(`/projects/${id}`);
+
 export const createProject = (data: CreateProjectParams) =>
   axiosClient.post<Project>('/projects', data);
 

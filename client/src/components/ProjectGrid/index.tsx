@@ -5,8 +5,8 @@ import { Group } from '../../types/group.types';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import {
-  FetchProjectsPayload,
-  fetchProjectsThunk,
+  FetchAllProjectsPayload,
+  fetchAllProjectsThunk,
 } from '../../store/project/project.thunks';
 import { Project } from '../../types/project.types';
 
@@ -20,8 +20,8 @@ function ProjectGrid({ group }: ProjectGridProps) {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    dispatch(fetchProjectsThunk({ groupId: id })).then((action) => {
-      const payload = action.payload as FetchProjectsPayload;
+    dispatch(fetchAllProjectsThunk({ groupId: id })).then((action) => {
+      const payload = action.payload as FetchAllProjectsPayload;
       setProjects(payload.data);
     });
   }, [dispatch, id]);
@@ -31,7 +31,7 @@ function ProjectGrid({ group }: ProjectGridProps) {
       <ProjectCard
         title={project.name}
         description={project?.description}
-        link={'/'}
+        link={`/project/${project.id}`}
         key={`project-card-${index}`}
       />
     ));

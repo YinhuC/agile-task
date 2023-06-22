@@ -7,16 +7,25 @@ import {
   UpdateProjectParams,
 } from '../../types/project.types';
 
-export interface FetchProjectsPayload {
+export interface FetchAllProjectsPayload {
   data: Project[];
 }
 
-export const fetchProjectsThunk = createAsyncThunk<
-  FetchProjectsPayload,
+export interface FetchProjectPayload {
+  data: Project;
+}
+
+export const fetchAllProjectsThunk = createAsyncThunk<
+  FetchAllProjectsPayload,
   GetProjectsParams
->('projects/fetch', (params: GetProjectsParams) => {
+>('projects/fetch/all', (params: GetProjectsParams) => {
   return API.project.getAllProjects(params);
 });
+
+export const fetchProjectThunk = createAsyncThunk<FetchProjectPayload, string>(
+  'projects/fetch',
+  (id: string) => API.project.getProject(id)
+);
 
 export const createProjectThunk = createAsyncThunk(
   'projects/create',

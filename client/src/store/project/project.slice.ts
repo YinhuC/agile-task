@@ -3,7 +3,8 @@ import { Project } from '../../types/project.types';
 import {
   createProjectThunk,
   deleteProjectThunk,
-  fetchProjectsThunk,
+  fetchProjectThunk,
+  fetchAllProjectsThunk,
   updateProjectThunk,
 } from './project.thunks';
 
@@ -39,8 +40,12 @@ export const projectSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchProjectsThunk.fulfilled, (state, action) => {
+    builder.addCase(fetchAllProjectsThunk.fulfilled, (state, action) => {
       state.projects = action.payload.data;
+    });
+
+    builder.addCase(fetchProjectThunk.fulfilled, (state, action) => {
+      state.projects.unshift(action.payload.data);
     });
 
     builder.addCase(createProjectThunk.fulfilled, (state, action) => {

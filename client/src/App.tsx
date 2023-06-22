@@ -12,6 +12,7 @@ import BoardPage from './pages/BoardPage';
 import { AuthContext } from './utils/context/AuthContext';
 import { User } from './types/user.types';
 import AuthRoute from './components/AuthRoute';
+import ProjectPage from './pages/ProjectPage';
 
 type Props = {
   user?: User;
@@ -46,6 +47,7 @@ function App() {
         <Route path='/register' element={<RegisterPage />} />
         <Route element={<AuthRoute />}>
           <Route path='/boards/:id' element={<BoardPage />} />
+          <Route path='/project/:id' element={<ProjectPage />} />
         </Route>
       </Routes>
     </Providers>
