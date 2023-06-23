@@ -11,7 +11,11 @@ import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
 import { CategoryService } from 'src/category/services/category.service';
 import { User } from 'src/user/user.entity';
-import { updateIndexValues } from 'src/shared/utils/array.utils';
+import {
+  insertIndexValue,
+  removeIndexValue,
+  updateIndexValues,
+} from 'src/shared/utils/array.utils';
 
 @Injectable()
 export class TaskService {
@@ -76,24 +80,53 @@ export class TaskService {
     taskId: number,
     updateTaskDto: UpdateTaskDto
   ): Promise<Task> {
+    const { categoryId, index } = updateTaskDto;
     const task = await this.getTaskById(taskId);
     const tasks = await this.getAllTasksByCategoryId(user, task.category.id);
     const updatedTask = { ...task, ...updateTaskDto };
 
-    if (updateTaskDto.index) {
-      if (updateTaskDto.index > tasks.length) {
+    if (index && categoryId === task.category.id) {
+      if (index > tasks.length) {
         throw new BadRequestException(
           'Index cannot be bigger than the current length of tasks'
         );
       }
       const oldIndex = task.index;
-      const newIndex = updateTaskDto.index;
+      const newIndex = index;
       const modifiedTasks = updateIndexValues(tasks, oldIndex, newIndex);
 
       updatedTask.index = newIndex;
 
-      // Save all the modified tasks in bulk
       await this.taskRepository.save(modifiedTasks);
+    } else if (index) {
+      const newTasks = await this.getAllTasksByCategoryId(user, categoryId);
+      if (index > newTasks.length + 1) {
+        throw new BadRequestException(
+          'Index cannot be bigger than the current length of tasks'
+        );
+      }
+      const oldCategory = await this.categoryService.getCategoryById(
+        task.category.id
+      );
+      const newCategory = await this.categoryService.getCategoryById(
+        categoryId
+      );
+      if (oldCategory.project.id !== newCategory.project.id) {
+        throw new BadRequestException(
+          'Cannot move to different to category in different project'
+        );
+      }
+
+      const oldIndex = task.index;
+      const newIndex = updateTaskDto.index;
+      const newModifiedTasks = insertIndexValue(newTasks, newIndex);
+      const oldModifiedTasks = removeIndexValue(tasks, oldIndex);
+
+      updatedTask.index = newIndex;
+      updatedTask.category = newCategory;
+
+      await this.taskRepository.save(newModifiedTasks);
+      await this.taskRepository.save(oldModifiedTasks);
     }
 
     return await this.taskRepository.save(updatedTask);
