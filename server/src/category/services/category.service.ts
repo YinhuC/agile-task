@@ -11,6 +11,7 @@ import { CreateCategoryDto } from '../dto/create-category.dto';
 import { UpdateCategoryDto } from '../dto/update-category.dto';
 import { User } from 'src/user/user.entity';
 import { ProjectService } from 'src/project/services/project.service';
+import { updateIndexValues } from 'src/shared/utils/array.utils';
 
 @Injectable()
 export class CategoryService {
@@ -84,14 +85,13 @@ export class CategoryService {
     updateCategoryDto: UpdateCategoryDto
   ): Promise<Category> {
     const category = await this.getCategoryById(categoryId);
+    const categories = await this.getAllCategoriesByProjectId(
+      user,
+      category.project.id
+    );
     const updatedCategory = { ...category, ...updateCategoryDto };
 
     if (updateCategoryDto.index) {
-      const categories = await this.getAllCategoriesByProjectId(
-        user,
-        category.project.id
-      );
-
       if (updateCategoryDto.index > categories.length) {
         throw new BadRequestException(
           'Index cannot be bigger than the current length of categories'
@@ -100,24 +100,9 @@ export class CategoryService {
 
       const oldIndex = category.index;
       const newIndex = updateCategoryDto.index;
+      const modifiedTasks = updateIndexValues(categories, oldIndex, newIndex);
 
-      if (oldIndex < newIndex) {
-        for (let i = oldIndex + 1; i <= newIndex; i++) {
-          const categoryToUpdate = categories.find((cat) => cat.index === i);
-          if (categoryToUpdate) {
-            categoryToUpdate.index--;
-          }
-        }
-      } else if (oldIndex > newIndex) {
-        for (let i = oldIndex - 1; i >= newIndex; i--) {
-          const categoryToUpdate = categories.find((cat) => cat.index === i);
-          if (categoryToUpdate) {
-            categoryToUpdate.index++;
-          }
-        }
-      }
-
-      await this.categoryRepository.save(categories);
+      await this.categoryRepository.save(modifiedTasks);
       updatedCategory.index = newIndex;
     }
 
