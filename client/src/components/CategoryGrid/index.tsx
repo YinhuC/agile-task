@@ -9,13 +9,14 @@ import {
   fetchTasksThunk,
 } from '../../store/task/task.thunks';
 import { Task } from '../../types/task.types';
+import { Draggable } from 'react-beautiful-dnd';
 
 type CategoryGridProps = {
   category: Category;
 };
 
 function CategoryGrid({ category }: CategoryGridProps) {
-  const { name, id } = category;
+  const { name, id, index } = category;
   const dispatch = useDispatch<AppDispatch>();
   const [tasks, setTasks] = useState<Task[]>([]);
 
@@ -35,21 +36,28 @@ function CategoryGrid({ category }: CategoryGridProps) {
   );
 
   return (
-    <Stack
-      spacing={20}
-      p={20}
-      mx={10}
-      sx={{
-        backgroundColor: 'white',
-        borderRadius: '0.2rem',
-      }}
-    >
-      <Title order={4} ml={5}>
-        {name}
-      </Title>
-      <Divider />
-      {cards}
-    </Stack>
+    <Draggable draggableId={`category-drop-${index}`} index={index}>
+      {(provided) => (
+        <Stack
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+          spacing={20}
+          p={20}
+          mx={10}
+          sx={{
+            backgroundColor: 'white',
+            borderRadius: '0.2rem',
+          }}
+        >
+          <Title order={4} ml={5}>
+            {name}
+          </Title>
+          <Divider />
+          {cards}
+        </Stack>
+      )}
+    </Draggable>
   );
 }
 

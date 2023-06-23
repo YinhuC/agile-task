@@ -19,6 +19,7 @@ export type UpdateCategoryParams = {
 export type Category = {
   id: number;
   name: string;
+  index: number;
   project?: Project;
   createdAt: string;
   tasks?: Task[];

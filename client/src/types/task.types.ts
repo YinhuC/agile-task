@@ -20,6 +20,7 @@ export type Task = {
   id: number;
   name: string;
   description: string;
+  index: number;
   category?: Category;
   createdAt: string;
   user?: User;

@@ -6,6 +6,7 @@ import { fetchCategoriesThunk } from '../../store/category/category.thunks';
 import { useLocation } from 'react-router-dom';
 import { fetchProjectThunk } from '../../store/project/project.thunks';
 import CategoryGrid from '../../components/CategoryGrid';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 function ProjectPage() {
   const theme = useMantineTheme();
@@ -32,8 +33,8 @@ function ProjectPage() {
   );
 
   return (
-    <>
-      <Container size='xl' mb={20}>
+    <DragDropContext onDragEnd={() => {}}>
+      <Container size='xl' mb={20} sx={{ userSelect: 'none' }}>
         <Title order={2} mb={10}>
           {project?.name}
         </Title>
@@ -41,24 +42,32 @@ function ProjectPage() {
           {project?.description}
         </Text>
       </Container>
-      <Flex
-        p={20}
-        sx={{
-          background: '#f9f9f9',
-          margin: '0 50px',
-          borderRadius: '0.5rem',
-          overflow: 'auto',
-          [theme.fn.smallerThan('lg')]: {
-            margin: '0 30px',
-          },
-          [theme.fn.smallerThan('sm')]: {
-            margin: '0 15px',
-          },
-        }}
-      >
-        {categories}
-      </Flex>
-    </>
+      <Droppable droppableId='board' direction='horizontal'>
+        {(provided) => (
+          <Flex
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            p={20}
+            sx={{
+              background: '#f9f9f9',
+              margin: '0 50px',
+              borderRadius: '0.5rem',
+              overflow: 'auto',
+              userSelect: 'none',
+              [theme.fn.smallerThan('lg')]: {
+                margin: '0 30px',
+              },
+              [theme.fn.smallerThan('sm')]: {
+                margin: '0 15px',
+              },
+            }}
+          >
+            {categories}
+            {provided.placeholder}
+          </Flex>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 }
 
