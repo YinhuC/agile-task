@@ -24,7 +24,7 @@ export class UserController {
     @AuthUser() user: User,
     @Body() updateUserDto: Partial<UpdateUserDto>
   ): Promise<User> {
-    return this.userService.updateUser(user.id, updateUserDto);
+    return await this.userService.updateUser(user.id, updateUserDto);
   }
 
   @Delete()
