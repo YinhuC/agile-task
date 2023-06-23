@@ -132,7 +132,12 @@ export class TaskService {
     return await this.taskRepository.save(updatedTask);
   }
 
-  async deleteTask(taskId: number): Promise<void> {
+  async deleteTask(user: User, taskId: number): Promise<void> {
+    const task = await this.getTaskById(taskId);
+    const tasks = await this.getAllTasksByCategoryId(user, task.category.id);
+    const modifiedTasks = removeIndexValue(tasks, task.index);
+    await this.taskRepository.save(modifiedTasks);
+
     const result = await this.taskRepository.delete(taskId);
     if (result.affected === 0) {
       throw new NotFoundException(`Task with ID ${taskId} not found`);
