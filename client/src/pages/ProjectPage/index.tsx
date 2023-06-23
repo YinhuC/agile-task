@@ -3,14 +3,14 @@ import { Flex, useMantineTheme } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import {
-  fetchCategoriesThunk,
-  updateCategoryThunk,
+  fetchAllCategoriesThunk,
+  updateCategoryOrderThunk,
 } from '../../store/category/category.thunks';
 import { useLocation } from 'react-router-dom';
 import CategoryGrid from '../../components/CategoryGrid';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import HeaderSection from './HeaderSection';
-import { UpdateCategoryParams } from '../../types/category.types';
+import { UpdateCategoryOrderParams } from '../../types/category.types';
 
 function ProjectPage() {
   const theme = useMantineTheme();
@@ -23,7 +23,7 @@ function ProjectPage() {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchCategoriesThunk({ projectId: parseInt(projectId) }));
+    dispatch(fetchAllCategoriesThunk({ projectId: parseInt(projectId) }));
   }, [dispatch, projectId]);
 
   const onDragEnd = (result: DropResult) => {
@@ -37,11 +37,12 @@ function ProjectPage() {
     ) {
       return;
     }
-    const category: UpdateCategoryParams = {
+    const category: UpdateCategoryOrderParams = {
       ...categoryState[source.index],
       index: destination.index + 1,
+      projectId: parseInt(projectId),
     };
-    dispatch(updateCategoryThunk(category));
+    dispatch(updateCategoryOrderThunk(category));
   };
 
   return (

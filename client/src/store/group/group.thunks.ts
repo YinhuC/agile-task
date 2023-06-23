@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import API from '../../api';
 import { CreateGroupParams, UpdateGroupParams } from '../../types/group.types';
 
-export const fetchGroupsThunk = createAsyncThunk('groups/fetch', () => {
+export const fetchAllGroupsThunk = createAsyncThunk('groups/fetch/all', () => {
   return API.group.getGroups();
 });
 

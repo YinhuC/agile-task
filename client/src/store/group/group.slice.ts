@@ -3,7 +3,7 @@ import { Group } from '../../types/group.types';
 import {
   createGroupThunk,
   deleteGroupThunk,
-  fetchGroupsThunk,
+  fetchAllGroupsThunk,
   updateGroupThunk,
 } from './group.thunks';
 
@@ -39,7 +39,7 @@ export const groupSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchGroupsThunk.fulfilled, (state, action) => {
+    builder.addCase(fetchAllGroupsThunk.fulfilled, (state, action) => {
       state.groups = action.payload.data;
     });
 

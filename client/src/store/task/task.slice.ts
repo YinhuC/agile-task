@@ -3,7 +3,7 @@ import { Task } from '../../types/task.types';
 import {
   createTaskThunk,
   deleteTaskThunk,
-  fetchTasksThunk,
+  fetchAllTasksThunk,
   updateTaskThunk,
 } from './task.thunks';
 
@@ -37,7 +37,7 @@ export const taskSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchTasksThunk.fulfilled, (state, action) => {
+    builder.addCase(fetchAllTasksThunk.fulfilled, (state, action) => {
       state.tasks = action.payload.data;
     });
 

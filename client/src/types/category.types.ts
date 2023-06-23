@@ -16,6 +16,12 @@ export type UpdateCategoryParams = {
   index?: number;
 };
 
+export type UpdateCategoryOrderParams = {
+  projectId: number;
+  id: number;
+  index: number;
+};
+
 export type Category = {
   id: number;
   name: string;

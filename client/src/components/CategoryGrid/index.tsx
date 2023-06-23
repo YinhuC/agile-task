@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import {
   FetchAllTasksPayload,
-  fetchTasksThunk,
+  fetchAllTasksThunk,
 } from '../../store/task/task.thunks';
 import { Task } from '../../types/task.types';
 import { Draggable } from 'react-beautiful-dnd';
@@ -22,7 +22,7 @@ function CategoryGrid({ category, index }: CategoryGridProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    dispatch(fetchTasksThunk({ categoryId: id })).then((action) => {
+    dispatch(fetchAllTasksThunk({ categoryId: id })).then((action) => {
       const payload = action.payload as FetchAllTasksPayload;
       setTasks(payload.data);
     });

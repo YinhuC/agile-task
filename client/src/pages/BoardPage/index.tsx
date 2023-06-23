@@ -3,14 +3,14 @@ import { Container, Title } from '@mantine/core';
 import ProjectGrid from '../../components/ProjectGrid';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { fetchGroupsThunk } from '../../store/group/group.thunks';
+import { fetchAllGroupsThunk } from '../../store/group/group.thunks';
 
 function BoardPage() {
   const dispatch = useDispatch<AppDispatch>();
   const groups = useSelector((state: RootState) => state.groups.groups);
 
   useEffect(() => {
-    dispatch(fetchGroupsThunk());
+    dispatch(fetchAllGroupsThunk());
   }, [dispatch]);
 
   const grids = useMemo(

@@ -11,10 +11,10 @@ export interface FetchAllTasksPayload {
   data: Task[];
 }
 
-export const fetchTasksThunk = createAsyncThunk<
+export const fetchAllTasksThunk = createAsyncThunk<
   FetchAllTasksPayload,
   GetTasksParams
->('tasks/fetch', (params: GetTasksParams) => {
+>('tasks/fetch/all', (params: GetTasksParams) => {
   return API.task.getAllTasks(params);
 });
 export const createTaskThunk = createAsyncThunk(

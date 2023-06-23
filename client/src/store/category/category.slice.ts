@@ -3,7 +3,8 @@ import { Category } from '../../types/category.types';
 import {
   createCategoryThunk,
   deleteCategoryThunk,
-  fetchCategoriesThunk,
+  fetchAllCategoriesThunk,
+  updateCategoryOrderThunk,
   updateCategoryThunk,
 } from './category.thunks';
 
@@ -46,7 +47,7 @@ export const categorySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchCategoriesThunk.fulfilled, (state, action) => {
+    builder.addCase(fetchAllCategoriesThunk.fulfilled, (state, action) => {
       const sortedCategories = action.payload.data.slice().sort((a, b) => {
         return a.index - b.index;
       });
@@ -64,6 +65,13 @@ export const categorySlice = createSlice({
       if (index !== -1) {
         state.categories[index] = action.payload.data;
       }
+    });
+
+    builder.addCase(updateCategoryOrderThunk.fulfilled, (state, action) => {
+      const sortedCategories = action.payload.data.slice().sort((a, b) => {
+        return a.index - b.index;
+      });
+      state.categories = sortedCategories;
     });
 
     builder.addCase(deleteCategoryThunk.fulfilled, (state, action) => {
