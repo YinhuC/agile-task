@@ -1,47 +1,52 @@
-import React, { useEffect, useMemo } from 'react';
-import { Container, Title, Text, Flex, useMantineTheme } from '@mantine/core';
+import React, { useEffect } from 'react';
+import { Flex, useMantineTheme } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { fetchCategoriesThunk } from '../../store/category/category.thunks';
+import {
+  fetchCategoriesThunk,
+  updateCategoryThunk,
+} from '../../store/category/category.thunks';
 import { useLocation } from 'react-router-dom';
-import { fetchProjectThunk } from '../../store/project/project.thunks';
 import CategoryGrid from '../../components/CategoryGrid';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
+import HeaderSection from './HeaderSection';
+import { UpdateCategoryParams } from '../../types/category.types';
 
 function ProjectPage() {
   const theme = useMantineTheme();
-  const dispatch = useDispatch<AppDispatch>();
-  const location = useLocation();
-  const project = useSelector((state: RootState) => state.projects.projects[0]);
-  const categoriesData = useSelector(
+  const categoryState = useSelector(
     (state: RootState) => state.categories.categories
   );
+  const location = useLocation();
+  const path = location.pathname.split('/');
+  const projectId = path[path.length - 1];
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const path = location.pathname.split('/');
-    const projectId = path[path.length - 1];
     dispatch(fetchCategoriesThunk({ projectId: parseInt(projectId) }));
-    dispatch(fetchProjectThunk(projectId));
-  }, [dispatch, location.pathname]);
+  }, [dispatch, projectId]);
 
-  const categories = useMemo(
-    () =>
-      categoriesData.map((category, index) => (
-        <CategoryGrid category={category} key={`category-grid-${index}`} />
-      )),
-    [categoriesData]
-  );
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return;
+    }
+    const { source, destination } = result;
+    if (
+      source.droppableId === destination.droppableId &&
+      source.index === destination.index
+    ) {
+      return;
+    }
+    const category: UpdateCategoryParams = {
+      ...categoryState[source.index],
+      index: destination.index + 1,
+    };
+    dispatch(updateCategoryThunk(category));
+  };
 
   return (
-    <DragDropContext onDragEnd={() => {}}>
-      <Container size='xl' mb={20} sx={{ userSelect: 'none' }}>
-        <Title order={2} mb={10}>
-          {project?.name}
-        </Title>
-        <Text w='60%' ml={2}>
-          {project?.description}
-        </Text>
-      </Container>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <HeaderSection projectId={projectId} />
       <Droppable droppableId='board' direction='horizontal'>
         {(provided) => (
           <Flex
@@ -62,7 +67,13 @@ function ProjectPage() {
               },
             }}
           >
-            {categories}
+            {categoryState.map((category, index) => (
+              <CategoryGrid
+                index={index}
+                category={category}
+                key={`category-grid-${index}`}
+              />
+            ))}
             {provided.placeholder}
           </Flex>
         )}

@@ -37,10 +37,20 @@ export const categorySlice = createSlice({
         state.categories[index] = action.payload;
       }
     },
+
+    updateAllCategories: (state, action: PayloadAction<Category[]>) => {
+      const sortedCategories = action.payload.slice().sort((a, b) => {
+        return a.index - b.index;
+      });
+      state.categories = sortedCategories;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCategoriesThunk.fulfilled, (state, action) => {
-      state.categories = action.payload.data;
+      const sortedCategories = action.payload.data.slice().sort((a, b) => {
+        return a.index - b.index;
+      });
+      state.categories = sortedCategories;
     });
 
     builder.addCase(createCategoryThunk.fulfilled, (state, action) => {

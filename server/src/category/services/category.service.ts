@@ -103,9 +103,13 @@ export class CategoryService {
 
       const oldIndex = category.index;
       const newIndex = updateCategoryDto.index;
-      const modifiedTasks = updateIndexValues(categories, oldIndex, newIndex);
+      const modifiedCategories = updateIndexValues(
+        categories,
+        oldIndex,
+        newIndex
+      );
 
-      await this.categoryRepository.save(modifiedTasks);
+      await this.categoryRepository.save(modifiedCategories);
       updatedCategory.index = newIndex;
     }
 

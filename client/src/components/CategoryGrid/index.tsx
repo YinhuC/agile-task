@@ -13,11 +13,12 @@ import { Draggable } from 'react-beautiful-dnd';
 
 type CategoryGridProps = {
   category: Category;
+  index: number;
 };
 
-function CategoryGrid({ category }: CategoryGridProps) {
-  const { name, id, index } = category;
+function CategoryGrid({ category, index }: CategoryGridProps) {
   const dispatch = useDispatch<AppDispatch>();
+  const { name, id } = category;
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
