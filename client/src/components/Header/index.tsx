@@ -11,7 +11,7 @@ const Header: React.FC = () => {
         align='center'
         direction='row'
         sx={{ height: 80 }}
-        mb={60}
+        mb={20}
       >
         <Text weight={700} size='xl'>
           Logo
