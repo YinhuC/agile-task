@@ -11,7 +11,10 @@ import { CreateCategoryDto } from '../dto/create-category.dto';
 import { UpdateCategoryDto } from '../dto/update-category.dto';
 import { User } from 'src/user/user.entity';
 import { ProjectService } from 'src/project/services/project.service';
-import { updateIndexValues } from 'src/shared/utils/array.utils';
+import {
+  removeIndexValue,
+  updateIndexValues,
+} from 'src/shared/utils/array.utils';
 
 @Injectable()
 export class CategoryService {
@@ -109,7 +112,15 @@ export class CategoryService {
     return await this.categoryRepository.save(updatedCategory);
   }
 
-  async deleteCategory(id: number): Promise<void> {
+  async deleteCategory(user: User, id: number): Promise<void> {
+    const category = await this.getCategoryById(id);
+    const categories = await this.getAllCategoriesByProjectId(
+      user,
+      category.project.id
+    );
+    const modifiedCategories = removeIndexValue(categories, category.index);
+    await this.categoryRepository.save(modifiedCategories);
+
     const result = await this.categoryRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`Category with ID ${id} not found`);
