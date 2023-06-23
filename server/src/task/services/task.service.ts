@@ -98,7 +98,7 @@ export class TaskService {
           }
         }
       } else if (oldIndex > newIndex) {
-        for (let i = newIndex; i < oldIndex; i++) {
+        for (let i = oldIndex - 1; i >= newIndex; i--) {
           const taskToUpdate = tasks.find((t) => t.index === i);
           if (taskToUpdate) {
             taskToUpdate.index++;

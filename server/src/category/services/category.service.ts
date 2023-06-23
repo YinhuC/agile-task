@@ -109,7 +109,7 @@ export class CategoryService {
           }
         }
       } else if (oldIndex > newIndex) {
-        for (let i = newIndex; i < oldIndex; i++) {
+        for (let i = oldIndex - 1; i >= newIndex; i--) {
           const categoryToUpdate = categories.find((cat) => cat.index === i);
           if (categoryToUpdate) {
             categoryToUpdate.index++;

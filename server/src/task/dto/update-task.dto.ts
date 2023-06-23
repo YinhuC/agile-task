@@ -1,4 +1,4 @@
-import { IsOptional, Length } from 'class-validator';
+import { IsNotEmpty, IsOptional, Length } from 'class-validator';
 
 export class UpdateTaskDto {
   @Length(0, 50)
@@ -7,4 +7,7 @@ export class UpdateTaskDto {
 
   @IsOptional()
   index: number;
+
+  @IsNotEmpty()
+  categoryId: number;
 }
