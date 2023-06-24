@@ -13,12 +13,11 @@ import { Draggable } from 'react-beautiful-dnd';
 
 type CategoryGridProps = {
   category: Category;
-  index: number;
 };
 
-function CategoryGrid({ category, index }: CategoryGridProps) {
+function CategoryGrid({ category }: CategoryGridProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const { name, id } = category;
+  const { name, id, index } = category;
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
@@ -40,9 +39,9 @@ function CategoryGrid({ category, index }: CategoryGridProps) {
     <Draggable draggableId={`category-drop-${index}`} index={index}>
       {(provided) => (
         <Stack
+          ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          ref={provided.innerRef}
           spacing={20}
           p={20}
           mx={10}

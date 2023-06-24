@@ -11,7 +11,7 @@ import {
 import { useForm } from '@mantine/form';
 import { IconAt, IconCheck, IconPassword, IconX } from '@tabler/icons-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { MESSAGES, REGEXES } from '../../utils/regex';
+import { MESSAGES, REGEXES } from '../../utils/regex.utils';
 import { RegisterParams } from '../../types/auth.types';
 import { postAuthRegister } from '../../api/auth.api';
 import { notifications } from '@mantine/notifications';

@@ -7,6 +7,7 @@ import {
   updateCategoryOrderThunk,
   updateCategoryThunk,
 } from './category.thunks';
+import { sortByIndex } from '../../utils/sort.utils';
 
 export interface CategoryState {
   categories: Category[];
@@ -40,18 +41,12 @@ export const categorySlice = createSlice({
     },
 
     updateAllCategories: (state, action: PayloadAction<Category[]>) => {
-      const sortedCategories = action.payload.slice().sort((a, b) => {
-        return a.index - b.index;
-      });
-      state.categories = sortedCategories;
+      state.categories = sortByIndex(action.payload);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllCategoriesThunk.fulfilled, (state, action) => {
-      const sortedCategories = action.payload.data.slice().sort((a, b) => {
-        return a.index - b.index;
-      });
-      state.categories = sortedCategories;
+      state.categories = sortByIndex(action.payload.data);
     });
 
     builder.addCase(createCategoryThunk.fulfilled, (state, action) => {
@@ -68,10 +63,7 @@ export const categorySlice = createSlice({
     });
 
     builder.addCase(updateCategoryOrderThunk.fulfilled, (state, action) => {
-      const sortedCategories = action.payload.data.slice().sort((a, b) => {
-        return a.index - b.index;
-      });
-      state.categories = sortedCategories;
+      state.categories = sortByIndex(action.payload.data);
     });
 
     builder.addCase(deleteCategoryThunk.fulfilled, (state, action) => {
@@ -82,7 +74,11 @@ export const categorySlice = createSlice({
   },
 });
 
-export const { addCategory, removeCategory, updateCategory } =
-  categorySlice.actions;
+export const {
+  addCategory,
+  removeCategory,
+  updateCategory,
+  updateAllCategories,
+} = categorySlice.actions;
 
 export default categorySlice.reducer;

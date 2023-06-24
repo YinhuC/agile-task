@@ -1,18 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import API from '../../api';
 import {
+  Category,
   CreateCategoryParams,
   GetCategoriesParams,
   UpdateCategoryOrderParams,
   UpdateCategoryParams,
 } from '../../types/category.types';
 
-export const fetchAllCategoriesThunk = createAsyncThunk(
-  'categories/fetch/all',
-  (params: GetCategoriesParams) => {
-    return API.category.getAllCategories(params);
-  }
-);
+export interface FetchAllCategoriesPayload {
+  data: Category[];
+}
+
+export const fetchAllCategoriesThunk = createAsyncThunk<
+  FetchAllCategoriesPayload,
+  GetCategoriesParams
+>('categories/fetch/all', (params: GetCategoriesParams) => {
+  return API.category.getAllCategories(params);
+});
 export const createCategoryThunk = createAsyncThunk(
   'categories/create',
   (params: CreateCategoryParams) => API.category.createCategory(params)
@@ -32,8 +37,8 @@ export const updateCategoryOrderThunk = createAsyncThunk(
     try {
       const response = await API.category.updateCategory(params);
       if (response.status === 200) {
-        const categoires = API.category.getAllCategories({ projectId });
-        return categoires;
+        const categories = API.category.getAllCategories({ projectId });
+        return categories;
       }
     } catch (error) {}
     return rejectWithValue('An error occurred while updating the category.');

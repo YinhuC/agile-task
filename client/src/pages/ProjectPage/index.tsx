@@ -11,10 +11,12 @@ import CategoryGrid from '../../components/CategoryGrid';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import HeaderSection from './HeaderSection';
 import { UpdateCategoryOrderParams } from '../../types/category.types';
+import { updateIndexValues } from '../../utils/array.utils';
+import { updateAllCategories } from '../../store/category/category.slice';
 
 function ProjectPage() {
   const theme = useMantineTheme();
-  const categoryState = useSelector(
+  const categories = useSelector(
     (state: RootState) => state.categories.categories
   );
   const location = useLocation();
@@ -31,17 +33,24 @@ function ProjectPage() {
       return;
     }
     const { source, destination } = result;
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    ) {
+    if (source.index === destination.index) {
       return;
     }
     const category: UpdateCategoryOrderParams = {
-      ...categoryState[source.index],
-      index: destination.index + 1,
+      ...categories[source.index],
+      index: destination.index,
       projectId: parseInt(projectId),
     };
+
+    // https://github.com/atlassian/react-beautiful-dnd/issues/873
+    // Still a delay even when updating local state first
+    const updatedCategories = updateIndexValues(
+      categories,
+      source.index,
+      destination.index
+    );
+
+    dispatch(updateAllCategories(updatedCategories));
     dispatch(updateCategoryOrderThunk(category));
   };
 
@@ -68,9 +77,8 @@ function ProjectPage() {
               },
             }}
           >
-            {categoryState.map((category, index) => (
+            {categories.map((category, index) => (
               <CategoryGrid
-                index={index}
                 category={category}
                 key={`category-grid-${index}`}
               />
