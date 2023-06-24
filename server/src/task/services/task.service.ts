@@ -63,7 +63,7 @@ export class TaskService {
     }
 
     const existingTasks = await this.getAllTasksByCategoryId(user, categoryId);
-    const nextIndex = existingTasks.length > 0 ? existingTasks.length + 1 : 1;
+    const nextIndex = existingTasks.length > 0 ? existingTasks.length + 1 : 0;
 
     const category = await this.categoryService.getCategoryById(categoryId);
     const task = {
@@ -85,12 +85,13 @@ export class TaskService {
     const tasks = await this.getAllTasksByCategoryId(user, task.category.id);
     const updatedTask = { ...task, ...updateTaskDto };
 
-    if (index && categoryId === task.category.id) {
-      if (index > tasks.length) {
+    if (index !== undefined && categoryId === task.category.id) {
+      if (index > tasks.length - 1) {
         throw new BadRequestException(
           'Index cannot be bigger than the current length of tasks'
         );
       }
+
       const oldIndex = task.index;
       const newIndex = index;
       const modifiedTasks = updateIndexValues(tasks, oldIndex, newIndex);
@@ -98,9 +99,9 @@ export class TaskService {
       updatedTask.index = newIndex;
 
       await this.taskRepository.save(modifiedTasks);
-    } else if (index) {
+    } else if (index !== undefined) {
       const newTasks = await this.getAllTasksByCategoryId(user, categoryId);
-      if (index > newTasks.length + 1) {
+      if (index > newTasks.length) {
         throw new BadRequestException(
           'Index cannot be bigger than the current length of tasks'
         );

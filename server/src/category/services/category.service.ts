@@ -69,7 +69,7 @@ export class CategoryService {
       projectId
     );
     const nextIndex =
-      existingCategories.length > 0 ? existingCategories.length + 1 : 1;
+      existingCategories.length > 0 ? existingCategories.length + 1 : 0;
 
     const project = await this.projectService.getProjectById(projectId);
 
@@ -94,8 +94,8 @@ export class CategoryService {
     );
     const updatedCategory = { ...category, ...updateCategoryDto };
 
-    if (updateCategoryDto.index) {
-      if (updateCategoryDto.index > categories.length) {
+    if (updateCategoryDto.index !== undefined) {
+      if (updateCategoryDto.index > categories.length - 1) {
         throw new BadRequestException(
           'Index cannot be bigger than the current length of categories'
         );
