@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Divider, Stack, Title } from '@mantine/core';
-import CategoryCard from '../TaskCard';
+import TaskCard from '../TaskCard';
 import { Category } from '../../types/category.types';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
@@ -9,7 +9,7 @@ import {
   fetchAllTasksThunk,
 } from '../../store/task/task.thunks';
 import { Task } from '../../types/task.types';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 type CategoryGridProps = {
   category: Category;
@@ -27,16 +27,8 @@ function CategoryGrid({ category }: CategoryGridProps) {
     });
   }, [dispatch, id]);
 
-  const cards = useMemo(
-    () =>
-      tasks.map((task, index) => (
-        <CategoryCard task={task} key={`task-card-${index}`} />
-      )),
-    [tasks]
-  );
-
   return (
-    <Draggable draggableId={`category-drop-${index}`} index={index}>
+    <Draggable draggableId={`cat-drag-${index}-${index}`} index={index}>
       {(provided) => (
         <Stack
           ref={provided.innerRef}
@@ -54,7 +46,24 @@ function CategoryGrid({ category }: CategoryGridProps) {
             {name}
           </Title>
           <Divider />
-          {cards}
+          <Droppable droppableId={`task-drop-${index}-${id}`} type='TASK'>
+            {(provided) => (
+              <Stack
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                spacing={10}
+              >
+                {tasks.map((task, index) => (
+                  <TaskCard
+                    task={task}
+                    index={index}
+                    key={`task-card-${index}`}
+                  />
+                ))}
+                {provided.placeholder}
+              </Stack>
+            )}
+          </Droppable>
         </Stack>
       )}
     </Draggable>

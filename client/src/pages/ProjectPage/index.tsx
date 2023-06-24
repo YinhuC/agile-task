@@ -11,8 +11,6 @@ import CategoryGrid from '../../components/CategoryGrid';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import HeaderSection from './HeaderSection';
 import { UpdateCategoryOrderParams } from '../../types/category.types';
-import { updateIndexValues } from '../../utils/array.utils';
-import { updateAllCategories } from '../../store/category/category.slice';
 
 function ProjectPage() {
   const theme = useMantineTheme();
@@ -36,32 +34,36 @@ function ProjectPage() {
     if (source.index === destination.index) {
       return;
     }
-    const category: UpdateCategoryOrderParams = {
-      ...categories[source.index],
-      index: destination.index,
-      projectId: parseInt(projectId),
-    };
 
-    // https://github.com/atlassian/react-beautiful-dnd/issues/873
-    // Still a delay even when updating local state first
-    const updatedCategories = updateIndexValues(
-      categories,
-      source.index,
-      destination.index
-    );
+    if (result.type === 'CATEGORY') {
+      const category: UpdateCategoryOrderParams = {
+        ...categories[source.index],
+        index: destination.index,
+        projectId: parseInt(projectId),
+      };
 
-    dispatch(updateAllCategories(updatedCategories));
-    dispatch(updateCategoryOrderThunk(category));
+      // Still a delay even when updating local state first
+      // https://github.com/atlassian/react-beautiful-dnd/issues/873
+      // const updatedCategories = updateIndexValues(
+      //   categories,
+      //   source.index,
+      //   destination.index
+      // );
+      // dispatch(updateAllCategories(updatedCategories));
+
+      dispatch(updateCategoryOrderThunk(category));
+    } else {
+    }
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <HeaderSection projectId={projectId} />
-      <Droppable droppableId='board' direction='horizontal'>
+      <Droppable droppableId='cat-drop' direction='horizontal' type='CATEGORY'>
         {(provided) => (
           <Flex
-            {...provided.droppableProps}
             ref={provided.innerRef}
+            {...provided.droppableProps}
             p={20}
             sx={{
               background: '#f9f9f9',

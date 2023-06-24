@@ -17,7 +17,14 @@ function HeaderSection({ projectId }: HeaderSectionProps) {
   }, [dispatch, projectId]);
 
   return (
-    <Container size='xl' mb={20} sx={{ userSelect: 'none' }}>
+    <Container
+      size='xl'
+      mb={30}
+      px={40}
+      sx={{
+        userSelect: 'none',
+      }}
+    >
       <Title order={2} mb={10}>
         {project?.name}
       </Title>
