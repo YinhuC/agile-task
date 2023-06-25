@@ -4,6 +4,7 @@ import {
   CreateTaskParams,
   GetTasksParams,
   Task,
+  UpdateTaskOrderParams,
   UpdateTaskParams,
 } from '../../types/task.types';
 
@@ -25,6 +26,26 @@ export const createTaskThunk = createAsyncThunk(
 export const updateTaskThunk = createAsyncThunk(
   'tasks/update',
   (params: UpdateTaskParams) => API.task.updateTask(params)
+);
+
+export const updateTaskOrderThunk = createAsyncThunk(
+  'tasks/update/order',
+  async (
+    { oldCategoryId, newCategoryId, ...params }: UpdateTaskOrderParams,
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await API.task.updateTask({
+        ...params,
+        categoryId: newCategoryId,
+      });
+      if (response.status === 200) {
+        API.task.getAllTasks({ categoryId: oldCategoryId });
+        return API.task.getAllTasks({ categoryId: newCategoryId });
+      }
+    } catch (error) {}
+    return rejectWithValue('An error occurred while updating the category.');
+  }
 );
 
 export const deleteTaskThunk = createAsyncThunk('tasks/delete', (id: string) =>

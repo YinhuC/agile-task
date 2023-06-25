@@ -28,7 +28,7 @@ function CategoryGrid({ category }: CategoryGridProps) {
   }, [dispatch, id]);
 
   return (
-    <Draggable draggableId={`cat-drag-${index}-${index}`} index={index}>
+    <Draggable draggableId={`cat-drag-${id}-${index}`} index={index}>
       {(provided) => (
         <Stack
           ref={provided.innerRef}
@@ -46,7 +46,7 @@ function CategoryGrid({ category }: CategoryGridProps) {
             {name}
           </Title>
           <Divider />
-          <Droppable droppableId={`task-drop-${index}-${id}`} type='TASK'>
+          <Droppable droppableId={`task-drop-${id}-${index}`} type='TASK'>
             {(provided) => (
               <Stack
                 ref={provided.innerRef}

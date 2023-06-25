@@ -11,7 +11,7 @@ type TaskCardProps = {
 function TaskCard({ task, index }: TaskCardProps) {
   const { name, description, id } = task;
   return (
-    <Draggable draggableId={`task-drag-${index}-${id}`} index={index}>
+    <Draggable draggableId={`task-drag-${id}-${index}`} index={index}>
       {(provided) => (
         <Card
           ref={provided.innerRef}

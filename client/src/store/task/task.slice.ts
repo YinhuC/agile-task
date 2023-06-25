@@ -4,8 +4,10 @@ import {
   createTaskThunk,
   deleteTaskThunk,
   fetchAllTasksThunk,
+  updateTaskOrderThunk,
   updateTaskThunk,
 } from './task.thunks';
+import { sortByIndex } from '../../utils/sort.utils';
 
 export interface TaskState {
   tasks: Task[];
@@ -35,10 +37,14 @@ export const taskSlice = createSlice({
         state.tasks[index] = action.payload;
       }
     },
+
+    updateAllTasks: (state, action: PayloadAction<Task[]>) => {
+      state.tasks = sortByIndex(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllTasksThunk.fulfilled, (state, action) => {
-      state.tasks = action.payload.data;
+      state.tasks = sortByIndex(action.payload.data);
     });
 
     builder.addCase(createTaskThunk.fulfilled, (state, action) => {
@@ -52,6 +58,10 @@ export const taskSlice = createSlice({
       if (index !== -1) {
         state.tasks[index] = action.payload.data;
       }
+    });
+
+    builder.addCase(updateTaskOrderThunk.fulfilled, (state, action) => {
+      state.tasks = sortByIndex(action.payload.data);
     });
 
     builder.addCase(deleteTaskThunk.fulfilled, (state, action) => {

@@ -11,9 +11,17 @@ export type CreateTaskParams = {
 };
 
 export type UpdateTaskParams = {
-  id: string;
+  id: number;
   name?: string;
   index?: number;
+  categoryId?: number;
+};
+
+export type UpdateTaskOrderParams = {
+  oldCategoryId: number;
+  newCategoryId: number;
+  id: number;
+  index: number;
 };
 
 export type Task = {
