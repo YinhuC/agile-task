@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Divider, Stack, Title } from '@mantine/core';
 import TaskCard from '../TaskCard';
 import { Category } from '../../types/category.types';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import {
-  FetchAllTasksPayload,
-  fetchAllTasksThunk,
-} from '../../store/task/task.thunks';
-import { Task } from '../../types/task.types';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import { fetchAllTasksThunk } from '../../store/task/task.thunks';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { sortByIndex } from '../../utils/sort.utils';
 
 type CategoryGridProps = {
   category: Category;
+  index: number;
 };
 
-function CategoryGrid({ category }: CategoryGridProps) {
+function CategoryGrid({ category, index }: CategoryGridProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const { name, id, index } = category;
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const { name, id } = category;
+  const allTasks = useSelector((state: RootState) => state.tasks.tasks);
+
+  const tasks = useMemo(
+    () => sortByIndex(allTasks.filter((task) => task.category?.id === id)),
+    [allTasks, id]
+  );
 
   useEffect(() => {
-    dispatch(fetchAllTasksThunk({ categoryId: id })).then((action) => {
-      const payload = action.payload as FetchAllTasksPayload;
-      setTasks(payload.data);
-    });
+    dispatch(fetchAllTasksThunk({ categoryId: id }));
   }, [dispatch, id]);
 
   return (
-    <Draggable draggableId={`cat-drag-${id}-${index}`} index={index}>
+    <Draggable draggableId={`cat-drag-${id}`} index={index}>
       {(provided) => (
         <Stack
           ref={provided.innerRef}
@@ -46,7 +46,7 @@ function CategoryGrid({ category }: CategoryGridProps) {
             {name}
           </Title>
           <Divider />
-          <Droppable droppableId={`task-drop-${id}-${index}`} type='TASK'>
+          <Droppable droppableId={`task-drop-${id}`} type='TASK'>
             {(provided) => (
               <Stack
                 ref={provided.innerRef}
@@ -57,7 +57,7 @@ function CategoryGrid({ category }: CategoryGridProps) {
                   <TaskCard
                     task={task}
                     index={index}
-                    key={`task-card-${index}`}
+                    key={`task-card-${task.id}`}
                   />
                 ))}
                 {provided.placeholder}

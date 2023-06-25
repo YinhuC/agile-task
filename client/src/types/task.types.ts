@@ -18,8 +18,7 @@ export type UpdateTaskParams = {
 };
 
 export type UpdateTaskOrderParams = {
-  oldCategoryId: number;
-  newCategoryId: number;
+  categoryId: number;
   id: number;
   index: number;
 };

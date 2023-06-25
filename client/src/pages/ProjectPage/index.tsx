@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Flex, useMantineTheme } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
@@ -71,8 +71,7 @@ function ProjectPage() {
       const newTask: UpdateTaskOrderParams = {
         ...oldTask,
         index: destination.index,
-        oldCategoryId,
-        newCategoryId,
+        categoryId: newCategoryId,
       };
       dispatch(updateTaskOrderThunk(newTask));
     }
@@ -104,7 +103,8 @@ function ProjectPage() {
             {categories.map((category, index) => (
               <CategoryGrid
                 category={category}
-                key={`category-grid-${index}`}
+                index={index}
+                key={`category-grid-${category.id}`}
               />
             ))}
             {provided.placeholder}

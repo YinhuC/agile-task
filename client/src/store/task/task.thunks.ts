@@ -31,17 +31,16 @@ export const updateTaskThunk = createAsyncThunk(
 export const updateTaskOrderThunk = createAsyncThunk(
   'tasks/update/order',
   async (
-    { oldCategoryId, newCategoryId, ...params }: UpdateTaskOrderParams,
+    { categoryId, ...params }: UpdateTaskOrderParams,
     { rejectWithValue }
   ) => {
     try {
       const response = await API.task.updateTask({
         ...params,
-        categoryId: newCategoryId,
+        categoryId,
       });
       if (response.status === 200) {
-        API.task.getAllTasks({ categoryId: oldCategoryId });
-        return API.task.getAllTasks({ categoryId: newCategoryId });
+        return API.task.getAllTasks({ categoryId });
       }
     } catch (error) {}
     return rejectWithValue('An error occurred while updating the category.');

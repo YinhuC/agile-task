@@ -44,7 +44,21 @@ export const taskSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllTasksThunk.fulfilled, (state, action) => {
-      state.tasks = sortByIndex(action.payload.data);
+      const fetchedTasks = action.payload.data;
+
+      fetchedTasks.forEach((fetchedTask) => {
+        const existingTaskIndex = state.tasks.findIndex(
+          (task) => task.id === fetchedTask.id
+        );
+
+        if (existingTaskIndex !== -1) {
+          state.tasks[existingTaskIndex] = fetchedTask;
+        } else {
+          state.tasks.push(fetchedTask);
+        }
+      });
+
+      state.tasks = sortByIndex(state.tasks);
     });
 
     builder.addCase(createTaskThunk.fulfilled, (state, action) => {
@@ -61,7 +75,21 @@ export const taskSlice = createSlice({
     });
 
     builder.addCase(updateTaskOrderThunk.fulfilled, (state, action) => {
-      state.tasks = sortByIndex(action.payload.data);
+      const fetchedTasks = action.payload.data;
+
+      fetchedTasks.forEach((fetchedTask) => {
+        const existingTaskIndex = state.tasks.findIndex(
+          (task) => task.id === fetchedTask.id
+        );
+
+        if (existingTaskIndex !== -1) {
+          state.tasks[existingTaskIndex] = fetchedTask;
+        } else {
+          state.tasks.push(fetchedTask);
+        }
+      });
+
+      state.tasks = sortByIndex(state.tasks);
     });
 
     builder.addCase(deleteTaskThunk.fulfilled, (state, action) => {
