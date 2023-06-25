@@ -4,7 +4,7 @@ export const textInput: MantineThemeOverride['components'] = {
   TextInput: {
     styles: (theme) => ({
       label: {
-        marginBottom: 10,
+        marginBottom: 7,
         color: '#6B6F76',
       },
       input: {

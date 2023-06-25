@@ -7,12 +7,14 @@ export type GetTasksParams = {
 
 export type CreateTaskParams = {
   name: string;
+  description?: string;
   categoryId: number;
 };
 
 export type UpdateTaskParams = {
   id: number;
   name?: string;
+  description?: string;
   index?: number;
   categoryId?: number;
 };

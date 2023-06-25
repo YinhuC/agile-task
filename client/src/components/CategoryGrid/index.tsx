@@ -7,6 +7,7 @@ import { AppDispatch, RootState } from '../../store';
 import { fetchAllTasksThunk } from '../../store/task/task.thunks';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { sortByIndex } from '../../utils/sort.utils';
+import TaskModal from '../TaskModal';
 
 type CategoryGridProps = {
   category: Category;
@@ -40,8 +41,11 @@ function CategoryGrid({ category, index }: CategoryGridProps) {
           miw={340}
           sx={{
             backgroundColor: 'white',
-            borderRadius: '0.2rem',
+            borderRadius: '0.5rem',
             height: '100%',
+            border: '0.0625rem solid #dee2e6',
+            boxShadow:
+              '0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05), 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.1)',
           }}
         >
           <Title order={4} ml={5}>
@@ -69,6 +73,7 @@ function CategoryGrid({ category, index }: CategoryGridProps) {
               </Stack>
             )}
           </Droppable>
+          <TaskModal category={category} type={'add'} />
         </Stack>
       )}
     </Draggable>

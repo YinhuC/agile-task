@@ -1,14 +1,11 @@
 import { MantineThemeOverride } from '@mantine/core';
 
-export const passwordInput: MantineThemeOverride['components'] = {
-  PasswordInput: {
+export const textarea: MantineThemeOverride['components'] = {
+  Textarea: {
     styles: (theme) => ({
       label: {
-        marginBottom: 7,
+        marginBottom: 6,
         color: '#6B6F76',
-      },
-      innerInput: {
-        padding: 18,
       },
       input: {
         padding: 20,
