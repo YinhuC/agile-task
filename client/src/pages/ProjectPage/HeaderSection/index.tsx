@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { Container, Title, Text } from '@mantine/core';
+import { Container, Title, Text, Flex, Box } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { fetchProjectThunk } from '../../../store/project/project.thunks';
+import CategoryModal from '../../../components/CategoryModal';
 
 type HeaderSectionProps = {
   projectId: string;
@@ -25,12 +26,17 @@ function HeaderSection({ projectId }: HeaderSectionProps) {
         userSelect: 'none',
       }}
     >
-      <Title order={2} mb={10}>
-        {project?.name}
-      </Title>
-      <Text w='60%' ml={2}>
-        {project?.description}
-      </Text>
+      <Flex align='end'>
+        <Box>
+          <Title order={2} mb={10}>
+            {project?.name}
+          </Title>
+          <Text w='60%' ml={2}>
+            {project?.description}
+          </Text>
+        </Box>
+        <CategoryModal type='add' projectId={project?.id} />
+      </Flex>
     </Container>
   );
 }

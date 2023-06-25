@@ -102,6 +102,7 @@ function ProjectPage() {
           >
             {categories.map((category, index) => (
               <CategoryGrid
+                projectId={parseInt(projectId)}
                 category={category}
                 index={index}
                 key={`category-grid-${category.id}`}

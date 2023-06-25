@@ -50,7 +50,7 @@ export const categorySlice = createSlice({
     });
 
     builder.addCase(createCategoryThunk.fulfilled, (state, action) => {
-      state.categories.unshift(action.payload.data);
+      state.categories.push(action.payload.data);
     });
 
     builder.addCase(updateCategoryThunk.fulfilled, (state, action) => {

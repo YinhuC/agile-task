@@ -62,7 +62,7 @@ export const taskSlice = createSlice({
     });
 
     builder.addCase(createTaskThunk.fulfilled, (state, action) => {
-      state.tasks.unshift(action.payload.data);
+      state.tasks.push(action.payload.data);
     });
 
     builder.addCase(updateTaskThunk.fulfilled, (state, action) => {
