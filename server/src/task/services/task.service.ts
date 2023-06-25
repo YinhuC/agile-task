@@ -133,7 +133,7 @@ export class TaskService {
     return await this.taskRepository.save(updatedTask);
   }
 
-  async deleteTask(user: User, taskId: number): Promise<void> {
+  async deleteTask(user: User, taskId: number): Promise<Task> {
     const task = await this.getTaskById(taskId);
     const tasks = await this.getAllTasksByCategoryId(user, task.category.id);
     const modifiedTasks = removeIndexValue(tasks, task.index);
@@ -143,6 +143,7 @@ export class TaskService {
     if (result.affected === 0) {
       throw new NotFoundException(`Task with ID ${taskId} not found`);
     }
+    return task;
   }
 
   async isMember(user: Partial<User>, taskId: number): Promise<boolean> {

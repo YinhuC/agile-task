@@ -5,6 +5,10 @@ export class UpdateTaskDto {
   @IsOptional()
   name: string;
 
+  @Length(0, 200)
+  @IsOptional()
+  description: string;
+
   @IsOptional()
   index: number;
 

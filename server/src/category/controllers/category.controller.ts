@@ -67,7 +67,7 @@ export class CategoryController {
   async deleteCategory(
     @AuthUser() user: User,
     @Param('id') id: number
-  ): Promise<void> {
-    await this.categoryService.deleteCategory(user, id);
+  ): Promise<Category> {
+    return await this.categoryService.deleteCategory(user, id);
   }
 }

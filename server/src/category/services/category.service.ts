@@ -116,7 +116,7 @@ export class CategoryService {
     return await this.categoryRepository.save(updatedCategory);
   }
 
-  async deleteCategory(user: User, id: number): Promise<void> {
+  async deleteCategory(user: User, id: number): Promise<Category> {
     const category = await this.getCategoryById(id);
     const categories = await this.getAllCategoriesByProjectId(
       user,
@@ -129,6 +129,7 @@ export class CategoryService {
     if (result.affected === 0) {
       throw new NotFoundException(`Category with ID ${id} not found`);
     }
+    return category;
   }
 
   async isMember(user: Partial<User>, categoryId: number): Promise<boolean> {
