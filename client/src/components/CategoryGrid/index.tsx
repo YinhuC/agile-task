@@ -37,9 +37,11 @@ function CategoryGrid({ category, index }: CategoryGridProps) {
           spacing={20}
           p={20}
           mx={10}
+          miw={340}
           sx={{
             backgroundColor: 'white',
             borderRadius: '0.2rem',
+            height: '100%',
           }}
         >
           <Title order={4} ml={5}>
@@ -52,6 +54,9 @@ function CategoryGrid({ category, index }: CategoryGridProps) {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
                 spacing={10}
+                sx={{
+                  minHeight: 60,
+                }}
               >
                 {tasks.map((task, index) => (
                   <TaskCard
