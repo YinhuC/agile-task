@@ -59,7 +59,7 @@ export class ProjectController {
 
   @Delete(':id')
   @UseGuards(ProjectMemberGuard)
-  async deleteProject(@Param('id') id: number): Promise<void> {
-    await this.projectService.deleteProject(id);
+  async deleteProject(@Param('id') id: number): Promise<Project> {
+    return await this.projectService.deleteProject(id);
   }
 }

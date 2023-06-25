@@ -31,7 +31,7 @@ export class ProjectService {
     }
     return await this.projectRepository
       .createQueryBuilder('project')
-      .innerJoin('project.group', 'group')
+      .leftJoinAndSelect('project.group', 'group')
       .where('group.id = :groupId', { groupId })
       .getMany();
   }
@@ -78,11 +78,13 @@ export class ProjectService {
     return await this.projectRepository.save(updatedProject);
   }
 
-  async deleteProject(projectId: number): Promise<void> {
+  async deleteProject(projectId: number): Promise<Project> {
+    const project = await this.getProjectById(projectId);
     const result = await this.projectRepository.delete(projectId);
     if (result.affected === 0) {
       throw new NotFoundException(`Project with ID ${projectId} not found`);
     }
+    return project;
   }
 
   async isMember(user: Partial<User>, projectId: number): Promise<boolean> {
