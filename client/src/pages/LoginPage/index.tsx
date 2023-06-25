@@ -16,6 +16,7 @@ import { LoginParams } from '../../types/auth.types';
 import { AxiosError } from 'axios';
 import { notifications } from '@mantine/notifications';
 import { User } from '../../types/user.types';
+import { GeneralErrorObject } from '../../utils/notification.utils';
 
 function LoginPage() {
   const form = useForm({
@@ -45,12 +46,7 @@ function LoginPage() {
           icon: <IconX />,
         });
       } else {
-        notifications.show({
-          title: 'An error occurred.',
-          message: 'Please try again later.',
-          color: 'red',
-          icon: <IconX />,
-        });
+        notifications.show(GeneralErrorObject);
       }
     }
   };

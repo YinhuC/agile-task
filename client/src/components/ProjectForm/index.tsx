@@ -1,31 +1,35 @@
 import React from 'react';
 import { Button, Group, TextInput, Textarea } from '@mantine/core';
-import { CreateTaskParams, UpdateTaskParams } from '../../types/task.types';
 import { UseFormReturnType } from '@mantine/form';
 
-type TaskFormValues = {
+import {
+  CreateProjectParams,
+  UpdateProjectParams,
+} from '../../types/project.types';
+
+type ProjectFormValues = {
   name: string;
   description: string;
 };
 
-type TaskFormProps = {
-  categoryId: number;
-  onSubmit: (values: CreateTaskParams | UpdateTaskParams) => void;
-  form: UseFormReturnType<TaskFormValues>;
+type ProjectFormProps = {
+  groupId: number;
+  onSubmit: (values: CreateProjectParams | UpdateProjectParams) => void;
+  form: UseFormReturnType<ProjectFormValues>;
   type: 'add' | 'edit';
   onDelete?: () => void;
 };
 
-function TaskForm({
-  categoryId,
+function ProjectForm({
+  groupId,
   onSubmit,
   form,
   type,
   onDelete,
-}: TaskFormProps) {
+}: ProjectFormProps) {
   return (
     <form
-      onSubmit={form.onSubmit((values) => onSubmit({ ...values, categoryId }))}
+      onSubmit={form.onSubmit((values) => onSubmit({ ...values, groupId }))}
     >
       <TextInput
         mb={10}
@@ -45,11 +49,11 @@ function TaskForm({
       />
       <Group position='right'>
         <Button type='submit' h={45}>
-          {type === 'add' ? 'Create Task' : 'Edit Task'}
+          {type === 'add' ? 'Create Project' : 'Edit Project'}
         </Button>
         {type === 'edit' && (
           <Button h={45} color='red' onClick={onDelete}>
-            Delete Task
+            Delete Project
           </Button>
         )}
       </Group>
@@ -57,4 +61,4 @@ function TaskForm({
   );
 }
 
-export default TaskForm;
+export default ProjectForm;

@@ -7,6 +7,7 @@ export type GetProjectsParams = {
 
 export type CreateProjectParams = {
   name: string;
+  description?: string;
   groupId: number;
 };
 

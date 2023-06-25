@@ -1,14 +1,18 @@
 import React from 'react';
-import { Card, Text, Title, Button, Box } from '@mantine/core';
+import { Card, Text, Title, Button, Box, Flex } from '@mantine/core';
 import { Link } from 'react-router-dom';
+import ProjectModal from '../ProjectModal';
+import { Project } from '../../types/project.types';
+import { Group } from '../../types/group.types';
 
 type ProjectCardProps = {
-  title: string;
-  description: string;
+  project: Project;
+  group: Group;
   link: string;
 };
 
-function ProjectCard({ title, description, link }: ProjectCardProps) {
+function ProjectCard({ project, link, group }: ProjectCardProps) {
+  const { name, description } = project;
   return (
     <Card
       shadow='sm'
@@ -22,9 +26,12 @@ function ProjectCard({ title, description, link }: ProjectCardProps) {
       }}
     >
       <Box>
-        <Title order={4} weight={500} mb={10}>
-          {title}
-        </Title>
+        <Flex justify='space-between'>
+          <Title order={4} weight={500} mb={10}>
+            {name}
+          </Title>
+          <ProjectModal group={group} type='edit' project={project} />
+        </Flex>
         <Text mb={15}>{description}</Text>
       </Box>
       <Button component={Link} variant='light' color='blue' fullWidth to={link}>

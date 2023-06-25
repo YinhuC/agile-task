@@ -1,59 +1,63 @@
 import React from 'react';
 import { Button, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Category } from '../../types/category.types';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import { IconEditCircle } from '@tabler/icons-react';
-import {
-  CreateTaskParams,
-  Task,
-  UpdateTaskParams,
-} from '../../types/task.types';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
-import {
-  createTaskThunk,
-  deleteTaskThunk,
-  updateTaskThunk,
-} from '../../store/task/task.thunks';
-import TaskForm from '../TaskForm';
+import {} from '../../store/category/category.thunks';
 import { GeneralErrorObject } from '../../utils/notification.utils';
+import ProjectForm from '../ProjectForm';
+import {
+  CreateProjectParams,
+  Project,
+  UpdateProjectParams,
+} from '../../types/project.types';
+import {
+  createProjectThunk,
+  deleteProjectThunk,
+  updateProjectThunk,
+} from '../../store/project/project.thunks';
+import { Group } from '../../types/group.types';
 
-type TaskModalProps = {
-  category: Category;
+type ProjectModalProps = {
+  group: Group;
   type: 'add' | 'edit';
-  task?: Task;
+  project?: Project;
 };
 
-function TaskModal({ category, type, task }: TaskModalProps) {
-  const { id } = category;
+function ProjectModal({ group, type, project }: ProjectModalProps) {
+  const { id } = group;
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useDispatch<AppDispatch>();
 
   const form = useForm({
     initialValues: {
-      name: type === 'edit' && task?.name ? task.name : '',
-      description: type === 'edit' && task?.description ? task.description : '',
+      name: type === 'edit' && project?.name ? project.name : '',
+      description:
+        type === 'edit' && project?.description ? project.description : '',
     },
     validate: {
       name: (value) =>
-        value.length > 50
-          ? 'Title should not be longer than 50 characters long.'
+        value.length > 30
+          ? 'Title should not be longer than 30 characters long.'
           : null,
       description: (value) =>
-        value.length > 200
-          ? 'Description should not be longer than 200 characters long.'
+        value.length > 100
+          ? 'Description should not be longer than 100 characters long.'
           : null,
     },
   });
 
-  const onSubmit = async (values: CreateTaskParams | UpdateTaskParams) => {
+  const onSubmit = async (
+    values: CreateProjectParams | UpdateProjectParams
+  ) => {
     try {
       if (type === 'add') {
-        dispatch(createTaskThunk(values as CreateTaskParams));
+        dispatch(createProjectThunk(values as CreateProjectParams));
       } else {
-        dispatch(updateTaskThunk(values as UpdateTaskParams));
+        dispatch(updateProjectThunk(values as UpdateProjectParams));
       }
     } catch (err) {
       notifications.cleanQueue();
@@ -65,7 +69,8 @@ function TaskModal({ category, type, task }: TaskModalProps) {
 
   const onDelete = async () => {
     try {
-      if (task && task.id) dispatch(deleteTaskThunk(task.id.toString()));
+      if (project && project.id)
+        dispatch(deleteProjectThunk(project.id.toString()));
     } catch (err) {
       notifications.cleanQueue();
       notifications.show(GeneralErrorObject);
@@ -80,12 +85,12 @@ function TaskModal({ category, type, task }: TaskModalProps) {
         padding='xl'
         opened={opened}
         onClose={close}
-        title={type === 'add' ? 'Create New Task' : 'Edit Task'}
+        title={type === 'add' ? 'Create New Project' : 'Edit Project'}
         centered
         size='lg'
       >
-        <TaskForm
-          categoryId={id}
+        <ProjectForm
+          groupId={id}
           onSubmit={(values) => onSubmit(values)}
           form={form}
           type={type}
@@ -93,9 +98,7 @@ function TaskModal({ category, type, task }: TaskModalProps) {
         />
       </Modal>
       {type === 'add' ? (
-        <Button fullWidth onClick={open} variant='outline'>
-          Add new task
-        </Button>
+        <Button onClick={open}>Create Project</Button>
       ) : (
         <Button
           onClick={open}
@@ -112,4 +115,4 @@ function TaskModal({ category, type, task }: TaskModalProps) {
   );
 }
 
-export default TaskModal;
+export default ProjectModal;

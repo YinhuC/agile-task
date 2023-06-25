@@ -30,7 +30,6 @@ function TaskCard({ task, index }: TaskCardProps) {
             <Title order={5} mb={10}>
               {name}
             </Title>
-
             <TaskModal
               type='edit'
               category={category as Category}

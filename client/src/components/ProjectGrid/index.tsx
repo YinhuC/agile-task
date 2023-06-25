@@ -1,14 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Title, SimpleGrid, Stack } from '@mantine/core';
+import React, { useEffect, useMemo } from 'react';
+import { Title, SimpleGrid, Stack, Flex } from '@mantine/core';
 import ProjectCard from '../ProjectCard';
 import { Group } from '../../types/group.types';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import {
-  FetchAllProjectsPayload,
-  fetchAllProjectsThunk,
-} from '../../store/project/project.thunks';
-import { Project } from '../../types/project.types';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import { fetchAllProjectsThunk } from '../../store/project/project.thunks';
+import ProjectModal from '../ProjectModal';
 
 type ProjectGridProps = {
   group: Group;
@@ -17,38 +14,40 @@ type ProjectGridProps = {
 function ProjectGrid({ group }: ProjectGridProps) {
   const { name, id } = group;
   const dispatch = useDispatch<AppDispatch>();
-  const [projects, setProjects] = useState<Project[]>([]);
+  const allProjects = useSelector(
+    (state: RootState) => state.projects.projects
+  );
+
+  const projects = useMemo(
+    () => allProjects.filter((project) => project.group?.id === id),
+    [allProjects, id]
+  );
 
   useEffect(() => {
-    dispatch(fetchAllProjectsThunk({ groupId: id })).then((action) => {
-      const payload = action.payload as FetchAllProjectsPayload;
-      setProjects(payload.data);
-    });
+    dispatch(fetchAllProjectsThunk({ groupId: id }));
   }, [dispatch, id]);
 
   const cards = useMemo(() => {
     const cards = projects.map((project, index) => (
       <ProjectCard
-        title={project.name}
-        description={project?.description}
+        project={project}
         link={`/project/${project.id}`}
         key={`project-card-${index}`}
+        group={group}
       />
     ));
-    if (projects.length === 0)
-      return (
-        <ProjectCard
-          title={'No Projects'}
-          description={'Click here to create one and get started'}
-          link={'/'}
-        />
-      );
+    if (projects.length === 0) return <></>;
     return cards;
-  }, [projects]);
+  }, [group, projects]);
 
   return (
     <Stack mb={50}>
-      <Title order={3}>{name}</Title>
+      <Flex justify='space-between' align='center' mb={10}>
+        <Title order={3} mb={8}>
+          {name}
+        </Title>
+        <ProjectModal group={group} type='add' />
+      </Flex>
       <SimpleGrid
         cols={3}
         breakpoints={[
