@@ -95,11 +95,13 @@ export class GroupService {
     return { ...response, notFoundUsers };
   }
 
-  async deleteGroup(id: number): Promise<void> {
+  async deleteGroup(id: number): Promise<Group> {
+    const group = this.getGroupById(id);
     const result = await this.groupRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`Group with ID ${id} not found`);
     }
+    return group;
   }
 
   async isOwner(user: Partial<User>, groupId: number): Promise<boolean> {

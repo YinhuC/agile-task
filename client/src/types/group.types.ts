@@ -7,7 +7,7 @@ export type CreateGroupParams = {
 };
 
 export type UpdateGroupParams = {
-  id: string;
+  id: number;
   name?: string;
   users?: string[];
   owner?: User;

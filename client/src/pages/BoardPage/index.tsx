@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
-import { Container, Title } from '@mantine/core';
+import { Container, Flex, Title } from '@mantine/core';
 import ProjectGrid from '../../components/ProjectGrid';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { fetchAllGroupsThunk } from '../../store/group/group.thunks';
+import GroupModal from '../../components/GroupModal';
 
 function BoardPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,9 +28,12 @@ function BoardPage() {
 
   return (
     <Container size='lg'>
-      <Title order={2} mb={30}>
-        Workspaces
-      </Title>
+      <Flex justify='space-between' align='start' mb={10}>
+        <Title order={2} mb={30}>
+          Workspaces
+        </Title>
+        <GroupModal type='add' />
+      </Flex>
       {grids}
     </Container>
   );

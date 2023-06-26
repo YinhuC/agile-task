@@ -54,7 +54,7 @@ export class GroupController {
 
   @Delete(':id')
   @UseGuards(OwnershipGuard)
-  async deleteGroup(@Param('id') id: number): Promise<void> {
+  async deleteGroup(@Param('id') id: number): Promise<Group> {
     return await this.groupService.deleteGroup(id);
   }
 }

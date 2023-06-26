@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { fetchAllProjectsThunk } from '../../store/project/project.thunks';
 import ProjectModal from '../ProjectModal';
+import GroupModal from '../GroupModal';
 
 type ProjectGridProps = {
   group: Group;
@@ -47,9 +48,12 @@ function ProjectGrid({ group }: ProjectGridProps) {
   return (
     <Stack mb={50}>
       <Flex justify='space-between' align='center' mb={10}>
-        <Title order={3} mb={8}>
-          {name}
-        </Title>
+        <Flex align='center'>
+          <Title order={3} mr={5}>
+            {name}
+          </Title>
+          <GroupModal type='edit' group={group} />
+        </Flex>
         <ProjectModal groupId={id} type='add' />
       </Flex>
       <SimpleGrid

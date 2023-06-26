@@ -11,3 +11,9 @@ export function sortByUpdateTime<T extends { updatedAt: string }>(
     return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
   });
 }
+
+export function sortById<T extends { id: number }>(items: T[]): T[] {
+  return items.slice().sort((a, b) => {
+    return a.id - b.id;
+  });
+}

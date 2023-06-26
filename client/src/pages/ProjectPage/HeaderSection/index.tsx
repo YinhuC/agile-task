@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Container, Title, Text, Flex, Box } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
@@ -11,7 +11,12 @@ type HeaderSectionProps = {
 
 function HeaderSection({ projectId }: HeaderSectionProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const project = useSelector((state: RootState) => state.projects.projects[0]);
+  const projects = useSelector((state: RootState) => state.projects.projects);
+
+  const project = useMemo(
+    () => projects.find((project) => project.id === parseInt(projectId)),
+    [projectId, projects]
+  );
 
   useEffect(() => {
     dispatch(fetchProjectThunk(projectId));
@@ -35,7 +40,7 @@ function HeaderSection({ projectId }: HeaderSectionProps) {
             {project?.description}
           </Text>
         </Box>
-        <CategoryModal type='add' projectId={project?.id} />
+        {project && <CategoryModal type='add' projectId={project.id} />}
       </Flex>
     </Container>
   );

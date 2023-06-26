@@ -42,11 +42,33 @@ export const projectSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllProjectsThunk.fulfilled, (state, action) => {
-      state.projects = sortByUpdateTime(action.payload.data);
+      const fetchedProjects = action.payload.data;
+
+      fetchedProjects.forEach((fetchedProject) => {
+        const existingProjetIndex = state.projects.findIndex(
+          (project) => project.id === fetchedProject.id
+        );
+
+        if (existingProjetIndex !== -1) {
+          state.projects[existingProjetIndex] = fetchedProject;
+        } else {
+          state.projects.push(fetchedProject);
+        }
+      });
+
+      state.projects = sortByUpdateTime(state.projects);
     });
 
     builder.addCase(fetchProjectThunk.fulfilled, (state, action) => {
-      state.projects.unshift(action.payload.data);
+      const fetchedProject = action.payload.data;
+      const existingProjetIndex = state.projects.findIndex(
+        (project) => project.id === fetchedProject.id
+      );
+      if (existingProjetIndex !== -1) {
+        state.projects[existingProjetIndex] = fetchedProject;
+      } else {
+        state.projects.push(fetchedProject);
+      }
       state.projects = sortByUpdateTime(state.projects);
     });
 
