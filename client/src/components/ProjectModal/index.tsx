@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
@@ -45,6 +45,14 @@ function ProjectModal({ groupId, type, project }: ProjectModalProps) {
           : null,
     },
   });
+
+  useEffect(() => {
+    form.setValues({
+      name: type === 'edit' && project ? project.name : '',
+      description: type === 'edit' && project ? project.description : '',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type, project]);
 
   const onSubmit = async (
     values: CreateProjectParams | UpdateProjectParams

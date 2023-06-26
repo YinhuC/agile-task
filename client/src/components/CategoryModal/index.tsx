@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Group, Modal, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
@@ -39,6 +39,13 @@ function CategoryModal({ projectId, type, category }: CategoryModalProps) {
           : null,
     },
   });
+
+  useEffect(() => {
+    form.setValues({
+      name: type === 'edit' && category?.name ? category.name : '',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type, category]);
 
   const onSubmit = async (
     values: CreateCategoryParams | UpdateCategoryParams

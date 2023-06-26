@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
@@ -30,8 +30,13 @@ function TaskModal({ categoryId, type, task }: TaskModalProps) {
 
   const form = useForm({
     initialValues: {
-      name: type === 'edit' && task?.name ? task.name : '',
-      description: type === 'edit' && task?.description ? task.description : '',
+      name: type === 'edit' && task ? task.name : '',
+      description:
+        type === 'edit' && task?.description
+          ? task.description === null
+            ? ''
+            : task.description
+          : '',
     },
     validate: {
       name: (value) =>
@@ -44,6 +49,19 @@ function TaskModal({ categoryId, type, task }: TaskModalProps) {
           : null,
     },
   });
+
+  useEffect(() => {
+    form.setValues({
+      name: type === 'edit' && task ? task.name : '',
+      description:
+        type === 'edit' && task?.description
+          ? task.description === null
+            ? ''
+            : task.description
+          : '',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type, task]);
 
   const onSubmit = async (values: CreateTaskParams | UpdateTaskParams) => {
     try {
