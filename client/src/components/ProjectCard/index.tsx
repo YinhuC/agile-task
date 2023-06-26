@@ -3,14 +3,13 @@ import { Card, Text, Title, Button, Box, Flex } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import ProjectModal from '../ProjectModal';
 import { Project } from '../../types/project.types';
-import { Group } from '../../types/group.types';
 
 type ProjectCardProps = {
   project: Project;
-  group: Group;
+  groupId: number;
 };
 
-function ProjectCard({ project, group }: ProjectCardProps) {
+function ProjectCard({ project, groupId }: ProjectCardProps) {
   const { name, description, id } = project;
 
   return (
@@ -30,7 +29,7 @@ function ProjectCard({ project, group }: ProjectCardProps) {
           <Title order={4} weight={500} mb={10}>
             {name}
           </Title>
-          <ProjectModal group={group} type='edit' project={project} />
+          <ProjectModal groupId={groupId} type='edit' project={project} />
         </Flex>
         <Text mb={15}>{description}</Text>
       </Box>

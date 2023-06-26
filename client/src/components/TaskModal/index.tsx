@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Category } from '../../types/category.types';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import { IconEditCircle } from '@tabler/icons-react';
@@ -20,13 +19,12 @@ import {
 import { GeneralErrorObject } from '../../utils/notification.utils';
 
 type TaskModalProps = {
-  category: Category;
+  categoryId: number;
   type: 'add' | 'edit';
   task?: Task;
 };
 
-function TaskModal({ category, type, task }: TaskModalProps) {
-  const { id } = category;
+function TaskModal({ categoryId, type, task }: TaskModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -85,7 +83,7 @@ function TaskModal({ category, type, task }: TaskModalProps) {
       >
         <form
           onSubmit={form.onSubmit((values) =>
-            onSubmit({ ...values, categoryId: id })
+            onSubmit({ ...values, categoryId, id: task?.id })
           )}
         >
           <TextInput

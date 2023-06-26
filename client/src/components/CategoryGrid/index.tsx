@@ -82,7 +82,7 @@ function CategoryGrid({ category, index, projectId }: CategoryGridProps) {
               </Stack>
             )}
           </Droppable>
-          <TaskModal category={category} type={'add'} />
+          <TaskModal categoryId={id} type={'add'} />
         </Stack>
       )}
     </Draggable>

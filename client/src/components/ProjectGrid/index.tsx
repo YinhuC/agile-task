@@ -35,13 +35,13 @@ function ProjectGrid({ group }: ProjectGridProps) {
         projects.map((project, index) => (
           <ProjectCard
             project={project}
-            group={group}
+            groupId={id}
             key={`project-card-${index}`}
           />
         ))
       ),
 
-    [group, projects]
+    [id, projects]
   );
 
   return (
@@ -50,7 +50,7 @@ function ProjectGrid({ group }: ProjectGridProps) {
         <Title order={3} mb={8}>
           {name}
         </Title>
-        <ProjectModal group={group} type='add' />
+        <ProjectModal groupId={id} type='add' />
       </Flex>
       <SimpleGrid
         cols={3}

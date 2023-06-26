@@ -3,7 +3,6 @@ import { Card, Title, Text, Flex } from '@mantine/core';
 import { Task } from '../../types/task.types';
 import { Draggable } from 'react-beautiful-dnd';
 import TaskModal from '../TaskModal';
-import { Category } from '../../types/category.types';
 
 type TaskCardProps = {
   task: Task;
@@ -32,7 +31,7 @@ function TaskCard({ task, index }: TaskCardProps) {
             </Title>
             <TaskModal
               type='edit'
-              category={category as Category}
+              categoryId={category?.id as number}
               task={task}
             />
           </Flex>

@@ -81,7 +81,7 @@ function CategoryModal({ projectId, type, category }: CategoryModalProps) {
       >
         <form
           onSubmit={form.onSubmit((values) =>
-            onSubmit({ ...values, projectId })
+            onSubmit({ ...values, projectId, id: category?.id })
           )}
         >
           <TextInput

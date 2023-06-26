@@ -18,16 +18,14 @@ import {
   deleteProjectThunk,
   updateProjectThunk,
 } from '../../store/project/project.thunks';
-import { Group as GroupType } from '../../types/group.types';
 
 type ProjectModalProps = {
-  group: GroupType;
+  groupId: number;
   type: 'add' | 'edit';
   project?: Project;
 };
 
-function ProjectModal({ group, type, project }: ProjectModalProps) {
-  const { id } = group;
+function ProjectModal({ groupId, type, project }: ProjectModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -89,7 +87,7 @@ function ProjectModal({ group, type, project }: ProjectModalProps) {
       >
         <form
           onSubmit={form.onSubmit((values) =>
-            onSubmit({ ...values, groupId: id })
+            onSubmit({ ...values, groupId, id: project?.id as number })
           )}
         >
           <TextInput
