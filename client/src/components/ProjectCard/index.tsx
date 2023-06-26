@@ -8,11 +8,11 @@ import { Group } from '../../types/group.types';
 type ProjectCardProps = {
   project: Project;
   group: Group;
-  link: string;
 };
 
-function ProjectCard({ project, link, group }: ProjectCardProps) {
-  const { name, description } = project;
+function ProjectCard({ project, group }: ProjectCardProps) {
+  const { name, description, id } = project;
+
   return (
     <Card
       shadow='sm'
@@ -34,7 +34,13 @@ function ProjectCard({ project, link, group }: ProjectCardProps) {
         </Flex>
         <Text mb={15}>{description}</Text>
       </Box>
-      <Button component={Link} variant='light' color='blue' fullWidth to={link}>
+      <Button
+        component={Link}
+        variant='light'
+        color='blue'
+        fullWidth
+        to={`/project/${id}`}
+      >
         View Project
       </Button>
     </Card>

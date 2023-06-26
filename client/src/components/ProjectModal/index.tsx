@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal } from '@mantine/core';
+import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import {} from '../../store/category/category.thunks';
 import { GeneralErrorObject } from '../../utils/notification.utils';
-import ProjectForm from '../ProjectForm';
 import {
   CreateProjectParams,
   Project,
@@ -19,10 +18,10 @@ import {
   deleteProjectThunk,
   updateProjectThunk,
 } from '../../store/project/project.thunks';
-import { Group } from '../../types/group.types';
+import { Group as GroupType } from '../../types/group.types';
 
 type ProjectModalProps = {
-  group: Group;
+  group: GroupType;
   type: 'add' | 'edit';
   project?: Project;
 };
@@ -34,9 +33,8 @@ function ProjectModal({ group, type, project }: ProjectModalProps) {
 
   const form = useForm({
     initialValues: {
-      name: type === 'edit' && project?.name ? project.name : '',
-      description:
-        type === 'edit' && project?.description ? project.description : '',
+      name: type === 'edit' && project ? project.name : '',
+      description: type === 'edit' && project ? project.description : '',
     },
     validate: {
       name: (value) =>
@@ -89,13 +87,38 @@ function ProjectModal({ group, type, project }: ProjectModalProps) {
         centered
         size='lg'
       >
-        <ProjectForm
-          groupId={id}
-          onSubmit={(values) => onSubmit(values)}
-          form={form}
-          type={type}
-          onDelete={onDelete}
-        />
+        <form
+          onSubmit={form.onSubmit((values) =>
+            onSubmit({ ...values, groupId: id })
+          )}
+        >
+          <TextInput
+            mb={10}
+            label='Title'
+            placeholder='Title'
+            required
+            {...form.getInputProps('name')}
+          />
+          <Textarea
+            mb={30}
+            label='Description'
+            placeholder='Description'
+            autosize
+            minRows={3}
+            maxRows={5}
+            {...form.getInputProps('description')}
+          />
+          <Group position='right'>
+            <Button type='submit' h={45}>
+              {type === 'add' ? 'Create Project' : 'Edit Project'}
+            </Button>
+            {type === 'edit' && (
+              <Button h={45} color='red' onClick={onDelete}>
+                Delete Project
+              </Button>
+            )}
+          </Group>
+        </form>
       </Modal>
       {type === 'add' ? (
         <Button onClick={open}>Create Project</Button>

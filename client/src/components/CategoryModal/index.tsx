@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal } from '@mantine/core';
+import { Button, Group, Modal, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
   Category,
@@ -12,7 +12,6 @@ import { IconEditCircle } from '@tabler/icons-react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { GeneralErrorObject } from '../../utils/notification.utils';
-import CategoryForm from '../CategoryForm';
 import {
   createCategoryThunk,
   deleteCategoryThunk,
@@ -80,13 +79,29 @@ function CategoryModal({ projectId, type, category }: CategoryModalProps) {
         centered
         size='lg'
       >
-        <CategoryForm
-          projectId={projectId}
-          onSubmit={(values) => onSubmit(values)}
-          form={form}
-          type={type}
-          onDelete={onDelete}
-        />
+        <form
+          onSubmit={form.onSubmit((values) =>
+            onSubmit({ ...values, projectId })
+          )}
+        >
+          <TextInput
+            mb={10}
+            label='Title'
+            placeholder='Title'
+            required
+            {...form.getInputProps('name')}
+          />
+          <Group position='right'>
+            <Button type='submit' h={45}>
+              {type === 'add' ? 'Create Category' : 'Edit Category'}
+            </Button>
+            {type === 'edit' && (
+              <Button h={45} color='red' onClick={onDelete}>
+                Delete Category
+              </Button>
+            )}
+          </Group>
+        </form>
       </Modal>
       {type === 'add' ? (
         <Button onClick={open}>Add new category</Button>

@@ -26,7 +26,7 @@ function HeaderSection({ projectId }: HeaderSectionProps) {
         userSelect: 'none',
       }}
     >
-      <Flex align='end'>
+      <Flex justify='space-between' align='end'>
         <Box>
           <Title order={2} mb={10}>
             {project?.name}

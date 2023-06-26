@@ -7,6 +7,7 @@ import {
   fetchAllProjectsThunk,
   updateProjectThunk,
 } from './project.thunks';
+import { sortByUpdateTime } from '../../utils/sort.utils';
 
 export interface ProjectState {
   projects: Project[];
@@ -41,11 +42,12 @@ export const projectSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllProjectsThunk.fulfilled, (state, action) => {
-      state.projects = action.payload.data;
+      state.projects = sortByUpdateTime(action.payload.data);
     });
 
     builder.addCase(fetchProjectThunk.fulfilled, (state, action) => {
       state.projects.unshift(action.payload.data);
+      state.projects = sortByUpdateTime(state.projects);
     });
 
     builder.addCase(createProjectThunk.fulfilled, (state, action) => {
@@ -59,12 +61,14 @@ export const projectSlice = createSlice({
       if (index !== -1) {
         state.projects[index] = action.payload.data;
       }
+      state.projects = sortByUpdateTime(state.projects);
     });
 
     builder.addCase(deleteProjectThunk.fulfilled, (state, action) => {
       state.projects = state.projects.filter(
         (project) => project.id !== action.payload.data.id
       );
+      state.projects = sortByUpdateTime(state.projects);
     });
   },
 });

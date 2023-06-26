@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal } from '@mantine/core';
+import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Category } from '../../types/category.types';
 import { useForm } from '@mantine/form';
@@ -17,7 +17,6 @@ import {
   deleteTaskThunk,
   updateTaskThunk,
 } from '../../store/task/task.thunks';
-import TaskForm from '../TaskForm';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 
 type TaskModalProps = {
@@ -84,13 +83,38 @@ function TaskModal({ category, type, task }: TaskModalProps) {
         centered
         size='lg'
       >
-        <TaskForm
-          categoryId={id}
-          onSubmit={(values) => onSubmit(values)}
-          form={form}
-          type={type}
-          onDelete={onDelete}
-        />
+        <form
+          onSubmit={form.onSubmit((values) =>
+            onSubmit({ ...values, categoryId: id })
+          )}
+        >
+          <TextInput
+            mb={10}
+            label='Title'
+            placeholder='Title'
+            required
+            {...form.getInputProps('name')}
+          />
+          <Textarea
+            mb={30}
+            label='Description'
+            placeholder='Description'
+            autosize
+            minRows={3}
+            maxRows={5}
+            {...form.getInputProps('description')}
+          />
+          <Group position='right'>
+            <Button type='submit' h={45}>
+              {type === 'add' ? 'Create Task' : 'Edit Task'}
+            </Button>
+            {type === 'edit' && (
+              <Button h={45} color='red' onClick={onDelete}>
+                Delete Task
+              </Button>
+            )}
+          </Group>
+        </form>
       </Modal>
       {type === 'add' ? (
         <Button fullWidth onClick={open} variant='outline'>

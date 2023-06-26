@@ -27,18 +27,22 @@ function ProjectGrid({ group }: ProjectGridProps) {
     dispatch(fetchAllProjectsThunk({ groupId: id }));
   }, [dispatch, id]);
 
-  const cards = useMemo(() => {
-    const cards = projects.map((project, index) => (
-      <ProjectCard
-        project={project}
-        link={`/project/${project.id}`}
-        key={`project-card-${index}`}
-        group={group}
-      />
-    ));
-    if (projects.length === 0) return <></>;
-    return cards;
-  }, [group, projects]);
+  const cards = useMemo(
+    () =>
+      projects.length === 0 ? (
+        <></>
+      ) : (
+        projects.map((project, index) => (
+          <ProjectCard
+            project={project}
+            group={group}
+            key={`project-card-${index}`}
+          />
+        ))
+      ),
+
+    [group, projects]
+  );
 
   return (
     <Stack mb={50}>
