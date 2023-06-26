@@ -9,3 +9,5 @@ export const postAuthLogin = (data: LoginParams) =>
   axiosClient.post<User>(`/auth/login`, data);
 
 export const getAuthUser = () => axiosClient.get<User>(`/auth/user`);
+
+export const postAuthLogout = () => axiosClient.post<User>(`auth/logout`);
