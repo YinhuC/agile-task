@@ -1,10 +1,7 @@
 {
   "name": "agile-tasker-server",
   "version": "0.1.0",
-  "description": "",
-  "author": "",
   "private": true,
-  "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
@@ -16,10 +13,16 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./tests/jest-e2e.json"
+    "test:e2e": "jest --config ./tests/jest-e2e.json",
+    "typeorm": "npm run build typeorm -d dist/database/data-source.js",
+    "migration:generate": "npm run typeorm -- migration:generate",
+    "migration:create": "npm run typeorm -- migration:create",
+    "migration:run": "npm run typeorm -- migration:run",
+    "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^10.0.3",
     "@nestjs/passport": "^9.0.3",

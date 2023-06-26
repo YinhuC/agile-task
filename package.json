@@ -2,6 +2,7 @@
   "name": "agile-tasker",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "start": "cd client && yarn start",
     "start:server": "cd server && yarn start:dev",
@@ -10,6 +11,10 @@
     "test:server": "cd server && yarn test",
     "eject": "react-scripts eject",
     "typecheck": "tsc --noEmit",
-    "postinstall": "cd client && yarn install --ignore-optional && cd ../server && yarn install --ignore-optional && rm -rf ../node_modules"
+    "postinstall": "cd client && yarn install --ignore-optional && cd ../server && yarn install --ignore-optional && rm -rf ../node_modules",
+    "migration:generate": "cd server && yarn migration:generate",
+    "migration:create": "cd server && yarn migration:create",
+    "migration:run": "cd server && yarn migration:run",
+    "migration:revert": "cd server && yarn migration:revert"
   }
 }
