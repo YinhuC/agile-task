@@ -11,7 +11,15 @@ Before getting started, make sure you have the following software installed on y
 
 - Node.js (v14 or later)
 - Yarn package manager
-- PostgreSQL
+
+      npm install --global yarn
+  
+- PostgreSQL - https://www.postgresql.org/download/
+- TypeORM globally
+
+      npm install -g typeorm
+      or
+      yarn global add typeorm
 
 # Getting Started
 
@@ -59,19 +67,30 @@ To run the Agile Task App locally, follow these steps:
 
     yarn start:server
 
-**7**.  Start the client:
+**7.**  Run migration script to add data into database
+
+    yarn migration:run
+
+**8.**  Sign in with johndoe@example.com to see data and play around
+
+    email: johndoe@example.com
+    password: Password123
+
+**9.**  Start the client:
 
     yarn start
 
-**8.**  Open your browser and visit [http://localhost:3000](http://localhost:3000/) to see the app in action.
+**10.**  Open your browser and visit [http://localhost:3000](http://localhost:3000/) to see the app in action.
 
-**9.**  Run the server tests:
+**11.**  Run the server tests:
 
     yarn test:server
 
-**10.**  Run the client tests:
+**12.**  Run the client tests:
 
     yarn test
+
+
 
 # Folder Structure
 
