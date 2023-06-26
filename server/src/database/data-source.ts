@@ -1,4 +1,3 @@
-import { join } from 'path';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import { DataSource, DataSourceOptions } from 'typeorm';
@@ -14,8 +13,9 @@ export const dataSourceOptions: DataSourceOptions = {
   database: data.REACT_APP_DB_NAME,
   // https://stackoverflow.com/questions/59435293/typeorm-entity-in-nestjs-cannot-use-import-statement-outside-a-module
   entities: ['dist/**/*.entity.js'],
-  migrations: [join(__dirname, '/../../database/migrations/*{.ts,.js}')],
+  migrations: ['dist/database/migrations/**/*{.js,.ts}'],
   synchronize: false,
+  logging: true,
 };
 
 const dataSource = new DataSource(dataSourceOptions);
