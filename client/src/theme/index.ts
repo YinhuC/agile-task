@@ -6,7 +6,7 @@ import { passwordInput } from './components/password-input-styles';
 import './styles/fonts.css';
 import { textarea } from './components/text-area-styles';
 
-const theme: MantineThemeOverride = {
+const projectTheme: MantineThemeOverride = {
   colorScheme: 'light',
   fontFamily: 'Inter, Arial, Helvetica, sans-serif',
   lineHeight: '120%',
@@ -24,10 +24,4 @@ const theme: MantineThemeOverride = {
   },
 };
 
-export default theme;
-
-// text - #6B6F76
-// light gray #F9F9F9
-// red #da3458
-// gold #B59978
-// light blue #7894B5
+export default projectTheme;

@@ -49,7 +49,7 @@ function ProjectGrid({ group }: ProjectGridProps) {
     <Stack mb={50}>
       <Flex justify='space-between' align='center' mb={10}>
         <Flex align='center'>
-          <Title order={3} mr={5}>
+          <Title order={3} mx={5}>
             {name}
           </Title>
           <GroupModal type='edit' group={group} />
