@@ -28,7 +28,7 @@ function BoardPage() {
   );
 
   return (
-    <Box py={20}>
+    <Box py={30}>
       <Container size='xl'>
         <Flex
           justify='space-between'

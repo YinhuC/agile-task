@@ -6,18 +6,24 @@ import {
   Flex,
   MediaQuery,
   ContainerProps,
+  useMantineTheme,
 } from '@mantine/core';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { notifications } from '@mantine/notifications';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 import { postAuthLogout } from '../../api/auth.api';
 import Logo from '../../assets/logos/logo-transparent.png';
 import SmallLogo from '../../assets/logos/small-logo-transparent.png';
+import { usePrevious, useWindowScroll } from '@mantine/hooks';
 
 const Header: React.FC = ({ ...props }: ContainerProps) => {
   const { user, removeUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const theme = useMantineTheme();
+  const [scroll] = useWindowScroll();
+  const prevScroll = usePrevious(scroll);
 
   const logout = async () => {
     try {
@@ -34,75 +40,76 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
     <Container
       {...props}
       size='xl'
+      py='md'
+      mx={5}
       sx={{
-        backgroundColor: 'white',
-        width: '100%',
-        borderBottom: '1px solid lightgray',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         position: 'fixed',
-        zIndex: 999,
+        zIndex: 9,
+        width: '100%',
+        overflow: 'hidden',
+        backgroundColor:
+          location.pathname === '/' ? theme.colors.gray[1] : 'white',
+        borderBottom:
+          location.pathname === '/' ? '1px solid gray' : '1px solid lightgray',
+        height: 80,
+        marginTop: prevScroll && scroll.y > prevScroll.y ? -100 : 0,
+        transition: 'margin-top 0.5s ease-out',
       }}
     >
-      <Flex
-        py='md'
-        justify='space-between'
-        align='center'
-        direction='row'
-        sx={{ height: 80, overflow: 'hidden' }}
-        mx={5}
-      >
-        <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-          <Link to={'/'}>
-            <Image src={Logo} width={200} />
-          </Link>
-        </MediaQuery>
-        <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
-          <Link to={'/'}>
-            <Image src={SmallLogo} width={100} sx={{ overflow: 'hidden' }} />
-          </Link>
-        </MediaQuery>
-
-        <Flex justify='flex-end' align='center' w={200} mr={20}>
-          {user ? (
-            <>
-              <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-                <Button
-                  component={Link}
-                  variant='link'
-                  mr={20}
-                  to={'/'}
-                  sx={{ fontWeight: 400 }}
-                >
-                  Home
-                </Button>
-              </MediaQuery>
-              <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-                <Button
-                  component={Link}
-                  variant='link'
-                  to={`/boards/${user.id}`}
-                  sx={{ fontWeight: 400 }}
-                  mr={40}
-                >
-                  Board
-                </Button>
-              </MediaQuery>
-              <Button onClick={logout} variant='outline' compact radius='xs'>
-                Logout
+      <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+        <Link to={'/'}>
+          <Image src={Logo} width={200} />
+        </Link>
+      </MediaQuery>
+      <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
+        <Link to={'/'}>
+          <Image src={SmallLogo} width={100} sx={{ overflow: 'hidden' }} />
+        </Link>
+      </MediaQuery>
+      <Flex justify='flex-end' align='center' w={200} mr={20}>
+        {user ? (
+          <>
+            <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+              <Button
+                component={Link}
+                variant='link'
+                mr={20}
+                to={'/'}
+                sx={{ fontWeight: 400 }}
+              >
+                Home
               </Button>
-            </>
-          ) : (
-            <Button
-              component={Link}
-              size='md'
-              variant='outline'
-              mr='0.5rem'
-              to={'/login'}
-              compact
-            >
-              Sign In
+            </MediaQuery>
+            <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+              <Button
+                component={Link}
+                variant='link'
+                to={`/boards/${user.id}`}
+                sx={{ fontWeight: 400 }}
+                mr={40}
+              >
+                Board
+              </Button>
+            </MediaQuery>
+            <Button onClick={logout} variant='outline' compact radius='xs'>
+              Logout
             </Button>
-          )}
-        </Flex>
+          </>
+        ) : (
+          <Button
+            component={Link}
+            size='md'
+            variant='outline'
+            mr='0.5rem'
+            to={'/login'}
+            compact
+          >
+            Sign In
+          </Button>
+        )}
       </Flex>
     </Container>
   );

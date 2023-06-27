@@ -37,6 +37,7 @@ function HeaderSection({ projectId, ...props }: HeaderSectionProps) {
       size='xl'
       mb={30}
       px={40}
+      pt={20}
       sx={{
         userSelect: 'none',
       }}

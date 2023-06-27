@@ -42,7 +42,7 @@ function App() {
     <Providers user={user} setUser={setUser}>
       <Notifications />
       {!isLoginPage && !isRegisterPage && (
-        <Flex justify='center' sx={{ width: '100%' }} mb={100}>
+        <Flex justify='center' sx={{ width: '100%' }} mb={80}>
           <Header />
         </Flex>
       )}
