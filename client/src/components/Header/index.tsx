@@ -12,8 +12,8 @@ import { useAuth } from '../../hooks/useAuth';
 import { notifications } from '@mantine/notifications';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 import { postAuthLogout } from '../../api/auth.api';
-import Logo from '../../assets/logos/transparent-agile.png';
-import SmallLogo from '../../assets/logos/transparent-a.png';
+import Logo from '../../assets/logos/logo-transparent.png';
+import SmallLogo from '../../assets/logos/small-logo-transparent.png';
 
 const Header: React.FC = ({ ...props }: ContainerProps) => {
   const { user, removeUser } = useAuth();
@@ -41,12 +41,12 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
         justify='space-between'
         align='center'
         direction='row'
-        sx={{ height: 80 }}
+        sx={{ height: 80, overflow: 'hidden' }}
         mx={5}
       >
         <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
           <Link to={'/'}>
-            <Image src={Logo} width={200} sx={{ overflow: 'hidden' }} />
+            <Image src={Logo} width={200} />
           </Link>
         </MediaQuery>
         <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
@@ -58,43 +58,43 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
         <Flex justify='flex-end' align='center' w={200} mr={20}>
           {user ? (
             <>
-              <Button
-                component={Link}
-                variant='link'
-                mr={20}
-                to={'/'}
-                sx={{ fontWeight: 400 }}
-              >
-                Home
-              </Button>
-              <Button
-                component={Link}
-                variant='link'
-                to={`/boards/${user.id}`}
-                sx={{ fontWeight: 400 }}
-                mr={40}
-              >
-                Board
-              </Button>
+              <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+                <Button
+                  component={Link}
+                  variant='link'
+                  mr={20}
+                  to={'/'}
+                  sx={{ fontWeight: 400 }}
+                >
+                  Home
+                </Button>
+              </MediaQuery>
+              <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+                <Button
+                  component={Link}
+                  variant='link'
+                  to={`/boards/${user.id}`}
+                  sx={{ fontWeight: 400 }}
+                  mr={40}
+                >
+                  Board
+                </Button>
+              </MediaQuery>
               <Button onClick={logout} variant='outline' compact radius='xs'>
                 Logout
               </Button>
             </>
           ) : (
-            <>
-              <Button
-                component={Link}
-                size='md'
-                variant='outline'
-                mr='0.5rem'
-                to={'/login'}
-              >
-                Sign In
-              </Button>
-              <Button component={Link} size='md' to={'/login'}>
-                Buy Now
-              </Button>
-            </>
+            <Button
+              component={Link}
+              size='md'
+              variant='outline'
+              mr='0.5rem'
+              to={'/login'}
+              compact
+            >
+              Sign In
+            </Button>
           )}
         </Flex>
       </Flex>

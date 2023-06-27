@@ -93,7 +93,7 @@ function RegisterPage() {
       <Title order={2} mb={20}>
         Create your account.
       </Title>
-      <Text mb={50}>
+      <Text mb={50} align='center'>
         Create your account today and embark on a collaborative journey.
       </Text>
       <Box miw={300} w='24%' mb={60}>

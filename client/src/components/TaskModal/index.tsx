@@ -121,12 +121,12 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
             maxRows={5}
             {...form.getInputProps('description')}
           />
-          <Group position='right'>
+          <Group position='right' spacing={10}>
             <Button type='submit' h={45}>
               {type === 'add' ? 'Create Task' : 'Edit Task'}
             </Button>
             {type === 'edit' && (
-              <Button h={45} color='red' onClick={onDelete}>
+              <Button h={45} color='dark' onClick={onDelete}>
                 Delete Task
               </Button>
             )}
