@@ -7,6 +7,7 @@ import {
   TextInput,
   PasswordInput,
   Box,
+  useMantineTheme,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconAt, IconPassword, IconX } from '@tabler/icons-react';
@@ -20,6 +21,7 @@ import { GeneralErrorObject } from '../../utils/notification.utils';
 import { useAuth } from '../../hooks/useAuth';
 
 function LoginPage() {
+  const theme = useMantineTheme();
   const form = useForm({
     initialValues: {
       email: '',
@@ -65,7 +67,14 @@ function LoginPage() {
       justify='center'
       align='center'
       direction='column'
-      sx={{ minHeight: '100vh' }}
+      sx={{
+        minHeight: '100vh',
+        background: theme.fn.linearGradient(
+          45,
+          theme.colors.pink[0],
+          theme.colors.teal[0]
+        ),
+      }}
       py={50}
       px={20}
     >

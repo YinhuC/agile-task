@@ -7,6 +7,7 @@ import {
   TextInput,
   PasswordInput,
   Box,
+  useMantineTheme,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconAt, IconCheck, IconPassword, IconX } from '@tabler/icons-react';
@@ -18,6 +19,7 @@ import { notifications } from '@mantine/notifications';
 import { AxiosError } from 'axios';
 
 function RegisterPage() {
+  const theme = useMantineTheme();
   const form = useForm({
     initialValues: {
       firstname: '',
@@ -86,7 +88,14 @@ function RegisterPage() {
       justify='center'
       align='center'
       direction='column'
-      sx={{ minHeight: '100vh' }}
+      sx={{
+        minHeight: '100vh',
+        background: theme.fn.linearGradient(
+          225,
+          theme.colors.pink[0],
+          theme.colors.teal[0]
+        ),
+      }}
       py={50}
       px={20}
     >
