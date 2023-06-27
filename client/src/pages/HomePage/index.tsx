@@ -2,13 +2,11 @@ import React from 'react';
 
 import HeaderSection from './HeaderSection';
 import GuideSection from './GuideSection';
-import { Box, useMantineTheme } from '@mantine/core';
+import { Box } from '@mantine/core';
 
 function HomePage() {
-  const theme = useMantineTheme();
-
   return (
-    <Box mt={-80} pt={80} sx={{ backgroundColor: theme.colors.gray[1] }}>
+    <Box mt={-80}>
       <HeaderSection />
       <GuideSection />
     </Box>

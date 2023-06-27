@@ -8,6 +8,7 @@ import {
   Button,
   BoxProps,
   Box,
+  useMantineTheme,
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
@@ -19,6 +20,7 @@ import DeviceSquare from '../../../assets/images/parallax/device-parallax.png';
 import TeamSquare from '../../../assets/images/parallax/team-parallax.png';
 
 function HeaderSection({ ...props }: BoxProps) {
+  const theme = useMantineTheme();
   const imgAnimate1 = useAnimation();
   const imgAnimate2 = useAnimation();
   const imgAnimate3 = useAnimation();
@@ -33,22 +35,26 @@ function HeaderSection({ ...props }: BoxProps) {
       y: moveY / 250,
     });
     imgAnimate2.start({
-      x: moveX / 180,
-      y: moveY / 180,
+      x: moveX / 80,
+      y: moveY / 80,
     });
     imgAnimate3.start({
-      x: moveX / 100,
-      y: moveY / 100,
+      x: moveX / 50,
+      y: moveY / 50,
     });
     imgAnimate4.start({
-      x: moveX / 100,
-      y: moveY / 100,
+      x: moveX / 50,
+      y: moveY / 50,
     });
   };
   const throttledMouseMove = throttle(handleMouseMove, 100);
 
   return (
-    <Box {...props} onMouseMove={(e) => throttledMouseMove(e)}>
+    <Box
+      {...props}
+      onMouseMove={(e) => throttledMouseMove(e)}
+      sx={{ backgroundColor: theme.colors.gray[1] }}
+    >
       <Container
         size='xl'
         sx={{
@@ -56,14 +62,15 @@ function HeaderSection({ ...props }: BoxProps) {
           flexDirection: 'column',
           alignItems: 'center',
         }}
-        mb={100}
+        pt={200}
+        pb={100}
       >
         <Stack
           justify='center'
           align='center'
           sx={{ width: '100%' }}
-          mb={100}
-          mt={140}
+          mb={60}
+          mx={10}
         >
           <Title align='center' order={1}>
             Unmatched Project Efficiency.
@@ -79,6 +86,7 @@ function HeaderSection({ ...props }: BoxProps) {
           </Flex>
         </Stack>
         <Flex
+          mx={20}
           sx={{
             img: {
               position: 'relative',
