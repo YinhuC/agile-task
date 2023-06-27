@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   type: 'postgres',
   host: data.REACT_APP_DB_HOST,
   port: parseInt(data.REACT_APP_DB_PORT),

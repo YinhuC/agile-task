@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from '../user.entity';
 import { UpdateUserDto } from '../dto/update-user';
 import bcrypt from 'bcrypt';
-import { Group } from 'src/group/group.entity';
+import { Group } from '../../group/group.entity';
 
 @Injectable()
 export class UserService {

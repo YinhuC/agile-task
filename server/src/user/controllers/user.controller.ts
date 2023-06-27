@@ -10,7 +10,7 @@ import {
 import { UserService } from '../services/user.service';
 import { UpdateUserDto } from '../dto/update-user';
 import { User } from '../user.entity';
-import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
+import { AuthenticatedGuard } from '../../auth/guards/auth.guard';
 import { Request, Response } from 'express';
 import { AuthUser } from '../decorators/user.decorator';
 

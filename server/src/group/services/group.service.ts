@@ -7,9 +7,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Group } from '../group.entity';
 import { CreateGroupDTO } from '../dto/create-group.dto';
-import { User } from 'src/user/user.entity';
+import { User } from '../../user/user.entity';
 import { UpdateGroupDto } from '../dto/update-group.dto';
-import { UserService } from 'src/user/services/user.service';
+import { UserService } from '../../user/services/user.service';
 import { GroupResponse } from '../utils/group.types';
 
 @Injectable()

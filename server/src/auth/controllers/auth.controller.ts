@@ -9,11 +9,11 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { User } from 'src/user/user.entity';
+import { User } from '../../user/user.entity';
 import { AuthService } from '../services/auth.service';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { RegisterDto } from '../dto/register.dto';
-import { AuthUser } from 'src/user/decorators/user.decorator';
+import { AuthUser } from '../../user/decorators/user.decorator';
 import { AuthenticatedGuard } from '../guards/auth.guard';
 import { Request, Response } from 'express';
 

@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
-import { Group } from 'src/group/group.entity';
+import { Group } from '../group/group.entity';
 import {
   Column,
   CreateDateColumn,

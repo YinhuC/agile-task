@@ -12,9 +12,9 @@ import { Task } from '../task.entity';
 import { TaskService } from '../services/task.service';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
-import { AuthUser } from 'src/user/decorators/user.decorator';
-import { User } from 'src/user/user.entity';
-import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
+import { AuthUser } from '../../user/decorators/user.decorator';
+import { User } from '../../user/user.entity';
+import { AuthenticatedGuard } from '../../auth/guards/auth.guard';
 import { TaskMemberGuard } from '../guards/task-member.guard';
 import { GetTaskDto } from '../dto/get-task.dto';
 

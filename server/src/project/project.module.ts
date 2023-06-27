@@ -3,7 +3,7 @@ import { ProjectService } from './services/project.service';
 import { ProjectController } from './controllers/project.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Project } from './project.entity';
-import { GroupModule } from 'src/group/group.module';
+import { GroupModule } from '../group/group.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Project]), GroupModule],

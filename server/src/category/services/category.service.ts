@@ -9,12 +9,12 @@ import { Repository, getManager } from 'typeorm';
 import { Category } from '../category.entity';
 import { CreateCategoryDto } from '../dto/create-category.dto';
 import { UpdateCategoryDto } from '../dto/update-category.dto';
-import { User } from 'src/user/user.entity';
-import { ProjectService } from 'src/project/services/project.service';
+import { User } from '../../user/user.entity';
+import { ProjectService } from '../../project/services/project.service';
 import {
   removeIndexValue,
   updateIndexValues,
-} from 'src/shared/utils/array.utils';
+} from '../../shared/utils/array.utils';
 
 @Injectable()
 export class CategoryService {

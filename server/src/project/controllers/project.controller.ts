@@ -12,9 +12,9 @@ import { ProjectService } from '../services/project.service';
 import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
 import { Project } from '../project.entity';
-import { AuthenticatedGuard } from 'src/auth/guards/auth.guard';
-import { AuthUser } from 'src/user/decorators/user.decorator';
-import { User } from 'src/user/user.entity';
+import { AuthenticatedGuard } from '../../auth/guards/auth.guard';
+import { AuthUser } from '../../user/decorators/user.decorator';
+import { User } from '../../user/user.entity';
 import { GetProjectDto } from '../dto/get-project.dto';
 import { ProjectMemberGuard } from '../guards/project-member.guard';
 

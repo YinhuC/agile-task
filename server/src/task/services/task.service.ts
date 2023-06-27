@@ -9,13 +9,13 @@ import { Repository } from 'typeorm';
 import { Task } from '../task.entity';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
-import { CategoryService } from 'src/category/services/category.service';
-import { User } from 'src/user/user.entity';
+import { CategoryService } from '../../category/services/category.service';
+import { User } from '../../user/user.entity';
 import {
   insertIndexValue,
   removeIndexValue,
   updateIndexValues,
-} from 'src/shared/utils/array.utils';
+} from '../../shared/utils/array.utils';
 
 @Injectable()
 export class TaskService {

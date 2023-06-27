@@ -8,8 +8,8 @@ import { Repository } from 'typeorm';
 import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
 import { Project } from '../project.entity';
-import { GroupService } from 'src/group/services/group.service';
-import { User } from 'src/user/user.entity';
+import { GroupService } from '../../group/services/group.service';
+import { User } from '../../user/user.entity';
 
 @Injectable()
 export class ProjectService {

@@ -3,8 +3,8 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UserService } from 'src/user/services/user.service';
-import { User } from 'src/user/user.entity';
+import { UserService } from '../../user/services/user.service';
+import { User } from '../../user/user.entity';
 import { RegisterDto } from '../dto/register.dto';
 
 @Injectable()
