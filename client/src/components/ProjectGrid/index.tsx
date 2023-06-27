@@ -62,7 +62,17 @@ function ProjectGrid({ group, ...props }: ProjectGridProps) {
       pb={40}
       sx={{ backgroundColor: theme.colors.gray[0], borderRadius: '0.3rem' }}
     >
-      <Flex justify='space-between' align='center' mb={10}>
+      <Flex
+        justify='space-between'
+        align='center'
+        mb={10}
+        sx={{
+          [theme.fn.smallerThan('sm')]: {
+            flexDirection: 'column',
+            alignItems: 'center',
+          },
+        }}
+      >
         <Flex align='center'>
           <Title order={3} mx={5}>
             {name}

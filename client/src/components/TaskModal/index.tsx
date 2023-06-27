@@ -1,12 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Button,
-  Group,
-  Modal,
-  ModalProps,
-  TextInput,
-  Textarea,
-} from '@mantine/core';
+import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
@@ -25,7 +18,7 @@ import {
 } from '../../store/task/task.thunks';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 
-type TaskModalProps = Partial<ModalProps> & {
+type TaskModalProps = {
   categoryId: number;
   type: 'add' | 'edit';
   task?: Task;

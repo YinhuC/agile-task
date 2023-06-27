@@ -3,9 +3,9 @@ import {
   Button,
   Group,
   Modal,
-  ModalProps,
   TextInput,
   Textarea,
+  useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
@@ -26,13 +26,14 @@ import {
   updateProjectThunk,
 } from '../../store/project/project.thunks';
 
-type ProjectModalProps = Partial<ModalProps> & {
+type ProjectModalProps = {
   groupId: number;
   type: 'add' | 'edit';
   project?: Project;
 };
 
 function ProjectModal({ groupId, type, project, ...props }: ProjectModalProps) {
+  const theme = useMantineTheme();
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -135,7 +136,16 @@ function ProjectModal({ groupId, type, project, ...props }: ProjectModalProps) {
         </form>
       </Modal>
       {type === 'add' ? (
-        <Button onClick={open}>Create Project</Button>
+        <Button
+          onClick={open}
+          sx={{
+            [theme.fn.smallerThan('sm')]: {
+              marginTop: 15,
+            },
+          }}
+        >
+          Create Project
+        </Button>
       ) : (
         <Button
           onClick={open}

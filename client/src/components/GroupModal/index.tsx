@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { Button, Group, Modal, ModalProps, TextInput } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Modal,
+  TextInput,
+  useMantineTheme,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
@@ -18,12 +24,13 @@ import {
   updateGroupThunk,
 } from '../../store/group/group.thunks';
 
-type GroupModalProps = Partial<ModalProps> & {
+type GroupModalProps = {
   type: 'add' | 'edit';
   group?: GroupType;
 };
 
 function GroupModal({ type, group, ...props }: GroupModalProps) {
+  const theme = useMantineTheme();
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -108,7 +115,15 @@ function GroupModal({ type, group, ...props }: GroupModalProps) {
         </form>
       </Modal>
       {type === 'add' ? (
-        <Button onClick={open} variant='light'>
+        <Button
+          onClick={open}
+          variant='light'
+          sx={{
+            [theme.fn.smallerThan('sm')]: {
+              marginTop: 15,
+            },
+          }}
+        >
           Create Group
         </Button>
       ) : (

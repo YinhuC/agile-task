@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { Box, Container, Flex, Title } from '@mantine/core';
+import { Box, Container, Flex, Title, useMantineTheme } from '@mantine/core';
 import ProjectGrid from '../../components/ProjectGrid';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
@@ -7,6 +7,7 @@ import { fetchAllGroupsThunk } from '../../store/group/group.thunks';
 import GroupModal from '../../components/GroupModal';
 
 function BoardPage() {
+  const theme = useMantineTheme();
   const dispatch = useDispatch<AppDispatch>();
   const groups = useSelector((state: RootState) => state.groups.groups);
 
@@ -29,10 +30,19 @@ function BoardPage() {
   return (
     <Box py={40}>
       <Container size='xl'>
-        <Flex justify='space-between' align='start' mb={10} mx={40}>
-          <Title order={2} mb={30}>
-            Workspaces
-          </Title>
+        <Flex
+          justify='space-between'
+          align='start'
+          mb={20}
+          mx={40}
+          sx={{
+            [theme.fn.smallerThan('sm')]: {
+              flexDirection: 'column',
+              alignItems: 'center',
+            },
+          }}
+        >
+          <Title order={2}>Workspaces</Title>
           <GroupModal type='add' />
         </Flex>
         {grids}

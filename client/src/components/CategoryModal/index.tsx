@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { Button, Group, Modal, ModalProps, TextInput } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Modal,
+  TextInput,
+  useMantineTheme,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
   Category,
@@ -18,7 +24,7 @@ import {
   updateCategoryThunk,
 } from '../../store/category/category.thunks';
 
-type CategoryModalProps = Partial<ModalProps> & {
+type CategoryModalProps = {
   projectId: number;
   type: 'add' | 'edit';
   category?: Category;
@@ -30,6 +36,7 @@ function CategoryModal({
   category,
   ...props
 }: CategoryModalProps) {
+  const theme = useMantineTheme();
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -117,7 +124,17 @@ function CategoryModal({
         </form>
       </Modal>
       {type === 'add' ? (
-        <Button onClick={open}>Add new category</Button>
+        <Button
+          onClick={open}
+          sx={{
+            marginTop: 0,
+            [theme.fn.smallerThan('sm')]: {
+              marginTop: 15,
+            },
+          }}
+        >
+          Add new category
+        </Button>
       ) : (
         <Button
           onClick={open}
