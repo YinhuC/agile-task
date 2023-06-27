@@ -15,7 +15,7 @@ import Image from '../../../assets/images/iphone-all-transparent.png';
 function PhoneSection({ ...props }: ContainerProps) {
   const theme = useMantineTheme();
   return (
-    <Container {...props} size='xl' py={200}>
+    <Container {...props} size='xl' py={120}>
       <Flex
         gap={50}
         sx={{
