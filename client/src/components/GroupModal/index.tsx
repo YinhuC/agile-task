@@ -107,7 +107,9 @@ function GroupModal({ type, group }: GroupModalProps) {
         </form>
       </Modal>
       {type === 'add' ? (
-        <Button onClick={open}>Create Group</Button>
+        <Button onClick={open} variant='light'>
+          Create Group
+        </Button>
       ) : (
         <Button onClick={open} size='xs' variant='subtle' p={5} radius='50%'>
           <IconEditCircle size={20} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { Container, Flex, Title } from '@mantine/core';
+import { Box, Container, Flex, Title } from '@mantine/core';
 import ProjectGrid from '../../components/ProjectGrid';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
@@ -27,15 +27,17 @@ function BoardPage() {
   );
 
   return (
-    <Container size='lg'>
-      <Flex justify='space-between' align='start' mb={10}>
-        <Title order={2} mb={30}>
-          Workspaces
-        </Title>
-        <GroupModal type='add' />
-      </Flex>
-      {grids}
-    </Container>
+    <Box py={40}>
+      <Container size='xl'>
+        <Flex justify='space-between' align='start' mb={10} mx={50}>
+          <Title order={2} mb={30}>
+            Workspaces
+          </Title>
+          <GroupModal type='add' />
+        </Flex>
+        {grids}
+      </Container>
+    </Box>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Image, Button, Flex, Box, MediaQuery } from '@mantine/core';
+import { Container, Image, Button, Flex, MediaQuery } from '@mantine/core';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { notifications } from '@mantine/notifications';
@@ -23,25 +23,48 @@ const Header: React.FC = () => {
   };
 
   return (
-    <Container size='lg'>
+    <Container size='xl'>
       <Flex
         p='md'
         justify='space-between'
         align='center'
         direction='row'
         sx={{ height: 80 }}
-        mb={20}
+        mx={35}
       >
         <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-          <Image src={Logo} width={200} sx={{ overflow: 'hidden' }} />
+          <Link to={'/'}>
+            <Image src={Logo} width={200} sx={{ overflow: 'hidden' }} />
+          </Link>
         </MediaQuery>
         <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
-          <Image src={SmallLogo} width={100} sx={{ overflow: 'hidden' }} />
+          <Link to={'/'}>
+            <Image src={SmallLogo} width={100} sx={{ overflow: 'hidden' }} />
+          </Link>
         </MediaQuery>
-        <Box>
+
+        <Flex justify='flex-end' align='center' w={200}>
           {user ? (
             <>
-              <Button onClick={logout} variant='outline' compact>
+              <Button
+                component={Link}
+                variant='link'
+                mr={20}
+                to={'/'}
+                sx={{ fontWeight: 400 }}
+              >
+                Home
+              </Button>
+              <Button
+                component={Link}
+                variant='link'
+                to={`/boards/${user.id}`}
+                sx={{ fontWeight: 400 }}
+                mr={40}
+              >
+                Board
+              </Button>
+              <Button onClick={logout} variant='outline' compact radius='xs'>
                 Logout
               </Button>
             </>
@@ -61,7 +84,7 @@ const Header: React.FC = () => {
               </Button>
             </>
           )}
-        </Box>
+        </Flex>
       </Flex>
     </Container>
   );

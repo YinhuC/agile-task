@@ -16,7 +16,7 @@ function ProjectCard({ project, groupId }: ProjectCardProps) {
     <Card
       shadow='sm'
       padding='lg'
-      radius='md'
+      radius='sm'
       withBorder
       sx={{
         display: 'flex',

@@ -25,7 +25,7 @@ function HeaderSection({ projectId }: HeaderSectionProps) {
   return (
     <Container
       size='xl'
-      mb={30}
+      my={30}
       px={40}
       sx={{
         userSelect: 'none',
