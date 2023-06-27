@@ -1,5 +1,12 @@
 import React, { useEffect, useMemo } from 'react';
-import { Container, Title, Text, Flex, Box } from '@mantine/core';
+import {
+  Container,
+  Title,
+  Text,
+  Flex,
+  Box,
+  useMantineTheme,
+} from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { fetchProjectThunk } from '../../../store/project/project.thunks';
@@ -10,6 +17,7 @@ type HeaderSectionProps = {
 };
 
 function HeaderSection({ projectId }: HeaderSectionProps) {
+  const theme = useMantineTheme();
   const dispatch = useDispatch<AppDispatch>();
   const projects = useSelector((state: RootState) => state.projects.projects);
 
@@ -25,20 +33,28 @@ function HeaderSection({ projectId }: HeaderSectionProps) {
   return (
     <Container
       size='xl'
-      my={30}
+      mt={20}
+      mb={30}
       px={40}
       sx={{
         userSelect: 'none',
       }}
     >
-      <Flex justify='space-between' align='end'>
-        <Box>
+      <Flex
+        justify='space-between'
+        sx={{
+          alignItems: 'end',
+          [theme.fn.smallerThan('sm')]: {
+            flexDirection: 'column',
+            alignItems: 'start',
+          },
+        }}
+      >
+        <Box mr={50}>
           <Title order={2} mb={10}>
             {project?.name}
           </Title>
-          <Text w='60%' ml={2}>
-            {project?.description}
-          </Text>
+          <Text ml={2}>{project?.description}</Text>
         </Box>
         {project && <CategoryModal type='add' projectId={project.id} />}
       </Flex>

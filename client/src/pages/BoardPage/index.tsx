@@ -29,7 +29,7 @@ function BoardPage() {
   return (
     <Box py={40}>
       <Container size='xl'>
-        <Flex justify='space-between' align='start' mb={10} mx={50}>
+        <Flex justify='space-between' align='start' mb={10} mx={40}>
           <Title order={2} mb={30}>
             Workspaces
           </Title>

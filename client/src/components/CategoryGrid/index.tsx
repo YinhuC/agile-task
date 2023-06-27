@@ -40,11 +40,12 @@ function CategoryGrid({ category, index, projectId }: CategoryGridProps) {
           spacing={20}
           p={20}
           mx={10}
-          miw={340}
+          miw={322}
           sx={{
             backgroundColor: 'white',
             borderRadius: '0.5rem',
-            height: '100%',
+            height: 'fit-content',
+            overflow: 'visible',
             border: '0.0625rem solid #dee2e6',
             boxShadow:
               '0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05), 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.1)',

@@ -2,22 +2,22 @@ import { MantineThemeOverride } from '@mantine/core';
 
 export const sizes = {
   h1: {
-    fontSize: '3rem',
+    fontSize: '2.5rem',
   },
   h2: {
-    fontSize: '2.25rem',
+    fontSize: '2rem',
   },
   h3: {
-    fontSize: '1.75rem',
-  },
-  h4: {
     fontSize: '1.5rem',
   },
-  h5: {
+  h4: {
     fontSize: '1.25rem',
   },
-  h6: {
+  h5: {
     fontSize: '1rem',
+  },
+  h6: {
+    fontSize: '0.875rem',
   },
 };
 

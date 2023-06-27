@@ -23,14 +23,14 @@ const Header: React.FC = () => {
   };
 
   return (
-    <Container size='xl'>
+    <Container size='xl' sx={{ borderBottom: '1px solid lightgray' }}>
       <Flex
-        p='md'
+        py='md'
         justify='space-between'
         align='center'
         direction='row'
         sx={{ height: 80 }}
-        mx={35}
+        mx={5}
       >
         <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
           <Link to={'/'}>
@@ -43,7 +43,7 @@ const Header: React.FC = () => {
           </Link>
         </MediaQuery>
 
-        <Flex justify='flex-end' align='center' w={200}>
+        <Flex justify='flex-end' align='center' w={200} mr={20}>
           {user ? (
             <>
               <Button

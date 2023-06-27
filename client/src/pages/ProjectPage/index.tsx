@@ -85,13 +85,14 @@ function ProjectPage() {
           <Flex
             ref={provided.innerRef}
             {...provided.droppableProps}
-            p={20}
+            p={30}
             sx={{
-              background: '#f9f9f9',
+              background: theme.colors.gray[2],
               margin: '0 50px',
               borderRadius: '0.5rem',
               overflow: 'auto',
               userSelect: 'none',
+              height: '73vh',
               [theme.fn.smallerThan('lg')]: {
                 margin: '0 30px',
               },

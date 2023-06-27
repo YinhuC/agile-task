@@ -5,6 +5,7 @@ export const text: MantineThemeOverride['components'] = {
     styles: (theme) => ({
       root: {
         color: '#6B6F76',
+        fontSize: 14,
       },
     }),
   },

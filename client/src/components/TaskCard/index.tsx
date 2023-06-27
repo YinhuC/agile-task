@@ -23,7 +23,11 @@ function TaskCard({ task, index }: TaskCardProps) {
           padding='sm'
           radius='sm'
           withBorder
-          w={300}
+          w={280}
+          sx={{
+            height: '100%',
+            overflow: 'visible',
+          }}
         >
           <Flex justify='space-between' align='center'>
             <Title order={5} mb={10}>

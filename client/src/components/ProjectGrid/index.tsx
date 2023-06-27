@@ -48,10 +48,10 @@ function ProjectGrid({ group }: ProjectGridProps) {
 
   return (
     <Stack
-      mb={50}
-      px={50}
-      pt={40}
-      pb={55}
+      mb={40}
+      px={40}
+      pt={30}
+      pb={40}
       sx={{ backgroundColor: theme.colors.gray[0], borderRadius: '0.3rem' }}
     >
       <Flex justify='space-between' align='center' mb={10}>
