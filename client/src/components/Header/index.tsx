@@ -16,13 +16,14 @@ import Logo from '../../assets/logos/transparent-agile.png';
 import SmallLogo from '../../assets/logos/transparent-a.png';
 
 const Header: React.FC = ({ ...props }: ContainerProps) => {
-  const { user } = useAuth();
+  const { user, removeUser } = useAuth();
   const navigate = useNavigate();
 
   const logout = async () => {
     try {
       await postAuthLogout();
-      navigate(`/login`);
+      navigate(`/`);
+      removeUser();
     } catch (err) {
       notifications.cleanQueue();
       notifications.show(GeneralErrorObject);

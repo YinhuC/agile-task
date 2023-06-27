@@ -10,13 +10,14 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconAt, IconPassword, IconX } from '@tabler/icons-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { postAuthLogin } from '../../api/auth.api';
 import { LoginParams } from '../../types/auth.types';
 import { AxiosError } from 'axios';
 import { notifications } from '@mantine/notifications';
 import { User } from '../../types/user.types';
 import { GeneralErrorObject } from '../../utils/notification.utils';
+import { useAuth } from '../../hooks/useAuth';
 
 function LoginPage() {
   const form = useForm({
@@ -31,6 +32,12 @@ function LoginPage() {
   });
 
   const navigate = useNavigate();
+
+  const { user } = useAuth();
+  if (user) {
+    return <Navigate to={`/boards/${user.id}`} replace />;
+  }
+
   const onSubmit = async (values: LoginParams) => {
     try {
       const user: User = (await postAuthLogin(values)).data;

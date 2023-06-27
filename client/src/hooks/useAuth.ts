@@ -1,19 +1,28 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../utils/context/AuthContext';
 import { getAuthUser } from '../api/auth.api';
+import { useLocation } from 'react-router-dom';
 
 export function useAuth() {
   const [loading, setLoading] = useState(true);
   const { user, setUser } = useContext(AuthContext);
+  const location = useLocation();
+  const { pathname } = location;
 
   useEffect(() => {
     const controller = new AbortController();
 
     const fetchAuthUser = async () => {
       try {
-        const response = await getAuthUser();
-        const { data } = response;
-        setUser(data);
+        if (
+          pathname !== '/' &&
+          pathname !== '/login' &&
+          pathname !== '/register'
+        ) {
+          const response = await getAuthUser();
+          const { data } = response;
+          setUser(data);
+        }
       } catch (err) {
         console.log(err);
       } finally {
@@ -26,7 +35,11 @@ export function useAuth() {
     return () => {
       controller.abort();
     };
-  }, [setUser]);
+  }, [pathname, setUser]);
 
-  return { user, loading };
+  const removeUser = () => {
+    setUser(undefined);
+  };
+
+  return { user, loading, removeUser };
 }

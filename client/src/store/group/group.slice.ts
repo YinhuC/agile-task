@@ -6,7 +6,7 @@ import {
   fetchAllGroupsThunk,
   updateGroupThunk,
 } from './group.thunks';
-import { sortById } from '../../utils/sort.utils';
+import { sortByCreateTime } from '../../utils/sort.utils';
 
 export interface GroupState {
   groups: Group[];
@@ -41,12 +41,12 @@ export const groupSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllGroupsThunk.fulfilled, (state, action) => {
-      state.groups = sortById(action.payload.data);
+      state.groups = sortByCreateTime(action.payload.data);
     });
 
     builder.addCase(createGroupThunk.fulfilled, (state, action) => {
       state.groups.unshift(action.payload.data);
-      state.groups = sortById(state.groups);
+      state.groups = sortByCreateTime(state.groups);
     });
 
     builder.addCase(updateGroupThunk.fulfilled, (state, action) => {

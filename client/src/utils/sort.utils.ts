@@ -4,6 +4,12 @@ export function sortByIndex<T extends { index: number }>(items: T[]): T[] {
   });
 }
 
+export function sortById<T extends { id: number }>(items: T[]): T[] {
+  return items.slice().sort((a, b) => {
+    return a.id - b.id;
+  });
+}
+
 export function sortByUpdateTime<T extends { updatedAt: string }>(
   items: T[]
 ): T[] {
@@ -12,8 +18,10 @@ export function sortByUpdateTime<T extends { updatedAt: string }>(
   });
 }
 
-export function sortById<T extends { id: number }>(items: T[]): T[] {
+export function sortByCreateTime<T extends { createdAt: string }>(
+  items: T[]
+): T[] {
   return items.slice().sort((a, b) => {
-    return a.id - b.id;
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 }

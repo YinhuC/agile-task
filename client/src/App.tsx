@@ -32,7 +32,7 @@ function Providers({ children, user, setUser }: PropsWithChildren & Props) {
 }
 
 function App() {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | undefined>();
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isRegisterPage = location.pathname === '/register';
