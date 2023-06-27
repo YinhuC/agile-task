@@ -4,7 +4,6 @@ import {
   UseGuards,
   Body,
   Get,
-  UseInterceptors,
   HttpStatus,
   HttpCode,
   Req,
@@ -15,7 +14,6 @@ import { AuthService } from '../services/auth.service';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { RegisterDto } from '../dto/register.dto';
 import { AuthUser } from 'src/user/decorators/user.decorator';
-import { TokenInterceptor } from '../utils/token.interceptor';
 import { AuthenticatedGuard } from '../guards/auth.guard';
 import { Request, Response } from 'express';
 
@@ -25,7 +23,6 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  @UseInterceptors(TokenInterceptor)
   async register(@Body() registerDto: RegisterDto): Promise<User> {
     return await this.authService.register(registerDto);
   }
@@ -33,7 +30,6 @@ export class AuthController {
   @Post('login')
   @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
-  @UseInterceptors(TokenInterceptor)
   async login(@AuthUser() user: User): Promise<User> {
     return user;
   }

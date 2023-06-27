@@ -6,15 +6,10 @@ import {
 import { UserService } from 'src/user/services/user.service';
 import { User } from 'src/user/user.entity';
 import { RegisterDto } from '../dto/register.dto';
-import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from '../utils/jwt.interface';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly userService: UserService,
-    private readonly jwtService: JwtService
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
   async register(registerDto: RegisterDto): Promise<User> {
     const { email } = registerDto;
@@ -48,27 +43,5 @@ export class AuthService {
     }
 
     return user;
-  }
-
-  async verifyPayload(payload: JwtPayload): Promise<User> {
-    let user: User;
-
-    try {
-      user = await this.userService.findUserByEmail(payload.email);
-    } catch (error) {
-      throw new UnauthorizedException(
-        `There isn't any user with email: ${payload.sub}`
-      );
-    }
-
-    return user;
-  }
-
-  generateToken(user: User): string {
-    const payload: JwtPayload = {
-      email: user.email,
-      sub: user.id,
-    };
-    return this.jwtService.sign(payload);
   }
 }
