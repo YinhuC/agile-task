@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Container,
   Image,
   Button,
   Flex,
@@ -37,18 +36,16 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
   };
 
   return (
-    <Container
+    <Flex
       {...props}
-      size='xl'
       py='md'
       mx={5}
+      justify='space-around'
+      align='center'
       sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
         position: 'fixed',
         zIndex: 9,
-        width: '100%',
+        width: '100vw',
         overflow: 'hidden',
         backgroundColor:
           location.pathname === '/' ? theme.colors.gray[1] : 'white',
@@ -111,7 +108,7 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
           </Button>
         )}
       </Flex>
-    </Container>
+    </Flex>
   );
 };
 

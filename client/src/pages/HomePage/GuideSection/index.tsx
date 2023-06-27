@@ -3,7 +3,7 @@ import { Container, Flex, Title, Text, ContainerProps } from '@mantine/core';
 
 function GuideSection({ ...props }: ContainerProps) {
   return (
-    <Container {...props} size='lg'>
+    <Container {...props} size='xl'>
       <Flex direction='column' justify='center' gap={10} sx={{ width: '60%' }}>
         <Text transform='uppercase' weight={700} size={14}>
           Agile Tasker
