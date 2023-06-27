@@ -7,12 +7,14 @@ import {
   Title,
   Text,
   Button,
+  ContainerProps,
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
-function HeaderSection() {
+function HeaderSection({ ...props }: ContainerProps) {
   return (
     <Container
+      {...props}
       size='lg'
       sx={{ height: '60vh', display: 'flex', alignItems: 'center' }}
       mb={100}

@@ -6,17 +6,18 @@ import {
   Flex,
   Box,
   useMantineTheme,
+  ContainerProps,
 } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { fetchProjectThunk } from '../../../store/project/project.thunks';
 import CategoryModal from '../../../components/CategoryModal';
 
-type HeaderSectionProps = {
+type HeaderSectionProps = ContainerProps & {
   projectId: string;
 };
 
-function HeaderSection({ projectId }: HeaderSectionProps) {
+function HeaderSection({ projectId, ...props }: HeaderSectionProps) {
   const theme = useMantineTheme();
   const dispatch = useDispatch<AppDispatch>();
   const projects = useSelector((state: RootState) => state.projects.projects);
@@ -32,6 +33,7 @@ function HeaderSection({ projectId }: HeaderSectionProps) {
 
   return (
     <Container
+      {...props}
       size='xl'
       mt={20}
       mb={30}

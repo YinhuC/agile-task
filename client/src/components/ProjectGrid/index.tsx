@@ -1,5 +1,12 @@
 import React, { useEffect, useMemo } from 'react';
-import { Title, SimpleGrid, Stack, Flex, useMantineTheme } from '@mantine/core';
+import {
+  Title,
+  SimpleGrid,
+  Stack,
+  Flex,
+  useMantineTheme,
+  StackProps,
+} from '@mantine/core';
 import ProjectCard from '../ProjectCard';
 import { Group } from '../../types/group.types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,11 +15,11 @@ import { fetchAllProjectsThunk } from '../../store/project/project.thunks';
 import ProjectModal from '../ProjectModal';
 import GroupModal from '../GroupModal';
 
-type ProjectGridProps = {
+type ProjectGridProps = StackProps & {
   group: Group;
 };
 
-function ProjectGrid({ group }: ProjectGridProps) {
+function ProjectGrid({ group, ...props }: ProjectGridProps) {
   const theme = useMantineTheme();
   const { name, id } = group;
   const dispatch = useDispatch<AppDispatch>();
@@ -48,6 +55,7 @@ function ProjectGrid({ group }: ProjectGridProps) {
 
   return (
     <Stack
+      {...props}
       mb={40}
       px={40}
       pt={30}

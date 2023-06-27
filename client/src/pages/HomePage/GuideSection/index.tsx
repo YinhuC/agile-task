@@ -1,9 +1,9 @@
 import React from 'react';
-import { Container, Flex, Title, Text } from '@mantine/core';
+import { Container, Flex, Title, Text, ContainerProps } from '@mantine/core';
 
-function GuideSection() {
+function GuideSection({ ...props }: ContainerProps) {
   return (
-    <Container size='lg'>
+    <Container {...props} size='lg'>
       <Flex direction='column' justify='center' gap={10} sx={{ width: '60%' }}>
         <Text transform='uppercase' weight={700} size={14}>
           Agile Tasker

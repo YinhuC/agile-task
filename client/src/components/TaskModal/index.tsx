@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Modal,
+  ModalProps,
+  TextInput,
+  Textarea,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
@@ -18,13 +25,13 @@ import {
 } from '../../store/task/task.thunks';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 
-type TaskModalProps = {
+type TaskModalProps = Partial<ModalProps> & {
   categoryId: number;
   type: 'add' | 'edit';
   task?: Task;
 };
 
-function TaskModal({ categoryId, type, task }: TaskModalProps) {
+function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -92,6 +99,7 @@ function TaskModal({ categoryId, type, task }: TaskModalProps) {
   return (
     <>
       <Modal
+        {...props}
         padding='xl'
         opened={opened}
         onClose={close}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Group, Modal, TextInput } from '@mantine/core';
+import { Button, Group, Modal, ModalProps, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
@@ -18,12 +18,12 @@ import {
   updateGroupThunk,
 } from '../../store/group/group.thunks';
 
-type GroupModalProps = {
+type GroupModalProps = Partial<ModalProps> & {
   type: 'add' | 'edit';
   group?: GroupType;
 };
 
-function GroupModal({ type, group }: GroupModalProps) {
+function GroupModal({ type, group, ...props }: GroupModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -75,6 +75,7 @@ function GroupModal({ type, group }: GroupModalProps) {
   return (
     <>
       <Modal
+        {...props}
         padding='xl'
         opened={opened}
         onClose={close}

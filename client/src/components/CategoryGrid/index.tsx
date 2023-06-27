@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { Divider, Flex, Stack, Title } from '@mantine/core';
+import { Divider, Flex, Stack, StackProps, Title } from '@mantine/core';
 import TaskCard from '../TaskCard';
 import { Category } from '../../types/category.types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,13 +10,18 @@ import { sortByIndex } from '../../utils/sort.utils';
 import TaskModal from '../TaskModal';
 import CategoryModal from '../CategoryModal';
 
-type CategoryGridProps = {
+type CategoryGridProps = StackProps & {
   category: Category;
   projectId: number;
   index: number;
 };
 
-function CategoryGrid({ category, index, projectId }: CategoryGridProps) {
+function CategoryGrid({
+  category,
+  index,
+  projectId,
+  ...props
+}: CategoryGridProps) {
   const dispatch = useDispatch<AppDispatch>();
   const { name, id } = category;
   const allTasks = useSelector((state: RootState) => state.tasks.tasks);
@@ -34,6 +39,7 @@ function CategoryGrid({ category, index, projectId }: CategoryGridProps) {
     <Draggable draggableId={`cat-drag-${id}`} index={index}>
       {(provided) => (
         <Stack
+          {...props}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}

@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Modal,
+  ModalProps,
+  TextInput,
+  Textarea,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
@@ -19,13 +26,13 @@ import {
   updateProjectThunk,
 } from '../../store/project/project.thunks';
 
-type ProjectModalProps = {
+type ProjectModalProps = Partial<ModalProps> & {
   groupId: number;
   type: 'add' | 'edit';
   project?: Project;
 };
 
-function ProjectModal({ groupId, type, project }: ProjectModalProps) {
+function ProjectModal({ groupId, type, project, ...props }: ProjectModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -86,6 +93,7 @@ function ProjectModal({ groupId, type, project }: ProjectModalProps) {
   return (
     <>
       <Modal
+        {...props}
         padding='xl'
         opened={opened}
         onClose={close}

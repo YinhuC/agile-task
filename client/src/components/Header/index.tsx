@@ -1,5 +1,12 @@
 import React from 'react';
-import { Container, Image, Button, Flex, MediaQuery } from '@mantine/core';
+import {
+  Container,
+  Image,
+  Button,
+  Flex,
+  MediaQuery,
+  ContainerProps,
+} from '@mantine/core';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { notifications } from '@mantine/notifications';
@@ -8,7 +15,7 @@ import { postAuthLogout } from '../../api/auth.api';
 import Logo from '../../assets/logos/transparent-agile.png';
 import SmallLogo from '../../assets/logos/transparent-a.png';
 
-const Header: React.FC = () => {
+const Header: React.FC = ({ ...props }: ContainerProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -23,7 +30,11 @@ const Header: React.FC = () => {
   };
 
   return (
-    <Container size='xl' sx={{ borderBottom: '1px solid lightgray' }}>
+    <Container
+      {...props}
+      size='xl'
+      sx={{ borderBottom: '1px solid lightgray' }}
+    >
       <Flex
         py='md'
         justify='space-between'

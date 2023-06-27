@@ -1,21 +1,22 @@
 import React from 'react';
-import { Card, Title, Text, Flex } from '@mantine/core';
+import { Card, Title, Text, Flex, CardProps } from '@mantine/core';
 import { Task } from '../../types/task.types';
 import { Draggable } from 'react-beautiful-dnd';
 import TaskModal from '../TaskModal';
 
-type TaskCardProps = {
+type TaskCardProps = Partial<CardProps> & {
   task: Task;
   index: number;
 };
 
-function TaskCard({ task, index }: TaskCardProps) {
+function TaskCard({ task, index, ...props }: TaskCardProps) {
   const { name, description, id, category } = task;
 
   return (
     <Draggable draggableId={`task-drag-${id}`} index={index}>
       {(provided) => (
         <Card
+          {...props}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}

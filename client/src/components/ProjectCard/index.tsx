@@ -1,19 +1,20 @@
 import React from 'react';
-import { Card, Text, Title, Button, Box, Flex } from '@mantine/core';
+import { Card, Text, Title, Button, Box, Flex, CardProps } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import ProjectModal from '../ProjectModal';
 import { Project } from '../../types/project.types';
 
-type ProjectCardProps = {
+type ProjectCardProps = Partial<CardProps> & {
   project: Project;
   groupId: number;
 };
 
-function ProjectCard({ project, groupId }: ProjectCardProps) {
+function ProjectCard({ project, groupId, ...props }: ProjectCardProps) {
   const { name, description, id } = project;
 
   return (
     <Card
+      {...props}
       shadow='sm'
       padding='lg'
       radius='sm'
