@@ -13,6 +13,7 @@ import { AuthContext } from './utils/context/AuthContext';
 import { User } from './types/user.types';
 import AuthRoute from './components/AuthRoute';
 import ProjectPage from './pages/ProjectPage';
+import { Flex } from '@mantine/core';
 
 type Props = {
   user?: User;
@@ -40,7 +41,11 @@ function App() {
   return (
     <Providers user={user} setUser={setUser}>
       <Notifications />
-      {!isLoginPage && !isRegisterPage && <Header />}
+      {!isLoginPage && !isRegisterPage && (
+        <Flex justify='center' sx={{ width: '100%' }} mb={100}>
+          <Header />
+        </Flex>
+      )}
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={<LoginPage />} />

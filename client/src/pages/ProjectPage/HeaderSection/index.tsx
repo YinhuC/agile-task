@@ -35,7 +35,6 @@ function HeaderSection({ projectId, ...props }: HeaderSectionProps) {
     <Container
       {...props}
       size='xl'
-      mt={20}
       mb={30}
       px={40}
       sx={{
@@ -48,11 +47,19 @@ function HeaderSection({ projectId, ...props }: HeaderSectionProps) {
           alignItems: 'end',
           [theme.fn.smallerThan('sm')]: {
             flexDirection: 'column',
-            alignItems: 'start',
+            alignItems: 'center',
           },
         }}
       >
-        <Box mr={50}>
+        <Box
+          mr={50}
+          sx={{
+            [theme.fn.smallerThan('sm')]: {
+              textAlign: 'center',
+              marginRight: 0,
+            },
+          }}
+        >
           <Title order={2} mb={10}>
             {project?.name}
           </Title>

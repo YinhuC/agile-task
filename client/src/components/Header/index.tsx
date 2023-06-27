@@ -34,7 +34,13 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
     <Container
       {...props}
       size='xl'
-      sx={{ borderBottom: '1px solid lightgray' }}
+      sx={{
+        backgroundColor: 'white',
+        width: '100%',
+        borderBottom: '1px solid lightgray',
+        position: 'fixed',
+        zIndex: 999,
+      }}
     >
       <Flex
         py='md'
