@@ -47,7 +47,7 @@ function PhoneSection({ ...props }: ContainerProps) {
             },
           }}
         >
-          <motion.img src={Image} />
+          <motion.img src={Image} alt='agile tasker on mobile' />
         </Box>
       </Flex>
     </Container>

@@ -101,27 +101,43 @@ function HeaderSection({ ...props }: BoxProps) {
             },
           }}
         >
-          <motion.img animate={imgAnimate1} src={MacScreen} />
+          <motion.img
+            animate={imgAnimate1}
+            src={MacScreen}
+            alt='project screen wide screen'
+          />
           <Box
             sx={{
               position: 'absolute',
             }}
           >
-            <motion.img animate={imgAnimate2} src={PhoneScreen} />
+            <motion.img
+              animate={imgAnimate2}
+              src={PhoneScreen}
+              alt='project screen mobile screen'
+            />
           </Box>
           <Box
             sx={{
               position: 'absolute',
             }}
           >
-            <motion.img animate={imgAnimate3} src={DeviceSquare} />
+            <motion.img
+              animate={imgAnimate3}
+              src={DeviceSquare}
+              alt='device info'
+            />
           </Box>
           <Box
             sx={{
               position: 'absolute',
             }}
           >
-            <motion.img animate={imgAnimate4} src={TeamSquare} />
+            <motion.img
+              animate={imgAnimate4}
+              src={TeamSquare}
+              alt='team info'
+            />
           </Box>
         </Flex>
       </Container>

@@ -47,12 +47,17 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
     >
       <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
         <Link to={'/'}>
-          <Image src={Logo} width={200} />
+          <Image src={Logo} width={200} alt='agile-tasker logo' />
         </Link>
       </MediaQuery>
       <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
         <Link to={'/'}>
-          <Image src={SmallLogo} width={100} sx={{ overflow: 'hidden' }} />
+          <Image
+            src={SmallLogo}
+            width={100}
+            sx={{ overflow: 'hidden' }}
+            alt='a. logo'
+          />
         </Link>
       </MediaQuery>
       <Flex justify='flex-end' align='center' w={200} mr={20}>

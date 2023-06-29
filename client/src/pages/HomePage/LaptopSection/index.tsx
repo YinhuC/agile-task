@@ -17,6 +17,7 @@ function LaptopSection({ ...props }: ContainerProps) {
           <Image
             src={LaptopImage}
             sx={{ width: '100%', minWidth: 300, maxWidth: 1100 }}
+            alt='agiler tasker on laptop'
           />
         </Center>
       </Container>
