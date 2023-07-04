@@ -9,6 +9,8 @@ import {
   BoxProps,
   Box,
   useMantineTheme,
+  MediaQuery,
+  Image,
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
@@ -18,6 +20,7 @@ import MacScreen from '../../../assets/images/parallax/project-parallax.png';
 import PhoneScreen from '../../../assets/images/parallax/phone-parallax.png';
 import DeviceSquare from '../../../assets/images/parallax/device-parallax.png';
 import TeamSquare from '../../../assets/images/parallax/team-parallax.png';
+import IphoneProject from '../../../assets/images/iphone-project.png';
 
 function HeaderSection({ ...props }: BoxProps) {
   const theme = useMantineTheme();
@@ -97,55 +100,69 @@ function HeaderSection({ ...props }: BoxProps) {
             </Button>
           </Flex>
         </Stack>
-        <Flex
-          mx={20}
-          sx={{
-            img: {
-              position: 'relative',
-              width: '90%',
-              height: '100%',
-            },
-          }}
-        >
-          <motion.img
-            animate={imgAnimate1}
-            src={MacScreen}
-            alt='project screen wide screen'
+        <MediaQuery smallerThan='md' styles={{ display: 'none' }}>
+          <Flex
+            mx={20}
+            sx={{
+              img: {
+                position: 'relative',
+                width: '90%',
+                height: '100%',
+              },
+            }}
+          >
+            <motion.img
+              animate={imgAnimate1}
+              src={MacScreen}
+              alt='project screen wide screen'
+            />
+            <Box
+              sx={{
+                position: 'absolute',
+              }}
+            >
+              <motion.img
+                animate={imgAnimate2}
+                src={PhoneScreen}
+                alt='project screen mobile screen'
+              />
+            </Box>
+            <Box
+              sx={{
+                position: 'absolute',
+              }}
+            >
+              <motion.img
+                animate={imgAnimate3}
+                src={DeviceSquare}
+                alt='device info'
+              />
+            </Box>
+            <Box
+              sx={{
+                position: 'absolute',
+              }}
+            >
+              <motion.img
+                animate={imgAnimate4}
+                src={TeamSquare}
+                alt='team info'
+              />
+            </Box>
+          </Flex>
+        </MediaQuery>
+        <MediaQuery largerThan='md' styles={{ display: 'none' }}>
+          <Image
+            src={IphoneProject}
+            sx={{
+              overflow: 'hidden',
+              width: '100%',
+              minWidth: 250,
+              maxWidth: 500,
+            }}
+            alt='Iphone project page'
           />
-          <Box
-            sx={{
-              position: 'absolute',
-            }}
-          >
-            <motion.img
-              animate={imgAnimate2}
-              src={PhoneScreen}
-              alt='project screen mobile screen'
-            />
-          </Box>
-          <Box
-            sx={{
-              position: 'absolute',
-            }}
-          >
-            <motion.img
-              animate={imgAnimate3}
-              src={DeviceSquare}
-              alt='device info'
-            />
-          </Box>
-          <Box
-            sx={{
-              position: 'absolute',
-            }}
-          >
-            <motion.img
-              animate={imgAnimate4}
-              src={TeamSquare}
-              alt='team info'
-            />
-          </Box>
-        </Flex>
+        </MediaQuery>
       </Container>
     </Box>
   );
