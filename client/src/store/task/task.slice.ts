@@ -39,7 +39,21 @@ export const taskSlice = createSlice({
     },
 
     updateAllTasks: (state, action: PayloadAction<Task[]>) => {
-      state.tasks = sortByIndex(action.payload);
+      const newTasks = action.payload;
+
+      newTasks.forEach((newTask) => {
+        const existingTaskIndex = state.tasks.findIndex(
+          (task) => task.id === newTask.id
+        );
+
+        if (existingTaskIndex !== -1) {
+          state.tasks[existingTaskIndex] = newTask;
+        } else {
+          state.tasks.push(newTask);
+        }
+      });
+
+      state.tasks = sortByIndex(state.tasks);
     },
   },
   extraReducers: (builder) => {
@@ -100,6 +114,7 @@ export const taskSlice = createSlice({
   },
 });
 
-export const { addTask, removeTask, updateTask } = taskSlice.actions;
+export const { addTask, removeTask, updateTask, updateAllTasks } =
+  taskSlice.actions;
 
 export default taskSlice.reducer;

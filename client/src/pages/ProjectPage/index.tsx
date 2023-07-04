@@ -8,14 +8,21 @@ import { useLocation } from 'react-router-dom';
 import CategoryGrid from '../../components/CategoryGrid';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import HeaderSection from './HeaderSection';
-import { UpdateCategoryOrderParams } from '../../types/category.types';
-import { UpdateTaskOrderParams } from '../../types/task.types';
 import {
-  fetchAllTasksThunk,
-  updateTaskOrderThunk,
-} from '../../store/task/task.thunks';
+  Category,
+  UpdateCategoryOrderParams,
+} from '../../types/category.types';
+import { Task, UpdateTaskOrderParams } from '../../types/task.types';
+import { updateTaskOrderThunk } from '../../store/task/task.thunks';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import {
+  insertIndexValue,
+  removeIndexValue,
+  updateIndexValues,
+} from '../../utils/array.utils';
+import { updateAllCategories } from '../../store/category/category.slice';
+import { updateAllTasks } from '../../store/task/task.slice';
 
 function ProjectPage() {
   const theme = useMantineTheme();
@@ -43,31 +50,66 @@ function ProjectPage() {
     }
 
     if (result.type === 'CATEGORY') {
+      // Update local first to prevent switch back glitch
+      const updatedCategories = updateIndexValues(
+        categories,
+        source.index,
+        destination.index
+      );
+      dispatch(updateAllCategories(updatedCategories));
+
+      // Use thunk to update server
       const category: UpdateCategoryOrderParams = {
         ...categories[source.index],
         index: destination.index,
         projectId: parseInt(projectId),
       };
       dispatch(updateCategoryOrderThunk(category));
-
-      // Still a delay even when updating local state first
-      // https://github.com/atlassian/react-beautiful-dnd/issues/873
-      // const updatedCategories = updateIndexValues(
-      //   categories,
-      //   source.index,
-      //   destination.index
-      // );
-      // dispatch(updateAllCategories(updatedCategories));
     } else {
+      // Set variables and ids from drop zones
+      const taskId = parseInt(draggableId.split('-')[2]);
+      const task = tasks.find((task) => task.id === taskId);
+      if (!task) return;
       const newCategoryId = parseInt(destination.droppableId.split('-')[2]);
       const oldCategoryId = parseInt(source.droppableId.split('-')[2]);
-      const taskId = parseInt(draggableId.split('-')[2]);
-      dispatch(fetchAllTasksThunk({ categoryId: oldCategoryId }));
-      const oldTaskWithCategory = tasks.find((task) => task.id === taskId);
-      if (!oldTaskWithCategory) return;
-      const { category, ...oldTask } = oldTaskWithCategory;
+      const oldTaskGroup = tasks.filter(
+        (task) => task.category?.id === oldCategoryId
+      );
+
+      // Update local first to prevent switch back glitch
+      if (newCategoryId === oldCategoryId) {
+        const updatedTasks = updateIndexValues(
+          oldTaskGroup,
+          source.index,
+          destination.index
+        );
+        dispatch(updateAllTasks(updatedTasks));
+      } else {
+        const newTaskGroup = tasks.filter(
+          (task) => task.category?.id === newCategoryId
+        );
+        // Insert into new and remove from old category
+        const { category, ...rest } = task;
+        const newTask: Task = {
+          ...rest,
+          index: destination.index,
+          category: {
+            ...(category as Category),
+            id: newCategoryId,
+          },
+        };
+        const inserted = insertIndexValue(
+          newTask,
+          newTaskGroup,
+          destination.index
+        );
+        const removed = removeIndexValue(oldTaskGroup, source.index);
+        dispatch(updateAllTasks(inserted.concat(removed)));
+      }
+      // Use thunk to update server
+      const { category, ...rest } = task;
       const newTask: UpdateTaskOrderParams = {
-        ...oldTask,
+        ...rest,
         index: destination.index,
         categoryId: newCategoryId,
       };

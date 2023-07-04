@@ -46,3 +46,53 @@ export function updateIndexValues<T extends { index: number }>(
 
   return sortByIndex(modifiedItems);
 }
+
+export function insertIndexValue<T extends { index: number }>(
+  item: T,
+  items: T[],
+  index: number
+): T[] {
+  const modifiedItems = [...items];
+
+  for (let i = items.length - 1; i >= index; i--) {
+    const itemToUpdateIndex = modifiedItems.findIndex(
+      (item) => item.index === i
+    );
+    if (itemToUpdateIndex !== -1) {
+      modifiedItems[itemToUpdateIndex] = {
+        ...modifiedItems[itemToUpdateIndex],
+        index: i + 1,
+      };
+    }
+  }
+
+  modifiedItems.splice(index, 0, {
+    ...item,
+    index,
+  });
+
+  return modifiedItems;
+}
+
+export function removeIndexValue<T extends { index: number }>(
+  items: T[],
+  index: number
+): T[] {
+  const modifiedItems = [...items];
+  const removeIndex = modifiedItems.findIndex((item) => item.index === index);
+  modifiedItems.splice(removeIndex, 1);
+
+  for (let i = index + 1; i <= items.length - 1; i++) {
+    const itemToUpdateIndex = modifiedItems.findIndex(
+      (item) => item.index === i
+    );
+    if (itemToUpdateIndex !== -1) {
+      modifiedItems[itemToUpdateIndex] = {
+        ...modifiedItems[itemToUpdateIndex],
+        index: i - 1,
+      };
+    }
+  }
+
+  return modifiedItems;
+}
