@@ -7,11 +7,6 @@ const config = {
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!@mantine)'],
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.json',
-    },
-  },
 };
 
 export default config;
