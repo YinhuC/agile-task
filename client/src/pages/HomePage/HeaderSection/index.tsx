@@ -86,7 +86,13 @@ function HeaderSection({ ...props }: BoxProps) {
             of Physical Proximity.
           </Text>
           <Flex>
-            <Button component={Link} size='md' mr='0.5rem' to={'/login'}>
+            <Button
+              component={Link}
+              size='md'
+              mr='0.5rem'
+              to={'/login'}
+              aria-label='start trial'
+            >
               Start 14-day free trial
             </Button>
           </Flex>

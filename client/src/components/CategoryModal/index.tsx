@@ -111,11 +111,16 @@ function CategoryModal({
             {...form.getInputProps('name')}
           />
           <Group position='right' spacing={10}>
-            <Button type='submit' h={45}>
+            <Button type='submit' h={45} aria-label='submit'>
               {type === 'add' ? 'Create Category' : 'Edit Category'}
             </Button>
             {type === 'edit' && (
-              <Button h={45} color='dark' onClick={onDelete}>
+              <Button
+                h={45}
+                color='dark'
+                onClick={onDelete}
+                aria-label='delete category'
+              >
                 Delete Category
               </Button>
             )}
@@ -131,6 +136,7 @@ function CategoryModal({
               marginTop: 15,
             },
           }}
+          aria-label='add new category'
         >
           Add new category
         </Button>
@@ -142,6 +148,7 @@ function CategoryModal({
           mb={5}
           p={5}
           radius='50%'
+          aria-label='edit category'
         >
           <IconEditCircle size={20} />
         </Button>

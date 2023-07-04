@@ -122,11 +122,16 @@ function ProjectModal({ groupId, type, project, ...props }: ProjectModalProps) {
             {...form.getInputProps('description')}
           />
           <Group position='right' spacing={10}>
-            <Button type='submit' h={45}>
+            <Button type='submit' h={45} aria-label='submit'>
               {type === 'add' ? 'Create Project' : 'Edit Project'}
             </Button>
             {type === 'edit' && (
-              <Button h={45} color='dark' onClick={onDelete}>
+              <Button
+                h={45}
+                color='dark'
+                onClick={onDelete}
+                aria-label='delete project'
+              >
                 Delete Project
               </Button>
             )}
@@ -141,6 +146,7 @@ function ProjectModal({ groupId, type, project, ...props }: ProjectModalProps) {
               marginTop: 15,
             },
           }}
+          aria-label='create project'
         >
           Create Project
         </Button>
@@ -152,6 +158,7 @@ function ProjectModal({ groupId, type, project, ...props }: ProjectModalProps) {
           mb={5}
           p={5}
           radius='50%'
+          aria-label='edit project'
         >
           <IconEditCircle size={20} />
         </Button>

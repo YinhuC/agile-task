@@ -121,11 +121,16 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
             {...form.getInputProps('description')}
           />
           <Group position='right' spacing={10}>
-            <Button type='submit' h={45}>
+            <Button type='submit' h={45} aria-label='submit'>
               {type === 'add' ? 'Create Task' : 'Edit Task'}
             </Button>
             {type === 'edit' && (
-              <Button h={45} color='dark' onClick={onDelete}>
+              <Button
+                h={45}
+                color='dark'
+                onClick={onDelete}
+                aria-label='delete task'
+              >
                 Delete Task
               </Button>
             )}
@@ -133,7 +138,12 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
         </form>
       </Modal>
       {type === 'add' ? (
-        <Button fullWidth onClick={open} variant='outline'>
+        <Button
+          fullWidth
+          onClick={open}
+          variant='outline'
+          aria-label='add new task'
+        >
           Add new task
         </Button>
       ) : (
@@ -144,6 +154,7 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
           mb={5}
           p={5}
           radius='50%'
+          aria-label='edit task'
         >
           <IconEditCircle size={20} />
         </Button>

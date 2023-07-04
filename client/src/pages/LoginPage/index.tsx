@@ -98,7 +98,7 @@ function LoginPage() {
             required
             {...form.getInputProps('password')}
           />
-          <Button type='submit' fullWidth h={45}>
+          <Button type='submit' fullWidth h={45} aria-label='submit'>
             Submit
           </Button>
         </form>

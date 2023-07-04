@@ -144,7 +144,7 @@ function RegisterPage() {
             required
             {...form.getInputProps('confirmPassword')}
           />
-          <Button type='submit' fullWidth h={45}>
+          <Button type='submit' fullWidth h={45} aria-label='submit'>
             Submit
           </Button>
         </form>
