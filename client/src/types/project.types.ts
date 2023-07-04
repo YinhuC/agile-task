@@ -20,7 +20,7 @@ export type UpdateProjectParams = {
 export type Project = {
   id: number;
   name: string;
-  description?: string;
+  description: string;
   group?: Group;
   createdAt: string;
   updatedAt: string;

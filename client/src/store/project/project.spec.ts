@@ -71,6 +71,7 @@ describe('Project Thunks', () => {
       {
         id: 1,
         name: 'Project 1',
+        description: 'description',
         createdAt: new Date().toString(),
         updatedAt: new Date().toString(),
       },
@@ -92,6 +93,7 @@ describe('Project Thunks', () => {
     const mockProject: Project = {
       id: 1,
       name: 'Project 1',
+      description: 'description',
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };

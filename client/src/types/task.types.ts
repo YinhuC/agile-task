@@ -28,7 +28,7 @@ export type UpdateTaskOrderParams = {
 export type Task = {
   id: number;
   name: string;
-  description?: string;
+  description: string;
   index: number;
   category?: Category;
   createdAt: string;

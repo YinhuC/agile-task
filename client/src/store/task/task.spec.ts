@@ -67,6 +67,7 @@ describe('Task Thunks', () => {
       {
         id: 1,
         name: 'Updated Task',
+        description: 'description',
         index: 0,
         createdAt: Date.toString(),
       },
