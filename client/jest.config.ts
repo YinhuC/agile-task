@@ -4,8 +4,12 @@ const config = {
   testMatch: ['<rootDir>/src/**/*.spec.{ts,tsx}'],
   moduleNameMapper: {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
+    axios: 'axios/dist/node/axios.cjs',
   },
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!@mantine)'],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!@mantine)',
+    '<rootDir>/node_modules/(?!axios)',
+  ],
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 };
 

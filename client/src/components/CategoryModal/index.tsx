@@ -94,7 +94,7 @@ function CategoryModal({
         padding='xl'
         opened={opened}
         onClose={close}
-        title={type === 'add' ? 'Create Category' : 'Edit Category'}
+        title={type === 'add' ? 'Create New Category' : 'Edit Category'}
         centered
         size='lg'
       >
@@ -149,7 +149,7 @@ function CategoryModal({
           mb={5}
           p={5}
           radius='50%'
-          aria-label='Edit category'
+          aria-label='Edit Category'
         >
           <IconEditCircle size={20} />
         </Button>
