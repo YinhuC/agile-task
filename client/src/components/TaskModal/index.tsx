@@ -9,14 +9,13 @@ import {
   Task,
   UpdateTaskParams,
 } from '../../types/task.types';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
 import {
   createTaskThunk,
   deleteTaskThunk,
   updateTaskThunk,
 } from '../../store/task/task.thunks';
 import { GeneralErrorObject } from '../../utils/notification.utils';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 type TaskModalProps = {
   categoryId: number;
@@ -26,7 +25,7 @@ type TaskModalProps = {
 
 function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const form = useForm({
     initialValues: {

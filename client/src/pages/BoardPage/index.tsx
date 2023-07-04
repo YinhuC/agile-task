@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo } from 'react';
 import { Box, Container, Flex, Title, useMantineTheme } from '@mantine/core';
 import ProjectGrid from '../../components/ProjectGrid';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store';
 import { fetchAllGroupsThunk } from '../../store/group/group.thunks';
 import GroupModal from '../../components/GroupModal';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 function BoardPage() {
   const theme = useMantineTheme();
-  const dispatch = useDispatch<AppDispatch>();
-  const groups = useSelector((state: RootState) => state.groups.groups);
+  const dispatch = useAppDispatch();
+  const groups = useAppSelector((state) => state.groups.groups);
 
   useEffect(() => {
     dispatch(fetchAllGroupsThunk());

@@ -2,13 +2,13 @@ import React, { useEffect, useMemo } from 'react';
 import { Divider, Flex, Stack, StackProps, Title } from '@mantine/core';
 import TaskCard from '../TaskCard';
 import { Category } from '../../types/category.types';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store';
 import { fetchAllTasksThunk } from '../../store/task/task.thunks';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { sortByIndex } from '../../utils/sort.utils';
 import TaskModal from '../TaskModal';
 import CategoryModal from '../CategoryModal';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 type CategoryGridProps = StackProps & {
   category: Category;
@@ -22,9 +22,9 @@ function CategoryGrid({
   projectId,
   ...props
 }: CategoryGridProps) {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
+  const allTasks = useAppSelector((state) => state.tasks.tasks);
   const { name, id } = category;
-  const allTasks = useSelector((state: RootState) => state.tasks.tasks);
 
   const tasks = useMemo(
     () => sortByIndex(allTasks.filter((task) => task.category?.id === id)),

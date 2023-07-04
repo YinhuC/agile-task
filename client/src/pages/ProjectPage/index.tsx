@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { Flex, useMantineTheme } from '@mantine/core';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store';
 import {
   fetchAllCategoriesThunk,
   updateCategoryOrderThunk,
@@ -16,17 +14,17 @@ import {
   fetchAllTasksThunk,
   updateTaskOrderThunk,
 } from '../../store/task/task.thunks';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 function ProjectPage() {
   const theme = useMantineTheme();
-  const categories = useSelector(
-    (state: RootState) => state.categories.categories
-  );
-  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  const categories = useAppSelector((state) => state.categories.categories);
+  const tasks = useAppSelector((state) => state.tasks.tasks);
   const location = useLocation();
   const path = location.pathname.split('/');
   const projectId = path[path.length - 1];
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchAllCategoriesThunk({ projectId: parseInt(projectId) }));

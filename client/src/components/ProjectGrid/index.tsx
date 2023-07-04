@@ -9,11 +9,11 @@ import {
 } from '@mantine/core';
 import ProjectCard from '../ProjectCard';
 import { Group } from '../../types/group.types';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store';
 import { fetchAllProjectsThunk } from '../../store/project/project.thunks';
 import ProjectModal from '../ProjectModal';
 import GroupModal from '../GroupModal';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 type ProjectGridProps = StackProps & {
   group: Group;
@@ -22,10 +22,8 @@ type ProjectGridProps = StackProps & {
 function ProjectGrid({ group, ...props }: ProjectGridProps) {
   const theme = useMantineTheme();
   const { name, id } = group;
-  const dispatch = useDispatch<AppDispatch>();
-  const allProjects = useSelector(
-    (state: RootState) => state.projects.projects
-  );
+  const dispatch = useAppDispatch();
+  const allProjects = useAppSelector((state) => state.projects.projects);
 
   const projects = useMemo(
     () => allProjects.filter((project) => project.group?.id === id),

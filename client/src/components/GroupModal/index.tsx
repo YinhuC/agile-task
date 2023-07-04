@@ -10,8 +10,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import { IconEditCircle } from '@tabler/icons-react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 import {
   CreateGroupParams,
@@ -23,6 +21,7 @@ import {
   deleteGroupThunk,
   updateGroupThunk,
 } from '../../store/group/group.thunks';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 type GroupModalProps = {
   type: 'add' | 'edit';
@@ -32,7 +31,7 @@ type GroupModalProps = {
 function GroupModal({ type, group, ...props }: GroupModalProps) {
   const theme = useMantineTheme();
   const [opened, { open, close }] = useDisclosure(false);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const form = useForm({
     initialValues: {

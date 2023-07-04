@@ -8,10 +8,10 @@ import {
   useMantineTheme,
   ContainerProps,
 } from '@mantine/core';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../store';
 import { fetchProjectThunk } from '../../../store/project/project.thunks';
 import CategoryModal from '../../../components/CategoryModal';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { useAppSelector } from '../../../hooks/useAppSelector';
 
 type HeaderSectionProps = ContainerProps & {
   projectId: string;
@@ -19,8 +19,8 @@ type HeaderSectionProps = ContainerProps & {
 
 function HeaderSection({ projectId, ...props }: HeaderSectionProps) {
   const theme = useMantineTheme();
-  const dispatch = useDispatch<AppDispatch>();
-  const projects = useSelector((state: RootState) => state.projects.projects);
+  const dispatch = useAppDispatch();
+  const projects = useAppSelector((state) => state.projects.projects);
 
   const project = useMemo(
     () => projects.find((project) => project.id === parseInt(projectId)),
