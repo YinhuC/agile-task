@@ -113,9 +113,9 @@ export class Start1687784493936 implements MigrationInterface {
             const tasksData = Array.from(
               { length: faker.number.int({ min: 3, max: 8 }) },
               () => ({
-                name: faker.lorem.sentence(),
+                name: faker.lorem.words({ min: 2, max: 5 }),
                 description: faker.lorem.sentences(
-                  faker.number.int({ min: 1, max: 3 })
+                  faker.number.int({ min: 1, max: 2 })
                 ),
               })
             );
