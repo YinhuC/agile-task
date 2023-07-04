@@ -114,12 +114,14 @@ function RegisterPage() {
           <TextInput
             mb={20}
             placeholder='First Name'
+            aria-label='First Name'
             required
             {...form.getInputProps('firstname')}
           />
           <TextInput
             mb={20}
             placeholder='Last Name'
+            aria-label='Last Name'
             required
             {...form.getInputProps('lastname')}
           />
@@ -127,6 +129,7 @@ function RegisterPage() {
             mb={20}
             icon={<IconAt />}
             placeholder='Your email'
+            aria-label='Your email'
             required
             {...form.getInputProps('email')}
           />
@@ -134,6 +137,7 @@ function RegisterPage() {
             mb={20}
             icon={<IconPassword />}
             placeholder='Password'
+            aria-label='Password'
             required
             {...form.getInputProps('password')}
           />
@@ -141,10 +145,11 @@ function RegisterPage() {
             mb={30}
             icon={<IconPassword />}
             placeholder='Confirm Password'
+            aria-label='Confirm Password'
             required
             {...form.getInputProps('confirmPassword')}
           />
-          <Button type='submit' fullWidth h={45} aria-label='submit'>
+          <Button type='submit' fullWidth h={45} aria-label='Submit'>
             Submit
           </Button>
         </form>

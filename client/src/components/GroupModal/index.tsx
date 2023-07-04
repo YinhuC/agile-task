@@ -99,10 +99,11 @@ function GroupModal({ type, group, ...props }: GroupModalProps) {
             label='Title'
             placeholder='Title'
             required
+            aria-label='Group Title'
             {...form.getInputProps('name')}
           />
           <Group position='right' spacing={10}>
-            <Button type='submit' h={45} aria-label='submit'>
+            <Button type='submit' h={45} aria-label='Submit'>
               {type === 'add' ? 'Create Group' : 'Edit Group'}
             </Button>
             {type === 'edit' && (
@@ -110,7 +111,7 @@ function GroupModal({ type, group, ...props }: GroupModalProps) {
                 h={45}
                 color='dark'
                 onClick={onDelete}
-                aria-label='delete group'
+                aria-label='Delete Group'
               >
                 Delete Group
               </Button>
@@ -127,7 +128,7 @@ function GroupModal({ type, group, ...props }: GroupModalProps) {
               marginTop: 15,
             },
           }}
-          aria-label='create group'
+          aria-label='Create Group'
         >
           Create Group
         </Button>
@@ -138,7 +139,7 @@ function GroupModal({ type, group, ...props }: GroupModalProps) {
           variant='subtle'
           p={5}
           radius='50%'
-          aria-label='edit group'
+          aria-label='Edit Group'
         >
           <IconEditCircle size={20} />
         </Button>

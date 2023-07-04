@@ -40,7 +40,7 @@ function ProjectCard({ project, groupId, ...props }: ProjectCardProps) {
         color='blue'
         fullWidth
         to={`/project/${id}`}
-        aria-label='view project'
+        aria-label='View Project'
       >
         View Project
       </Button>

@@ -108,6 +108,7 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
             mb={10}
             label='Title'
             placeholder='Title'
+            aria-label='Task Title'
             required
             {...form.getInputProps('name')}
           />
@@ -115,6 +116,7 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
             mb={30}
             label='Description'
             placeholder='Description'
+            aria-label='Task Description'
             autosize
             minRows={3}
             maxRows={5}
@@ -129,7 +131,7 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
                 h={45}
                 color='dark'
                 onClick={onDelete}
-                aria-label='delete task'
+                aria-label='Delete Task'
               >
                 Delete Task
               </Button>
@@ -142,9 +144,9 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
           fullWidth
           onClick={open}
           variant='outline'
-          aria-label='add new task'
+          aria-label='Create Task'
         >
-          Add new task
+          Create Task
         </Button>
       ) : (
         <Button
@@ -154,7 +156,7 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
           mb={5}
           p={5}
           radius='50%'
-          aria-label='edit task'
+          aria-label='Edit Task'
         >
           <IconEditCircle size={20} />
         </Button>

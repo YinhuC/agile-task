@@ -88,6 +88,7 @@ function LoginPage() {
             mb={20}
             icon={<IconAt />}
             placeholder='Email'
+            aria-label='Email'
             required
             {...form.getInputProps('email')}
           />
@@ -95,10 +96,11 @@ function LoginPage() {
             mb={30}
             icon={<IconPassword />}
             placeholder='Password'
+            aria-label='Password'
             required
             {...form.getInputProps('password')}
           />
-          <Button type='submit' fullWidth h={45} aria-label='submit'>
+          <Button type='submit' fullWidth h={45} aria-label='Submit'>
             Submit
           </Button>
         </form>

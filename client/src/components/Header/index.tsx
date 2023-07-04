@@ -70,7 +70,7 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
                 mr={20}
                 to={'/'}
                 sx={{ fontWeight: 400 }}
-                aria-label='home'
+                aria-label='Home'
               >
                 Home
               </Button>
@@ -82,7 +82,7 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
                 to={`/boards/${user.id}`}
                 sx={{ fontWeight: 400 }}
                 mr={40}
-                aria-label='board'
+                aria-label='Board'
               >
                 Board
               </Button>
@@ -92,7 +92,7 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
               variant='outline'
               compact
               radius='xs'
-              aria-label='logout'
+              aria-label='Logout'
             >
               Logout
             </Button>
@@ -105,7 +105,7 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
             mr='0.5rem'
             to={'/login'}
             compact
-            aria-label='sign in'
+            aria-label='Sign In'
           >
             Sign In
           </Button>
