@@ -7,15 +7,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
-import { Project } from '../../shared/entities/project.entity';
+import { Project as ProjectEntity } from '../../shared/entities/project.entity';
+import { Project } from '../../shared/interfaces/project.interface';
 import { GroupService } from '../../group/services/group.service';
 import { User } from '../../shared/entities/user.entity';
 
 @Injectable()
 export class ProjectService {
   constructor(
-    @InjectRepository(Project)
-    private readonly projectRepository: Repository<Project>,
+    @InjectRepository(ProjectEntity)
+    private readonly projectRepository: Repository<ProjectEntity>,
     private readonly groupService: GroupService
   ) {}
 

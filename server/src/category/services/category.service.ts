@@ -5,8 +5,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getManager } from 'typeorm';
-import { Category } from '../../shared/entities/category.entity';
+import { Repository } from 'typeorm';
+import { Category as CategoryEntity } from '../../shared/entities/category.entity';
+import { Category } from '../../shared/interfaces/category.interface';
 import { CreateCategoryDto } from '../dto/create-category.dto';
 import { UpdateCategoryDto } from '../dto/update-category.dto';
 import { User } from '../../shared/entities/user.entity';
@@ -19,8 +20,8 @@ import {
 @Injectable()
 export class CategoryService {
   constructor(
-    @InjectRepository(Category)
-    private categoryRepository: Repository<Category>,
+    @InjectRepository(CategoryEntity)
+    private categoryRepository: Repository<CategoryEntity>,
     private readonly projectService: ProjectService
   ) {}
 

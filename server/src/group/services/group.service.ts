@@ -5,7 +5,8 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Group } from '../../shared/entities/group.entity';
+import { Group as GroupEntity } from '../../shared/entities/group.entity';
+import { Group } from '../../shared/interfaces/group.interface';
 import { CreateGroupDTO } from '../dto/create-group.dto';
 import { User } from '../../shared/entities/user.entity';
 import { UpdateGroupDto } from '../dto/update-group.dto';
@@ -15,8 +16,8 @@ import { GroupResponse } from '../utils/group.types';
 @Injectable()
 export class GroupService {
   constructor(
-    @InjectRepository(Group)
-    private readonly groupRepository: Repository<Group>,
+    @InjectRepository(GroupEntity)
+    private readonly groupRepository: Repository<GroupEntity>,
     private readonly userService: UserService
   ) {}
 

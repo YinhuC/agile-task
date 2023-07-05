@@ -6,7 +6,8 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Task } from '../../shared/entities/task.entity';
+import { Task as TaskEntity } from '../../shared/entities/task.entity';
+import { Task } from '../../shared/interfaces/task.interface';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
 import { CategoryService } from '../../category/services/category.service';
@@ -20,8 +21,8 @@ import {
 @Injectable()
 export class TaskService {
   constructor(
-    @InjectRepository(Task)
-    private taskRepository: Repository<Task>,
+    @InjectRepository(TaskEntity)
+    private taskRepository: Repository<TaskEntity>,
     private readonly categoryService: CategoryService
   ) {}
 
