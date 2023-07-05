@@ -6,6 +6,7 @@ import { User } from '../../shared/interfaces/user.interface';
 import { UpdateUserDto } from '../dto/update-user';
 import bcrypt from 'bcrypt';
 import { Group } from '../../shared/interfaces/group.interface';
+import { hashPassword } from '../../shared/utils/password.util';
 
 @Injectable()
 export class UserService {
@@ -46,8 +47,13 @@ export class UserService {
   }
 
   async create(data: Partial<User>): Promise<User> {
-    const user = this.userRepository.create(data);
-    await user.setPassword(user.password);
+    const { password, ...userData } = data;
+    const hashedPassword = await hashPassword(password);
+
+    const user = this.userRepository.create({
+      ...userData,
+      password: hashedPassword,
+    });
     await this.userRepository.save(user);
     return user;
   }

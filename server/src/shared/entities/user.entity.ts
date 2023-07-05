@@ -46,9 +46,4 @@ export class User {
   constructor(data: Partial<User> = {}) {
     Object.assign(this, data);
   }
-
-  async setPassword(password: string): Promise<void> {
-    const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(password, salt);
-  }
 }
