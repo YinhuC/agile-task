@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Project } from '../interfaces/project.interface';
 import { Group } from '../interfaces/group.interface';
-import { CreateProjectDto } from 'src/project/dto/create-project.dto';
+import { CreateProjectDto } from '../../project/dto/create-project.dto';
 
 export const generateMockProject = (i: number, group?: Group): Project => ({
   id: i,

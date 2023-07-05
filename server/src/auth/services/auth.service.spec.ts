@@ -4,7 +4,7 @@ import { UserService } from '../../user/services/user.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User as UserEntity } from '../../shared/entities/user.entity';
 import { RegisterDto } from '../dto/register.dto';
-import { User } from 'src/shared/interfaces/user.interface';
+import { User } from '../../shared/interfaces/user.interface';
 import {
   generateMockUser,
   generateMockUserDto,

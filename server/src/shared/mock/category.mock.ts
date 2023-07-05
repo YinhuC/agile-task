@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Category } from '../interfaces/category.interface';
 import { Project } from '../interfaces/project.interface';
-import { CreateCategoryDto } from 'src/category/dto/create-category.dto';
+import { CreateCategoryDto } from '../../category/dto/create-category.dto';
 
 export const generateMockCategory = (
   i: number,
