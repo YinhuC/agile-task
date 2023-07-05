@@ -119,6 +119,9 @@ export class CategoryService {
 
   async deleteCategory(user: User, id: number): Promise<Category> {
     const category = await this.getCategoryById(id);
+    if (!category) {
+      throw new NotFoundException(`Category with ID ${id} not found`);
+    }
     const categories = await this.getAllCategoriesByProjectId(
       user,
       category.project.id
