@@ -3,12 +3,12 @@ import { CategoryController } from './category.controller';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CategoryService } from '../services/category.service';
 import { ProjectService } from '../../project/services/project.service';
-import { Project } from '../../project/project.entity';
-import { Category } from '../category.entity';
+import { Project } from '../../shared/entities/project.entity';
+import { Category } from '../../shared/entities/category.entity';
 import { GroupService } from '../../group/services/group.service';
-import { Group } from '../../group/group.entity';
+import { Group } from '../../shared/entities/group.entity';
 import { UserService } from '../../user/services/user.service';
-import { User } from '../../user/user.entity';
+import { User } from '../../shared/entities/user.entity';
 
 describe('CategoryController', () => {
   let controller: CategoryController;

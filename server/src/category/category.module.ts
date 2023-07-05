@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CategoryController } from './controllers/category.controller';
 import { CategoryService } from './services/category.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Category } from './category.entity';
+import { Category } from '../shared/entities/category.entity';
 import { ProjectModule } from '../project/project.module';
 
 @Module({

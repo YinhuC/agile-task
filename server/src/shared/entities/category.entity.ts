@@ -1,5 +1,5 @@
-import { Project } from '../project/project.entity';
-import { Task } from '../task/task.entity';
+import { Project } from './project.entity';
+import { Task } from './task.entity';
 import {
   Column,
   CreateDateColumn,

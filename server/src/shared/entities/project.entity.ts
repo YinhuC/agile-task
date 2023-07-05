@@ -1,5 +1,5 @@
-import { Category } from '../category/category.entity';
-import { Group } from '../group/group.entity';
+import { Category } from './category.entity';
+import { Group } from './group.entity';
 import {
   Column,
   CreateDateColumn,

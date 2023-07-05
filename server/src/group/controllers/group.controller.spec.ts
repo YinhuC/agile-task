@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { GroupController } from './group.controller';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { GroupService } from '../services/group.service';
-import { Group } from '../group.entity';
+import { Group } from '../../shared/entities/group.entity';
 import { UserService } from '../../user/services/user.service';
-import { User } from '../../user/user.entity';
+import { User } from '../../shared/entities/user.entity';
 
 describe('GroupController', () => {
   let controller: GroupController;

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from '../user.entity';
+import { User } from '../../shared/entities/user.entity';
 
 describe('UserService', () => {
   let service: UserService;

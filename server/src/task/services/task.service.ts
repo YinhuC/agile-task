@@ -6,11 +6,11 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Task } from '../task.entity';
+import { Task } from '../../shared/entities/task.entity';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
 import { CategoryService } from '../../category/services/category.service';
-import { User } from '../../user/user.entity';
+import { User } from '../../shared/entities/user.entity';
 import {
   insertIndexValue,
   removeIndexValue,

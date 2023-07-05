@@ -6,10 +6,10 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, getManager } from 'typeorm';
-import { Category } from '../category.entity';
+import { Category } from '../../shared/entities/category.entity';
 import { CreateCategoryDto } from '../dto/create-category.dto';
 import { UpdateCategoryDto } from '../dto/update-category.dto';
-import { User } from '../../user/user.entity';
+import { User } from '../../shared/entities/user.entity';
 import { ProjectService } from '../../project/services/project.service';
 import {
   removeIndexValue,

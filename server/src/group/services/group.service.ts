@@ -5,9 +5,9 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Group } from '../group.entity';
+import { Group } from '../../shared/entities/group.entity';
 import { CreateGroupDTO } from '../dto/create-group.dto';
-import { User } from '../../user/user.entity';
+import { User } from '../../shared/entities/user.entity';
 import { UpdateGroupDto } from '../dto/update-group.dto';
 import { UserService } from '../../user/services/user.service';
 import { GroupResponse } from '../utils/group.types';
