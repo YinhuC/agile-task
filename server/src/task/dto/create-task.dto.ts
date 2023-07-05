@@ -7,7 +7,7 @@ export class CreateTaskDto {
 
   @Length(0, 200)
   @IsOptional()
-  description: string;
+  description?: string;
 
   @IsNotEmpty()
   categoryId: number;
