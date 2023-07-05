@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TaskService } from './task.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Task } from '../../shared/entities/task.entity';
 import { CategoryService } from '../../category/services/category.service';
-import { Category } from '../../shared/entities/category.entity';
 import { ProjectService } from '../../project/services/project.service';
-import { Project } from '../../shared/entities/project.entity';
 import { GroupService } from '../../group/services/group.service';
-import { Group } from '../../shared/entities/group.entity';
 import { UserService } from '../../user/services/user.service';
-import { User } from '../../shared/entities/user.entity';
+import { User as UserEntity } from '../../shared/entities/user.entity';
+import { Task as TaskEntity } from '../../shared/entities/task.entity';
+import { Group as GroupEntity } from '../../shared/entities/group.entity';
+import { Project as ProjectEntity } from '../../shared/entities/project.entity';
+import { Category as CategoryEntity } from '../../shared/entities/category.entity';
 
 describe('TaskService', () => {
   let service: TaskService;
@@ -19,27 +19,27 @@ describe('TaskService', () => {
       providers: [
         TaskService,
         {
-          provide: getRepositoryToken(Task),
+          provide: getRepositoryToken(TaskEntity),
           useValue: {},
         },
         CategoryService,
         {
-          provide: getRepositoryToken(Category),
+          provide: getRepositoryToken(CategoryEntity),
           useValue: {},
         },
         ProjectService,
         {
-          provide: getRepositoryToken(Project),
+          provide: getRepositoryToken(ProjectEntity),
           useValue: {},
         },
         GroupService,
         {
-          provide: getRepositoryToken(Group),
+          provide: getRepositoryToken(GroupEntity),
           useValue: {},
         },
         UserService,
         {
-          provide: getRepositoryToken(User),
+          provide: getRepositoryToken(UserEntity),
           useValue: {},
         },
       ],

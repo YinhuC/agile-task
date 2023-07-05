@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { UpdateUserDto } from '../dto/update-user';
-import { User } from '../../shared/entities/user.entity';
+import { User } from '../../shared/interfaces/user.interface';
 import { AuthenticatedGuard } from '../../auth/guards/auth.guard';
 import { Request, Response } from 'express';
 import { AuthUser } from '../decorators/user.decorator';

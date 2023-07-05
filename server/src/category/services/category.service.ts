@@ -10,7 +10,7 @@ import { Category as CategoryEntity } from '../../shared/entities/category.entit
 import { Category } from '../../shared/interfaces/category.interface';
 import { CreateCategoryDto } from '../dto/create-category.dto';
 import { UpdateCategoryDto } from '../dto/update-category.dto';
-import { User } from '../../shared/entities/user.entity';
+import { User } from '../../shared/interfaces/user.interface';
 import { ProjectService } from '../../project/services/project.service';
 import {
   removeIndexValue,

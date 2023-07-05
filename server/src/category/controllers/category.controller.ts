@@ -8,12 +8,12 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { Category } from '../../shared/entities/category.entity';
+import { Category } from '../../shared/interfaces/category.interface';
 import { CategoryService } from '../services/category.service';
 import { CreateCategoryDto } from '../dto/create-category.dto';
 import { UpdateCategoryDto } from '../dto/update-category.dto';
 import { AuthUser } from '../../user/decorators/user.decorator';
-import { User } from '../../shared/entities/user.entity';
+import { User } from '../../shared/interfaces/user.interface';
 import { AuthenticatedGuard } from '../../auth/guards/auth.guard';
 import { CategoryMemberGuard } from '../guards/category-member.guard';
 import { GetCategoryDto } from '../dto/get-category.dto';

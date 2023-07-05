@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GroupService } from './group.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Group } from '../../shared/entities/group.entity';
 import { UserService } from '../../user/services/user.service';
-import { User } from '../../shared/entities/user.entity';
+import { User as UserEntity } from '../../shared/entities/user.entity';
+import { Group as GroupEntity } from '../../shared/entities/group.entity';
 
 describe('GroupService', () => {
   let service: GroupService;
@@ -13,12 +13,12 @@ describe('GroupService', () => {
       providers: [
         GroupService,
         {
-          provide: getRepositoryToken(Group),
+          provide: getRepositoryToken(GroupEntity),
           useValue: {},
         },
         UserService,
         {
-          provide: getRepositoryToken(User),
+          provide: getRepositoryToken(UserEntity),
           useValue: {},
         },
       ],

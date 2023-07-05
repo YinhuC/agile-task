@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UserService } from '../../user/services/user.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from '../../shared/entities/user.entity';
+import { User as UserEntity } from '../../shared/entities/user.entity';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -13,7 +13,7 @@ describe('AuthService', () => {
         AuthService,
         UserService,
         {
-          provide: getRepositoryToken(User),
+          provide: getRepositoryToken(UserEntity),
           useValue: {},
         },
       ],

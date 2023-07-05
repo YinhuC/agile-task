@@ -5,7 +5,7 @@ import { User as UserEntity } from '../../shared/entities/user.entity';
 import { User } from '../../shared/interfaces/user.interface';
 import { UpdateUserDto } from '../dto/update-user';
 import bcrypt from 'bcrypt';
-import { Group } from '../../shared/entities/group.entity';
+import { Group } from '../../shared/interfaces/group.interface';
 
 @Injectable()
 export class UserService {

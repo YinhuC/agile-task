@@ -10,7 +10,7 @@ import { UpdateProjectDto } from '../dto/update-project.dto';
 import { Project as ProjectEntity } from '../../shared/entities/project.entity';
 import { Project } from '../../shared/interfaces/project.interface';
 import { GroupService } from '../../group/services/group.service';
-import { User } from '../../shared/entities/user.entity';
+import { User } from '../../shared/interfaces/user.interface';
 
 @Injectable()
 export class ProjectService {

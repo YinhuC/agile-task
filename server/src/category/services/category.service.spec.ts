@@ -4,10 +4,10 @@ import { ProjectService } from '../../project/services/project.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { GroupService } from '../../group/services/group.service';
 import { UserService } from '../../user/services/user.service';
-import { Project } from '../../shared/entities/project.entity';
-import { Category } from '../../shared/entities/category.entity';
-import { Group } from '../../shared/entities/group.entity';
-import { User } from '../../shared/entities/user.entity';
+import { User as UserEntity } from '../../shared/entities/user.entity';
+import { Group as GroupEntity } from '../../shared/entities/group.entity';
+import { Project as ProjectEntity } from '../../shared/entities/project.entity';
+import { Category as CategoryEntity } from '../../shared/entities/category.entity';
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -17,22 +17,22 @@ describe('CategoryService', () => {
       providers: [
         ProjectService,
         {
-          provide: getRepositoryToken(Project),
+          provide: getRepositoryToken(ProjectEntity),
           useValue: {},
         },
         CategoryService,
         {
-          provide: getRepositoryToken(Category),
+          provide: getRepositoryToken(CategoryEntity),
           useValue: {},
         },
         GroupService,
         {
-          provide: getRepositoryToken(Group),
+          provide: getRepositoryToken(GroupEntity),
           useValue: {},
         },
         UserService,
         {
-          provide: getRepositoryToken(User),
+          provide: getRepositoryToken(UserEntity),
           useValue: {},
         },
       ],

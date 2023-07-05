@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 import { Group as GroupEntity } from '../../shared/entities/group.entity';
 import { Group } from '../../shared/interfaces/group.interface';
 import { CreateGroupDTO } from '../dto/create-group.dto';
-import { User } from '../../shared/entities/user.entity';
+import { User } from '../../shared/interfaces/user.interface';
 import { UpdateGroupDto } from '../dto/update-group.dto';
 import { UserService } from '../../user/services/user.service';
 import { GroupResponse } from '../utils/group.types';

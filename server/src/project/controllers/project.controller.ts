@@ -11,10 +11,10 @@ import {
 import { ProjectService } from '../services/project.service';
 import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
-import { Project } from '../../shared/entities/project.entity';
+import { Project } from '../../shared/interfaces/project.interface';
 import { AuthenticatedGuard } from '../../auth/guards/auth.guard';
 import { AuthUser } from '../../user/decorators/user.decorator';
-import { User } from '../../shared/entities/user.entity';
+import { User } from '../../shared/interfaces/user.interface';
 import { GetProjectDto } from '../dto/get-project.dto';
 import { ProjectMemberGuard } from '../guards/project-member.guard';
 

@@ -8,12 +8,12 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { Task } from '../../shared/entities/task.entity';
+import { Task } from '../../shared/interfaces/task.interface';
 import { TaskService } from '../services/task.service';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
 import { AuthUser } from '../../user/decorators/user.decorator';
-import { User } from '../../shared/entities/user.entity';
+import { User } from '../../shared/interfaces/user.interface';
 import { AuthenticatedGuard } from '../../auth/guards/auth.guard';
 import { TaskMemberGuard } from '../guards/task-member.guard';
 import { GetTaskDto } from '../dto/get-task.dto';

@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProjectController } from './project.controller';
 import { ProjectService } from '../services/project.service';
-import { Project } from '../../shared/entities/project.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { GroupService } from '../../group/services/group.service';
-import { Group } from '../../shared/entities/group.entity';
 import { UserService } from '../../user/services/user.service';
-import { User } from '../../shared/entities/user.entity';
+import { User as UserEntity } from '../../shared/entities/user.entity';
+import { Group as GroupEntity } from '../../shared/entities/group.entity';
+import { Project as ProjectEntity } from '../../shared/entities/project.entity';
 
 describe('ProjectController', () => {
   let controller: ProjectController;
@@ -16,17 +16,17 @@ describe('ProjectController', () => {
       providers: [
         ProjectService,
         {
-          provide: getRepositoryToken(Project),
+          provide: getRepositoryToken(ProjectEntity),
           useValue: {},
         },
         GroupService,
         {
-          provide: getRepositoryToken(Group),
+          provide: getRepositoryToken(GroupEntity),
           useValue: {},
         },
         UserService,
         {
-          provide: getRepositoryToken(User),
+          provide: getRepositoryToken(UserEntity),
           useValue: {},
         },
       ],

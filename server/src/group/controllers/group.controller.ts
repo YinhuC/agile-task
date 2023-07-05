@@ -8,13 +8,13 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { Group } from '../../shared/entities/group.entity';
+import { Group } from '../../shared/interfaces/group.interface';
 import { GroupService } from '../services/group.service';
 import { OwnershipGuard } from '../guards/ownership.guard';
 import { CreateGroupDTO } from '../dto/create-group.dto';
 import { AuthenticatedGuard } from '../../auth/guards/auth.guard';
 import { AuthUser } from '../../user/decorators/user.decorator';
-import { User } from '../../shared/entities/user.entity';
+import { User } from '../../shared/interfaces/user.interface';
 import { UpdateGroupDto } from '../dto/update-group.dto';
 import { GroupMemberGuard } from '../guards/group-member.guard';
 import { GroupResponse } from '../utils/group.types';

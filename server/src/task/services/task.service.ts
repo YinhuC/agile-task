@@ -11,7 +11,7 @@ import { Task } from '../../shared/interfaces/task.interface';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
 import { CategoryService } from '../../category/services/category.service';
-import { User } from '../../shared/entities/user.entity';
+import { User } from '../../shared/interfaces/user.interface';
 import {
   insertIndexValue,
   removeIndexValue,

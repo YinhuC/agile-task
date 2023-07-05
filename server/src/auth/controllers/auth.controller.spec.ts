@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
 import { AuthService } from '../services/auth.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from '../../shared/entities/user.entity';
+import { User as UserEntity } from '../../shared/entities/user.entity';
 import { UserService } from '../../user/services/user.service';
 
 describe('AuthController', () => {
@@ -14,7 +14,7 @@ describe('AuthController', () => {
         AuthService,
         UserService,
         {
-          provide: getRepositoryToken(User),
+          provide: getRepositoryToken(UserEntity),
           useValue: {},
         },
       ],
