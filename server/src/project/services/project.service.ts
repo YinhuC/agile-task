@@ -75,6 +75,9 @@ export class ProjectService {
     updateProjectDto: UpdateProjectDto
   ): Promise<Project> {
     const project = await this.getProjectById(projectId);
+    if (!project) {
+      throw new NotFoundException(`Project with ID ${projectId} not found`);
+    }
     const updatedProject = { ...project, ...updateProjectDto };
     return await this.projectRepository.save(updatedProject);
   }
@@ -82,7 +85,7 @@ export class ProjectService {
   async deleteProject(projectId: number): Promise<Project> {
     const project = await this.getProjectById(projectId);
     const result = await this.projectRepository.delete(projectId);
-    if (result.affected === 0) {
+    if (!result || result.affected === 0) {
       throw new NotFoundException(`Project with ID ${projectId} not found`);
     }
     return project;
