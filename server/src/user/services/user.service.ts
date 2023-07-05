@@ -75,6 +75,9 @@ export class UserService {
   }
 
   async comparePassword(user: User, password: string): Promise<boolean> {
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
     const userWithPassword = await this.userRepository
       .createQueryBuilder('user')
       .addSelect('user.password')
@@ -84,7 +87,6 @@ export class UserService {
     if (!userWithPassword) {
       throw new NotFoundException('User not found');
     }
-
     return await bcrypt.compare(password, userWithPassword.password);
   }
 }
