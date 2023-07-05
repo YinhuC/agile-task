@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Group } from '../interfaces/group.interface';
+import { CreateGroupDTO } from '../../group/dto/create-group.dto';
 
 export const generateMockGroup = (i: number): Group => ({
   id: i,
@@ -13,3 +14,7 @@ export const generateMockGroups = (count: number): Group[] => {
   }
   return groups;
 };
+
+export const generateMockGroupDto = (): CreateGroupDTO => ({
+  name: faker.company.name(),
+});

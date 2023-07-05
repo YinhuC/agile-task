@@ -87,11 +87,17 @@ export class GroupService {
     const { name, emails } = updateGroupDto;
     const notFoundUsers: string[] = [];
     const group = await this.getGroupWithUsers(id);
+    if (!group) {
+      throw new NotFoundException('Group not found');
+    }
+
     const users = await this.getUsersFromEmails(emails, notFoundUsers);
+
     Object.assign(group, {
       name: name ? name : group.name,
-      users: [...group.users, ...users],
+      users: group.users && [...group.users, ...users],
     });
+
     const response = await this.groupRepository.save(group);
     return { ...response, notFoundUsers };
   }
