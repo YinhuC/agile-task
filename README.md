@@ -3,6 +3,12 @@
 
 Welcome to the Agile Tasker App! This application helps you manage your tasks and stay organized in an agile manner.
 
+![Board Page MacBook](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/mac-board.png)
+
+![Project Page MacBook](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/mac-project.png)
+
+![Iphone Screens](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/iphone-all-transparent.png)
+
 # Prerequisites
 
 ---
@@ -15,11 +21,6 @@ Before getting started, make sure you have the following software installed on y
       npm install --global yarn
   
 - PostgreSQL - https://www.postgresql.org/download/
-- TypeORM globally
-
-      npm install -g typeorm
-      or
-      yarn global add typeorm
 
 # Getting Started
 
@@ -71,14 +72,14 @@ To run the Agile Task App locally, follow these steps:
 
     yarn migration:run
 
-**8.**  Sign in with johndoe@example.com to see data and play around
+**8.**  Start the client:
+
+    yarn start
+
+**9.**  Sign in with johndoe@example.com to see data and play around
 
     email: johndoe@example.com
     password: Password123
-
-**9.**  Start the client:
-
-    yarn start
 
 **10.**  Open your browser and visit [http://localhost:3000](http://localhost:3000/) to see the app in action.
 
