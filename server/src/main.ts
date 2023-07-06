@@ -8,10 +8,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'https://agile-tasker-server.onrender.com/',
-    ],
+    origin: ['http://localhost:3000', 'https://agile-tasker.onrender.com/'],
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());
