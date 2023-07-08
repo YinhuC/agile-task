@@ -4,6 +4,10 @@ import session from 'express-session';
 import passport from 'passport';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import * as dotenv from 'dotenv';
+import * as fs from 'fs';
+
+const data: any = dotenv.parse(fs.readFileSync('../.env'));
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -15,7 +19,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.use(
     session({
-      secret: process.env.REACT_APP_SECRET,
+      secret: data.REACT_APP_SECRET,
       resave: false,
       saveUninitialized: false,
       name: 'SESSION_ID',
@@ -28,8 +32,9 @@ async function bootstrap() {
   app.use(passport.session());
 
   try {
-    await app.listen(process.env.REACT_APP_API_PORT, () => {
-      console.log(`Running on Port ${process.env.REACT_APP_API_PORT}`);
+    await app.listen(process.env.PORT || 3300, () => {
+      console.log(`Running on Port ${process.env.PORT || 3300}`);
+      console.log(`API URL: ${process.env.REACT_APP_API_URL}`);
     });
   } catch (err) {
     console.log(err);
