@@ -12,7 +12,7 @@ const data: any = dotenv.parse(fs.readFileSync('.env'));
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors({
-    origin: ['http://localhost:3000', 'https://agile-tasker.onrender.com'],
+    origin: ['http://localhost:3000', 'https://agile-tasker.vercel.app/'],
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());
