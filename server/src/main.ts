@@ -25,6 +25,8 @@ async function bootstrap() {
       name: 'SESSION_ID',
       cookie: {
         maxAge: 86400000,
+        secure: data.REACT_APP_NODE_ENV === 'production',
+        sameSite: data.REACT_APP_NODE_ENV === 'production' ? 'none' : 'lax',
       },
     })
   );
