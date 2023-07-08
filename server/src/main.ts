@@ -7,7 +7,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 
-const data: any = dotenv.parse(fs.readFileSync('../.env'));
+const data: any = dotenv.parse(fs.readFileSync('.env'));
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
