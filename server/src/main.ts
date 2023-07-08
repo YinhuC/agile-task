@@ -34,7 +34,7 @@ async function bootstrap() {
   try {
     await app.listen(process.env.PORT || 3300, () => {
       console.log(`Running on Port ${process.env.PORT || 3300}`);
-      console.log(`API URL: ${process.env.REACT_APP_API_URL}`);
+      console.log(`API URL: ${data.REACT_APP_API_URL}`);
     });
   } catch (err) {
     console.log(err);
