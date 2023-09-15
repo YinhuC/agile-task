@@ -7,6 +7,8 @@ Welcome to the Agile Tasker App! This application helps you manage your tasks an
 
 ![Project Page MacBook](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/mac-project.png)
 
+![Iphone Screens](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/iphone-all-transparent.png)
+
 # Prerequisites
 
 ---
