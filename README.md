@@ -3,6 +3,10 @@
 
 Welcome to the Agile Tasker App! This application helps you manage your tasks and stay organized in an agile manner.
 
+![Board Page MacBook](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/mac-board.png)
+
+![Project Page MacBook](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/mac-project.png)
+
 # Prerequisites
 
 ---
