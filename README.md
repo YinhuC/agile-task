@@ -21,11 +21,6 @@ Before getting started, make sure you have the following software installed on y
       npm install --global yarn
   
 - PostgreSQL - https://www.postgresql.org/download/
-- TypeORM globally
-
-      npm install -g typeorm
-      or
-      yarn global add typeorm
 
 # Getting Started
 
