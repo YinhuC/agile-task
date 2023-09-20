@@ -72,14 +72,14 @@ To run the Agile Task App locally, follow these steps:
 
     yarn migration:run
 
-**8.**  Sign in with johndoe@example.com to see data and play around
+**8.**  Start the client:
+
+    yarn start
+
+**9.**  Sign in with johndoe@example.com to see data and play around
 
     email: johndoe@example.com
     password: Password123
-
-**9.**  Start the client:
-
-    yarn start
 
 **10.**  Open your browser and visit [http://localhost:3000](http://localhost:3000/) to see the app in action.
 
