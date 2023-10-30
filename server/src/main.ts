@@ -7,7 +7,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 
-const data: any = dotenv.parse(fs.readFileSync('.env'));
+const data: any = dotenv.parse(fs.readFileSync('../.env'));
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -35,8 +35,8 @@ async function bootstrap() {
   app.use(passport.session());
 
   try {
-    await app.listen(process.env.PORT || 3300, () => {
-      console.log(`Running on Port ${process.env.PORT || 3300}`);
+    await app.listen(data.PORT || 3300, () => {
+      console.log(`Running on Port ${data.PORT || 3300}`);
       console.log(`API URL: ${data.REACT_APP_API_URL}`);
     });
   } catch (err) {
