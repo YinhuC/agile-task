@@ -83,7 +83,9 @@ function LoginPage() {
       </Title>
       <Text mb={50}>Access your team projects by logging in.</Text>
       <Box miw={300} w='18%' mb={60}>
-        <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
+        <form
+          onSubmit={form.onSubmit(async (values) => await onSubmit(values))}
+        >
           <TextInput
             mb={20}
             icon={<IconAt />}
