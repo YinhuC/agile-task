@@ -23,6 +23,7 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       name: 'SESSION_ID',
+      proxy: true,
       cookie: {
         maxAge: 86400000,
         secure: data.REACT_APP_NODE_ENV === 'production',
