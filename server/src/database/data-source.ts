@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
-const data: any = dotenv.parse(fs.readFileSync('.env'));
+const data: any = dotenv.parse(fs.readFileSync('../.env'));
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
@@ -16,6 +16,7 @@ export const dataSourceOptions: DataSourceOptions = {
   migrations: ['dist/database/migrations/**/*{.js,.ts}'],
   synchronize: false,
   logging: true,
+  poolSize: 5,
 };
 
 const dataSource = new DataSource(dataSourceOptions);
