@@ -7,6 +7,8 @@ Sign in with details below to see data and play around OR create your own accoun
 
     email: johndoe@example.com
     password: Password123
+    
+**Note:** Hosted on Render's free tier, so has a slight delay in backend startup due to automatic shutdown during inactivity, connection limit may also be reached.
 
 ![Board Page MacBook](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/mac-board.png)
 
