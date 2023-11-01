@@ -3,6 +3,11 @@
 
 Welcome to the Agile Tasker App! This application helps you manage your tasks and stay organized in an agile manner.
 
+Sign in with details below to see data and play around OR create your own account and start from scratch - https://agile-tasker.onrender.com/
+
+    email: johndoe@example.com
+    password: Password123
+
 ![Board Page MacBook](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/mac-board.png)
 
 ![Project Page MacBook](https://github.com/YinhuC/agile-tasker/blob/master/client/src/assets/images/mac-project.png)
