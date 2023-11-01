@@ -8,10 +8,11 @@ import { ProjectModule } from './project/project.module';
 import { CategoryModule } from './category/category.module';
 import { TaskModule } from './task/task.module';
 import { dataSourceOptions } from './database/data-source';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(dataSourceOptions),
+    ConfigModule,
     PassportModule.register({
       session: true,
     }),
@@ -21,6 +22,7 @@ import { dataSourceOptions } from './database/data-source';
     ProjectModule,
     CategoryModule,
     TaskModule,
+    TypeOrmModule.forRoot(dataSourceOptions),
   ],
   controllers: [],
   providers: [],
