@@ -12,7 +12,7 @@ const data: any = dotenv.parse(fs.readFileSync('.env'));
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors({
-    origin: ['http://localhost:3000', 'https://agile-tasker.onrender.com/'],
+    origin: ['http://localhost:3000', 'https://agile-tasker.onrender.com'],
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());
@@ -27,7 +27,7 @@ async function bootstrap() {
         maxAge: 86400000,
         secure: data.REACT_APP_NODE_ENV === 'production',
         sameSite: data.REACT_APP_NODE_ENV === 'production' ? 'none' : 'lax',
-        domain: '.domain.com',
+        domain: '.onrender.com',
       },
     })
   );
