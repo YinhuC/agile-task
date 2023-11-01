@@ -12,7 +12,7 @@ const data: any = dotenv.parse(fs.readFileSync('../.env'));
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors({
-    origin: data.REACT_APP_API_URL,
+    origin: data.REACT_APP_CLIENT_URL,
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());

@@ -16,6 +16,7 @@ export const dataSourceOptions: DataSourceOptions = {
   migrations: ['dist/database/migrations/**/*{.js,.ts}'],
   synchronize: false,
   logging: true,
+  poolSize: 5,
 };
 
 const dataSource = new DataSource(dataSourceOptions);
