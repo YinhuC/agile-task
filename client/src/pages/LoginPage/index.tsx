@@ -24,8 +24,8 @@ function LoginPage() {
   const theme = useMantineTheme();
   const form = useForm({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'johndoe@example.com',
+      password: 'Password123',
     },
     validate: {
       email: () => null,
