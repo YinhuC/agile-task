@@ -29,7 +29,6 @@ async function bootstrap() {
         maxAge: 86400000,
         secure: isProd,
         sameSite: isProd ? 'none' : 'lax',
-        domain: isProd ? '.onrender.com' : undefined,
       },
     })
   );
