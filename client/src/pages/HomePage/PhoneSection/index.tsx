@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Flex,
@@ -8,11 +8,13 @@ import {
   Stack,
   Box,
   useMantineTheme,
+  Skeleton,
 } from '@mantine/core';
 import { motion } from 'framer-motion';
 import Image from '../../../assets/images/iphone-all-transparent.png';
 
 function PhoneSection({ ...props }: ContainerProps) {
+  const [loading, setLoading] = useState(true);
   const theme = useMantineTheme();
   return (
     <Container {...props} size='xl' py={120}>
@@ -47,7 +49,22 @@ function PhoneSection({ ...props }: ContainerProps) {
             },
           }}
         >
-          <motion.img src={Image} alt='agile tasker on mobile' />
+          <Skeleton
+            width={(window.innerWidth / 100) * 40}
+            radius={12}
+            height={(window.innerHeight / 100) * 50}
+            sx={{
+              display: loading ? 'block' : 'none',
+            }}
+          />
+          <motion.img
+            src={Image}
+            alt='agile tasker on mobile'
+            style={{
+              display: loading ? 'none' : 'block',
+            }}
+            onLoad={() => setLoading(false)}
+          />
         </Box>
       </Flex>
     </Container>
