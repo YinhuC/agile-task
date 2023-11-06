@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Flex,
@@ -11,6 +11,7 @@ import {
   useMantineTheme,
   MediaQuery,
   Image,
+  Skeleton,
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
@@ -23,6 +24,8 @@ import TeamSquare from '../../../assets/images/parallax/team-parallax.png';
 import IphoneProject from '../../../assets/images/iphone-project.png';
 
 function HeaderSection({ ...props }: BoxProps) {
+  const [loading, setLoading] = useState(true);
+
   const theme = useMantineTheme();
   const imgAnimate1 = useAnimation();
   const imgAnimate2 = useAnimation();
@@ -111,10 +114,20 @@ function HeaderSection({ ...props }: BoxProps) {
               },
             }}
           >
+            <Skeleton
+              width={(window.innerWidth / 100) * 90}
+              radius={12}
+              height={(window.innerHeight / 100) * 75}
+              sx={{
+                display: loading ? 'block' : 'none',
+              }}
+            />
             <motion.img
               animate={imgAnimate1}
               src={MacScreen}
               alt='project screen wide screen'
+              onLoad={() => setLoading(false)}
+              style={{ display: loading ? 'none' : 'block' }}
             />
             <Box
               sx={{
