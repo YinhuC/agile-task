@@ -11,9 +11,14 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const isProd: boolean =
     configService.get<string>('REACT_APP_NODE_ENV') === 'production';
+  const corsWhitelist = configService
+    .get<string>('REACT_APP_CLIENT_URL')
+    .split(',');
+
+  console.log(corsWhitelist);
 
   app.enableCors({
-    origin: configService.get<string>('REACT_APP_CLIENT_URL'),
+    origin: corsWhitelist,
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());

@@ -46,5 +46,11 @@ export class AuthController {
     req.logout((err) => {
       return err ? res.sendStatus(400) : res.sendStatus(200);
     });
+    res.status(200).clearCookie('SESSION_ID', {
+      path: '/',
+    });
+    req.session.destroy(function (err) {
+      res.redirect('/');
+    });
   }
 }
