@@ -34,6 +34,7 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
       justify='space-around'
       align='center'
       sx={{
+        top: 0,
         position: 'fixed',
         zIndex: 9,
         width: '100vw',
@@ -41,7 +42,8 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
         backgroundColor: 'white',
         borderBottom: '1px solid lightgray',
         height: 80,
-        marginTop: prevScroll && scroll.y > prevScroll.y ? -100 : 0,
+        marginTop:
+          (prevScroll && scroll.y < prevScroll.y) || scroll.y < 50 ? 0 : -100,
         transition: 'margin-top 0.5s ease-out',
       }}
     >
