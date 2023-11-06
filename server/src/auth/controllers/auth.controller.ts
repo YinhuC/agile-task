@@ -49,8 +49,5 @@ export class AuthController {
     res.status(200).clearCookie('SESSION_ID', {
       path: '/',
     });
-    req.session.destroy(function (err) {
-      res.redirect('/');
-    });
   }
 }
