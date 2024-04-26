@@ -25,7 +25,8 @@ function PriceSection({ ...props }: BoxProps) {
           theme.colors.cyan[1]
         ),
       }}
-      py={80}
+      pt={80}
+      pb={120}
     >
       <Container
         size='lg'

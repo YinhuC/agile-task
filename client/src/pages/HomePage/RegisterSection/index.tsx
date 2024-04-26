@@ -40,13 +40,26 @@ function RegisterSection({ ...props }: BoxProps) {
           <Title align='center' order={1} color='white' weight={600} mb={10}>
             Start your Agile journey today.
           </Title>
-          <Flex>
+          <Flex
+            sx={{
+              [theme.fn.smallerThan('sm')]: {
+                flexDirection: 'column',
+              },
+            }}
+            align='center'
+            justify='center'
+          >
             <TextInput
-              mr={10}
               icon={<MdOutlineAlternateEmail />}
               placeholder='Your email'
               aria-label='Your email'
               required
+              sx={{
+                marginRight: 10,
+                [theme.fn.smallerThan('sm')]: {
+                  margin: '0 0 10px 0',
+                },
+              }}
             />
             <Button
               component={Link}
