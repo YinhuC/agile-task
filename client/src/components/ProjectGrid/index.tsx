@@ -82,9 +82,9 @@ function ProjectGrid({ group, ...props }: ProjectGridProps) {
       <SimpleGrid
         cols={3}
         breakpoints={[
-          { maxWidth: '62rem', cols: 3, spacing: 'md' },
-          { maxWidth: '48rem', cols: 2, spacing: 'sm' },
-          { maxWidth: '36rem', cols: 1, spacing: 'sm' },
+          { maxWidth: theme.breakpoints.md, cols: 3, spacing: 'md' },
+          { maxWidth: theme.breakpoints.sm, cols: 2, spacing: 'sm' },
+          { maxWidth: theme.breakpoints.xs, cols: 1, spacing: 'sm' },
         ]}
       >
         {cards}

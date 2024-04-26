@@ -4,7 +4,7 @@ import {
   Flex,
   Title,
   Text,
-  ContainerProps,
+  BoxProps,
   Stack,
   Card,
   SimpleGrid,
@@ -12,7 +12,7 @@ import {
   Box,
 } from '@mantine/core';
 
-function ComponentSection({ ...props }: ContainerProps) {
+function ComponentSection({ ...props }: BoxProps) {
   const theme = useMantineTheme();
   return (
     <Box
@@ -29,7 +29,6 @@ function ComponentSection({ ...props }: ContainerProps) {
         [theme.fn.smallerThan('sm')]: {
           marginTop: 250,
         },
-
         [theme.fn.smallerThan('xxs')]: {
           marginTop: 300,
         },
@@ -56,9 +55,9 @@ function ComponentSection({ ...props }: ContainerProps) {
               cols={3}
               spacing='lg'
               breakpoints={[
-                { maxWidth: '62rem', cols: 3, spacing: 'md' },
-                { maxWidth: '48rem', cols: 2, spacing: 'sm' },
-                { maxWidth: '36rem', cols: 1, spacing: 'sm' },
+                { maxWidth: theme.breakpoints.md, cols: 3, spacing: 'md' },
+                { maxWidth: theme.breakpoints.sm, cols: 2, spacing: 'sm' },
+                { maxWidth: theme.breakpoints.xs, cols: 1, spacing: 'sm' },
               ]}
               my={30}
             >

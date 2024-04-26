@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { notifications } from '@mantine/notifications';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 import { postAuthLogout } from '../../api/auth.api';
-import Logo from '../../assets/logos/logo.png';
+import LogoDark from '../../assets/logos/logo-dark.png';
 import SmallLogo from '../../assets/logos/logo-small.png';
 import { usePrevious, useWindowScroll } from '@mantine/hooks';
 
@@ -48,7 +48,7 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
     >
       <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
         <Link to={'/'}>
-          <Image src={Logo} width={200} alt='agile-tasker logo' />
+          <Image src={LogoDark} width={200} alt='agile-tasker logo' />
         </Link>
       </MediaQuery>
       <MediaQuery largerThan='sm' styles={{ display: 'none' }}>

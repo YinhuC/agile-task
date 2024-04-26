@@ -74,7 +74,7 @@ function HeaderSection({ ...props }: BoxProps) {
           flexDirection: 'column',
           alignItems: 'center',
         }}
-        pt={180}
+        pt={100}
         pb={50}
       >
         <Stack

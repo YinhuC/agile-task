@@ -8,10 +8,11 @@ import ComponentSection from './ComponentSection';
 import ViewSection from './ViewSection';
 import PriceSection from './PriceSection';
 import FeatureSection from './FeatureSection';
+import Footer from '../../components/Footer';
 
 function HomePage() {
   return (
-    <Box mt={-80}>
+    <Box>
       <HeaderSection />
       <LaptopSection />
       <GuideSection />
@@ -19,6 +20,7 @@ function HomePage() {
       <ViewSection />
       <ComponentSection />
       <PriceSection />
+      <Footer />
     </Box>
   );
 }
