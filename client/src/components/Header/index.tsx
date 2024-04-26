@@ -5,8 +5,8 @@ import { useAuth } from '../../hooks/useAuth';
 import { notifications } from '@mantine/notifications';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 import { postAuthLogout } from '../../api/auth.api';
-import Logo from '../../assets/logos/logo-transparent.png';
-import SmallLogo from '../../assets/logos/small-logo-transparent.png';
+import Logo from '../../assets/logos/logo.png';
+import SmallLogo from '../../assets/logos/logo-small.png';
 import { usePrevious, useWindowScroll } from '@mantine/hooks';
 
 const Header: React.FC = ({ ...props }: ContainerProps) => {
@@ -29,7 +29,6 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
   return (
     <Flex
       {...props}
-      py='md'
       mx={5}
       justify='space-around'
       align='center'
@@ -102,11 +101,8 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
         ) : (
           <Button
             component={Link}
-            size='md'
-            variant='outline'
             mr='0.5rem'
             to={'/login'}
-            compact
             aria-label='Sign In'
           >
             Sign In

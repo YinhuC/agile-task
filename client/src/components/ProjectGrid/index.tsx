@@ -72,7 +72,7 @@ function ProjectGrid({ group, ...props }: ProjectGridProps) {
         }}
       >
         <Flex align='center'>
-          <Title order={3} mx={5}>
+          <Title order={3} mx={5} weight={500}>
             {name}
           </Title>
           <GroupModal type='edit' group={group} />

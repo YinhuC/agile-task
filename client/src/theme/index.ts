@@ -10,6 +10,14 @@ import './styles/body.css';
 import { button } from './components/button-styles';
 
 const projectTheme: MantineThemeOverride = {
+  breakpoints: {
+    xxs: '24em',
+    xs: '36em',
+    sm: '48em',
+    md: '62em',
+    lg: '75em',
+    xl: '88em',
+  },
   colorScheme: 'light',
   fontFamily: 'Inter, Arial, Helvetica, sans-serif',
   lineHeight: '120%',
@@ -18,6 +26,13 @@ const projectTheme: MantineThemeOverride = {
     fontFamily: 'Playfair Display, Gerigia, serif',
     sizes: sizes,
     fontWeight: 400,
+  },
+  fontSizes: {
+    xs: '12px',
+    sm: '14px',
+    md: '16px',
+    lg: '20px',
+    xl: '24px',
   },
   components: {
     ...title,

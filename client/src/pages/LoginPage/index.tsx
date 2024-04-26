@@ -114,7 +114,7 @@ function LoginPage() {
           },
         }}
       >
-        <Text size='xs'>
+        <Text size='sm'>
           Not registered? <Link to={'/register'}>Create account</Link>
         </Text>
       </Box>

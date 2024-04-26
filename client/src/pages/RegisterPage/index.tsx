@@ -161,7 +161,7 @@ function RegisterPage() {
           },
         }}
       >
-        <Text size='xs'>
+        <Text size='sm'>
           Already have an acocunt? <Link to={'/login'}>Sign in</Link>
         </Text>
       </Box>

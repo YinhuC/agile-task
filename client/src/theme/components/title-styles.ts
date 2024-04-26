@@ -25,9 +25,7 @@ export const title: MantineThemeOverride['components'] = {
   Title: {
     styles: (theme) => ({
       root: {
-        fontWeight: 400,
         lineHeight: '120%',
-        color: '#000000',
       },
     }),
   },

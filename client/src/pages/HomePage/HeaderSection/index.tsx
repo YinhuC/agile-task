@@ -62,8 +62,8 @@ function HeaderSection({ ...props }: BoxProps) {
       sx={{
         background: theme.fn.linearGradient(
           180,
-          theme.colors.pink[1],
-          theme.colors.teal[1]
+          theme.colors.pink[7],
+          theme.colors.teal[3]
         ),
       }}
     >
@@ -74,8 +74,8 @@ function HeaderSection({ ...props }: BoxProps) {
           flexDirection: 'column',
           alignItems: 'center',
         }}
-        pt={200}
-        pb={100}
+        pt={180}
+        pb={50}
       >
         <Stack
           justify='center'
@@ -84,24 +84,23 @@ function HeaderSection({ ...props }: BoxProps) {
           mb={60}
           mx={10}
         >
-          <Title align='center' order={1}>
+          <Title align='center' order={1} color='white' weight={600}>
             Unmatched Project Efficiency.
           </Title>
-          <Text align='center' mb={10} sx={{ fontSize: 16 }}>
+          <Text align='center' mb={10} size='lg' color='white'>
             Seamlessly Manage Projects and Foster Team Collaboration, Regardless
             of Physical Proximity.
           </Text>
-          <Flex>
-            <Button
-              component={Link}
-              size='md'
-              mr='0.5rem'
-              to={'/login'}
-              aria-label='Start 14-day free trial'
-            >
-              Start 14-day free trial
-            </Button>
-          </Flex>
+          <Button
+            component={Link}
+            variant='light'
+            size='md'
+            mr='0.5rem'
+            to={'/login'}
+            aria-label='Start 14-day free trial'
+          >
+            Start 14-day free trial
+          </Button>
         </Stack>
         <MediaQuery smallerThan='md' styles={{ display: 'none' }}>
           <Flex
@@ -176,6 +175,10 @@ function HeaderSection({ ...props }: BoxProps) {
             alt='Iphone project page'
           />
         </MediaQuery>
+        <Title align='center' order={2} weight={500} mt={100} mx={10}>
+          Join the global community of over 2,000,000 teams leveraging Agile
+          Tasker to achieve greater productivity.
+        </Title>
       </Container>
     </Box>
   );

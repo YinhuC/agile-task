@@ -4,6 +4,10 @@ import { Box } from '@mantine/core';
 import HeaderSection from './HeaderSection';
 import GuideSection from './PhoneSection';
 import LaptopSection from './LaptopSection';
+import ComponentSection from './ComponentSection';
+import ViewSection from './ViewSection';
+import PriceSection from './PriceSection';
+import FeatureSection from './FeatureSection';
 
 function HomePage() {
   return (
@@ -11,6 +15,10 @@ function HomePage() {
       <HeaderSection />
       <LaptopSection />
       <GuideSection />
+      <FeatureSection />
+      <ViewSection />
+      <ComponentSection />
+      <PriceSection />
     </Box>
   );
 }
