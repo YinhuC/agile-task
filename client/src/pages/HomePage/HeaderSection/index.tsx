@@ -96,7 +96,7 @@ function HeaderSection({ ...props }: BoxProps) {
             variant='light'
             size='md'
             mr='0.5rem'
-            to={'/login'}
+            to={'/register'}
             aria-label='Start 14-day free trial'
           >
             Start 14-day free trial

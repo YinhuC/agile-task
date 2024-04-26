@@ -10,7 +10,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-import { IconEditCircle } from '@tabler/icons-react';
+import { FaEdit } from 'react-icons/fa';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 import {
   CreateProjectParams,
@@ -162,7 +162,7 @@ function ProjectModal({ groupId, type, project, ...props }: ProjectModalProps) {
           radius='50%'
           aria-label='Edit Project'
         >
-          <IconEditCircle size={20} />
+          <FaEdit size={20} />
         </Button>
       )}
     </>

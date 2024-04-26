@@ -3,7 +3,7 @@ import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-import { IconEditCircle } from '@tabler/icons-react';
+import { FaEdit } from 'react-icons/fa';
 import {
   CreateTaskParams,
   Task,
@@ -158,7 +158,7 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
           radius='50%'
           aria-label='Edit Task'
         >
-          <IconEditCircle size={20} />
+          <FaEdit size={20} />
         </Button>
       )}
     </>

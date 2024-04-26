@@ -10,7 +10,8 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconAt, IconPassword, IconX } from '@tabler/icons-react';
+import { TbPassword } from 'react-icons/tb';
+import { MdOutlineAlternateEmail, MdError } from 'react-icons/md';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { postAuthLogin } from '../../api/auth.api';
 import { LoginParams } from '../../types/auth.types';
@@ -52,7 +53,7 @@ function LoginPage() {
           title: 'Invalid email or password.',
           message: 'Please check your credentials and try again.',
           color: 'red',
-          icon: <IconX />,
+          icon: <MdError />,
         });
       } else {
         notifications.show(GeneralErrorObject);
@@ -88,7 +89,7 @@ function LoginPage() {
         >
           <TextInput
             mb={20}
-            icon={<IconAt />}
+            icon={<MdOutlineAlternateEmail />}
             placeholder='Email'
             aria-label='Email'
             required
@@ -96,7 +97,7 @@ function LoginPage() {
           />
           <PasswordInput
             mb={30}
-            icon={<IconPassword />}
+            icon={<TbPassword />}
             placeholder='Password'
             aria-label='Password'
             required

@@ -10,7 +10,6 @@
     "@mantine/notifications": "^6.0.13",
     "@mantine/styles": "^6.0.13",
     "@reduxjs/toolkit": "^1.9.5",
-    "@tabler/icons-react": "^2.22.0",
     "axios": "^1.4.0",
     "env-cmd": "^10.1.0",
     "framer-motion": "^10.12.17",

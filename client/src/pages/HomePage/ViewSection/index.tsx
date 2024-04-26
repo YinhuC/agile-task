@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 import PhoneImg from '../../../assets/images/iphone-all-transparent.png';
 import ContentBlock from '../../../components/ContentBlock';
 
-function BenefitSection({ ...props }: BoxProps) {
+function ViewSection({ ...props }: BoxProps) {
   const theme = useMantineTheme();
 
   return (
@@ -122,4 +122,4 @@ function BenefitSection({ ...props }: BoxProps) {
   );
 }
 
-export default BenefitSection;
+export default ViewSection;

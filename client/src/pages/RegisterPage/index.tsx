@@ -10,13 +10,15 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconAt, IconCheck, IconPassword, IconX } from '@tabler/icons-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MESSAGES, REGEXES } from '../../utils/regex.utils';
 import { RegisterParams } from '../../types/auth.types';
 import { postAuthRegister } from '../../api/auth.api';
 import { notifications } from '@mantine/notifications';
 import { AxiosError } from 'axios';
+import { TbPassword } from 'react-icons/tb';
+import { MdOutlineAlternateEmail, MdError } from 'react-icons/md';
+import { FaCircleCheck } from 'react-icons/fa6';
 
 function RegisterPage() {
   const theme = useMantineTheme();
@@ -57,7 +59,7 @@ function RegisterPage() {
         message:
           'Congratulations! Your user account has been successfully created. Welcome to our platform and get ready to explore!',
         color: 'green',
-        icon: <IconCheck />,
+        icon: <FaCircleCheck />,
       });
     } catch (err) {
       const axiosError = err as AxiosError;
@@ -67,7 +69,7 @@ function RegisterPage() {
           title: 'Email Already Registered.',
           message: 'Please use a different email to register and try again.',
           color: 'red',
-          icon: <IconX />,
+          icon: <MdError />,
         });
       } else {
         notifications.show({
@@ -75,7 +77,7 @@ function RegisterPage() {
           message:
             'An error occurred during the account creation process. Please double-check the provided information and try again.',
           color: 'red',
-          icon: <IconX />,
+          icon: <MdError />,
         });
       }
     }
@@ -127,7 +129,7 @@ function RegisterPage() {
           />
           <TextInput
             mb={20}
-            icon={<IconAt />}
+            icon={<MdOutlineAlternateEmail />}
             placeholder='Your email'
             aria-label='Your email'
             required
@@ -135,7 +137,7 @@ function RegisterPage() {
           />
           <PasswordInput
             mb={20}
-            icon={<IconPassword />}
+            icon={<TbPassword />}
             placeholder='Password'
             aria-label='Password'
             required
@@ -143,7 +145,7 @@ function RegisterPage() {
           />
           <PasswordInput
             mb={30}
-            icon={<IconPassword />}
+            icon={<TbPassword />}
             placeholder='Confirm Password'
             aria-label='Confirm Password'
             required

@@ -8,6 +8,7 @@ import ComponentSection from './ComponentSection';
 import ViewSection from './ViewSection';
 import PriceSection from './PriceSection';
 import FeatureSection from './FeatureSection';
+import RegisterSection from './RegisterSection';
 import Footer from '../../components/Footer';
 
 function HomePage() {
@@ -20,6 +21,7 @@ function HomePage() {
       <ViewSection />
       <ComponentSection />
       <PriceSection />
+      <RegisterSection />
       <Footer />
     </Box>
   );

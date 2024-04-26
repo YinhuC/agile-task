@@ -14,7 +14,7 @@ import {
 } from '../../types/category.types';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-import { IconEditCircle } from '@tabler/icons-react';
+import { FaEdit } from 'react-icons/fa';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 import {
   createCategoryThunk,
@@ -151,7 +151,7 @@ function CategoryModal({
           radius='50%'
           aria-label='Edit Category'
         >
-          <IconEditCircle size={20} />
+          <FaEdit size={20} />
         </Button>
       )}
     </>

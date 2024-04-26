@@ -9,7 +9,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-import { IconEditCircle } from '@tabler/icons-react';
+import { FaEdit } from 'react-icons/fa';
 import { GeneralErrorObject } from '../../utils/notification.utils';
 import {
   CreateGroupParams,
@@ -141,7 +141,7 @@ function GroupModal({ type, group, ...props }: GroupModalProps) {
           radius='50%'
           aria-label='Edit Group'
         >
-          <IconEditCircle size={20} />
+          <FaEdit size={20} />
         </Button>
       )}
     </>
