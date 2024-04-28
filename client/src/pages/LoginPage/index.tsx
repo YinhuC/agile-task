@@ -26,7 +26,7 @@ function LoginPage() {
   const form = useForm({
     initialValues: {
       email: 'johndoe@example.com',
-      password: 'Password123',
+      password: 'Password12345',
     },
     validate: {
       email: () => null,

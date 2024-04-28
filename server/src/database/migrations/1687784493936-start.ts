@@ -52,7 +52,7 @@ export class Start1687784493936 implements MigrationInterface {
         'johndoe@example.com',
         'John',
         'Doe',
-        '$2b$10$2HwoSGrgUXNNIHykh9oVQuPtT0xOCa0VWD7Dy4MN2d81IzRVsYmtC',
+        '$2b$10$HiHGLtAFBTgDuF6swU9hGuSutrjeYsBs1iToRUxgv71AraL77zLJC',
         'email',
       ]
     );
