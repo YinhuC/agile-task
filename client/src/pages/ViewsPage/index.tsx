@@ -13,7 +13,6 @@ import WorkImg1 from '../../assets/images/work-1.png';
 import WorkImg2 from '../../assets/images/work-2.png';
 import DashboardImg from '../../assets/images/dashboard-1.png';
 import BusinessImg from '../../assets/images/business.png';
-import SearchImg from '../../assets/images/search.png';
 import ChartImg1 from '../../assets/images/chart-1.png';
 import ChartImg2 from '../../assets/images/chart-2.png';
 import ChartImg3 from '../../assets/images/chart-3.png';
@@ -102,7 +101,7 @@ function ViewsPage({ ...props }: BoxProps) {
           title={'Experience it like a spreadsheet with Table view.'}
           subtitle={`Zoom in on all the ongoing work across a board using the Table view. Review your tasks in a user-friendly 
           spreadsheet-style list, allowing sorting and filtering to pinpoint the exact cards you need.`}
-          img={SearchImg}
+          img={ChartImg3}
           titleOrder={2}
           titleWeight={500}
           subtitleSize={18}
@@ -120,18 +119,6 @@ function ViewsPage({ ...props }: BoxProps) {
           imageLeft={false}
           imageSize='85%'
           mb={80}
-        />
-        <ContentBlock
-          title={'Discover a fresh sense of direction with Map view.'}
-          subtitle={`No matter your location, utilize Agile Tasker's Map view to showcase location-based information within an 
-          interactive map. Whether managing real estate properties, coordinating events, or organizing fieldwork, Map ensures 
-          your team stays on track.`}
-          img={ChartImg3}
-          titleOrder={2}
-          titleWeight={500}
-          subtitleSize={18}
-          imageLeft={true}
-          imageSize='85%'
         />
       </Container>
       <Box
