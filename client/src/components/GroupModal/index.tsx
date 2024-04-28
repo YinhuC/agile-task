@@ -124,8 +124,8 @@ function GroupModal({ type, group, ...props }: GroupModalProps) {
           onClick={open}
           variant='light'
           sx={{
-            [theme.fn.smallerThan('sm')]: {
-              marginTop: 15,
+            [theme.fn.smallerThan('md')]: {
+              marginTop: 10,
             },
           }}
           aria-label='Create Group'
