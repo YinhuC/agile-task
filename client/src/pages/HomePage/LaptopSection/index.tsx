@@ -7,7 +7,7 @@ import {
   BackgroundImage,
   Skeleton,
 } from '@mantine/core';
-import LaptopImage from '../../../assets/images/mac-board.png';
+import LaptopImage from '../../../assets/images/mac/mac-board.png';
 import BackgroundWaveImage from '../../../assets/images/wave.svg';
 
 function LaptopSection({ ...props }: ContainerProps) {

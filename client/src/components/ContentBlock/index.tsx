@@ -43,7 +43,7 @@ function ContentBlock({
   return (
     <Flex
       {...props}
-      gap={50}
+      gap={30}
       sx={[
         {
           [theme.fn.smallerThan('sm')]: {

@@ -21,7 +21,7 @@ import MacScreen from '../../../assets/images/parallax/project-parallax.png';
 import PhoneScreen from '../../../assets/images/parallax/phone-parallax.png';
 import DeviceSquare from '../../../assets/images/parallax/device-parallax.png';
 import TeamSquare from '../../../assets/images/parallax/team-parallax.png';
-import IphoneProject from '../../../assets/images/iphone-project.png';
+import IphoneProject from '../../../assets/images/iphone/iphone-project.png';
 
 function HeaderSection({ ...props }: BoxProps) {
   const [loading, setLoading] = useState(true);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, BoxProps, Box, useMantineTheme } from '@mantine/core';
-import PhoneImg from '../../../assets/images/iphone-all-transparent.png';
+import PhoneImg from '../../../assets/images/iphone/iphone-all-transparent.png';
 import ContentBlock from '../../../components/ContentBlock';
 
 function PhoneSection({ ...props }: BoxProps) {

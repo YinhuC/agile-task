@@ -21,7 +21,7 @@ function ComponentSection({ ...props }: BoxProps) {
         background: theme.fn.linearGradient(180, '#fff', theme.colors.cyan[0]),
         marginTop: 140,
         [theme.fn.smallerThan('lg')]: {
-          marginTop: 220,
+          marginTop: 200,
         },
         [theme.fn.smallerThan('md')]: {
           marginTop: 180,
