@@ -64,7 +64,7 @@ function ViewSection({ ...props }: BoxProps) {
             component={Link}
             size='md'
             mr='0.5rem'
-            to={'/login'}
+            to={'/views'}
             aria-label='Discover different views'
             variant='light'
             mb={40}

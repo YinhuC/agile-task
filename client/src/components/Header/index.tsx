@@ -1,5 +1,13 @@
 import React from 'react';
-import { Image, Button, Flex, MediaQuery, ContainerProps } from '@mantine/core';
+import {
+  Image,
+  Button,
+  Flex,
+  MediaQuery,
+  ContainerProps,
+  Text,
+  useMantineTheme,
+} from '@mantine/core';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { notifications } from '@mantine/notifications';
@@ -10,6 +18,7 @@ import SmallLogo from '../../assets/logos/logo-small.png';
 import { usePrevious, useWindowScroll } from '@mantine/hooks';
 
 const Header: React.FC = ({ ...props }: ContainerProps) => {
+  const theme = useMantineTheme();
   const { user, removeUser } = useAuth();
   const navigate = useNavigate();
   const [scroll] = useWindowScroll();
@@ -47,9 +56,25 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
       }}
     >
       <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-        <Link to={'/'}>
-          <Image src={LogoDark} width={200} alt='agile-tasker logo' />
-        </Link>
+        <Flex align='center' justify='center'>
+          <Link to={'/'}>
+            <Image src={LogoDark} width={200} alt='agile-tasker logo' mr={80} />
+          </Link>
+          {!user && (
+            <>
+              <Link to={'/views'} style={{ textDecorationLine: 'none' }}>
+                <Text color={theme.colors.gray[8]} weight={500} mr={40}>
+                  Views
+                </Text>
+              </Link>
+              <Link to={'/plans'} style={{ textDecorationLine: 'none' }}>
+                <Text color={theme.colors.gray[8]} weight={500}>
+                  Plans
+                </Text>
+              </Link>
+            </>
+          )}
+        </Flex>
       </MediaQuery>
       <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
         <Link to={'/'}>
@@ -64,18 +89,6 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
       <Flex justify='flex-end' align='center' w={200} mr={20}>
         {user ? (
           <>
-            <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-              <Button
-                component={Link}
-                variant='link'
-                mr={20}
-                to={'/'}
-                sx={{ fontWeight: 400 }}
-                aria-label='Home'
-              >
-                Home
-              </Button>
-            </MediaQuery>
             <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
               <Button
                 component={Link}

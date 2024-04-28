@@ -22,6 +22,7 @@ type ContentBlockProps = FlexProps & {
   imageSize?: string;
   titleOrder?: TitleOrder;
   titleWeight?: number;
+  subtitleSize?: number;
   sx?: Sx;
 };
 
@@ -34,7 +35,8 @@ function ContentBlock({
   imageTop = true,
   imageSize = '100%',
   titleOrder = 1,
-  titleWeight = 400,
+  titleWeight,
+  subtitleSize,
   sx,
   ...props
 }: ContentBlockProps) {
@@ -76,7 +78,7 @@ function ContentBlock({
           </Title>
         )}
         {subtitle && (
-          <Text sx={{ lineHeight: '160%' }} mb={20}>
+          <Text sx={{ lineHeight: '160%' }} mb={20} size={subtitleSize}>
             {subtitle}
           </Text>
         )}

@@ -14,6 +14,8 @@ import { User } from './types/user.types';
 import AuthRoute from './components/AuthRoute';
 import ProjectPage from './pages/ProjectPage';
 import { Flex } from '@mantine/core';
+import ViewsPage from './pages/ViewsPage';
+import PlansPage from './pages/PlansPage';
 
 type Props = {
   user?: User;
@@ -48,6 +50,8 @@ function App() {
       )}
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/views' element={<ViewsPage />} />
+        <Route path='/plans' element={<PlansPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route element={<AuthRoute />}>

@@ -25,8 +25,8 @@ function FeatureSection({ ...props }: ContainerProps) {
             Maximize your potential with Agile Tasker.
           </Title>
           <Text>
-            Trello's intuitive features enable any team to swiftly establish and
-            personalize workflows for virtually any task
+            Agile Tasker's intuitive features enable any team to swiftly
+            establish and personalize workflows for virtually any task
           </Text>
 
           <SimpleGrid

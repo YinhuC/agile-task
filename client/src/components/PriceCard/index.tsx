@@ -7,6 +7,7 @@ type PriceCardProps = {
   amountDescription: string;
   tierDescription: string;
   buttonText: string;
+  highlight?: boolean;
 };
 
 function PriceCard({
@@ -15,19 +16,22 @@ function PriceCard({
   amountDescription,
   tierDescription,
   buttonText,
+  highlight = false,
 }: PriceCardProps) {
   const theme = useMantineTheme();
 
   return (
     <Card
       padding='lg'
-      withBorder
       radius={0}
       sx={{
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: theme.colors.gray[0],
+        border: highlight
+          ? `0.125rem solid ${theme.colors.pink[3]}`
+          : '0.0625rem solid #dee2e6',
       }}
     >
       <Text transform='uppercase' weight={700} mb={30} mt={20}>
