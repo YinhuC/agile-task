@@ -86,7 +86,7 @@ To run the Agile Task App locally, follow these steps:
 **9.**  Sign in with johndoe@example.com to see data and play around
 
     email: johndoe@example.com
-    password: Password123
+    password: Password12345
 
 **10.**  Open your browser and visit [http://localhost:3000](http://localhost:3000/) to see the app in action.
 
