@@ -34,7 +34,6 @@ function PriceCard({
 
   return (
     <Card
-      padding='lg'
       radius={0}
       sx={[
         {
@@ -47,6 +46,7 @@ function PriceCard({
             : '0.0625rem solid #dee2e6',
           [theme.fn.smallerThan('sm')]: {
             height: 'auto',
+            minHeight: 450,
           },
         },
         sx,

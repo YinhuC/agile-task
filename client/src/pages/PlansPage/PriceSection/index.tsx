@@ -47,7 +47,7 @@ function PriceSection() {
             height: '100%',
             gap: 0,
             [theme.fn.smallerThan('sm')]: {
-              gap: 20,
+              gap: 30,
             },
           }}
           breakpoints={[
@@ -187,7 +187,7 @@ function PriceSection() {
                 </List.Item>
                 <List.Item>Workspace views: Table and Calendar</List.Item>
                 <List.Item>Unlimited Workspace command runs</List.Item>
-                <List.Item>Atlassian Intelligence (AI)</List.Item>
+                <List.Item>Agile Intelligence (AI)</List.Item>
                 <List.Item>Admin and security features</List.Item>
                 <List.Item>Workspace-level templates</List.Item>
                 <List.Item>Collections</List.Item>
@@ -240,7 +240,7 @@ function PriceSection() {
                 <List.Item>Attachment permissions</List.Item>
                 <List.Item>Power-Up administration</List.Item>
                 <List.Item>
-                  Free SSO and user provisioning with Atlassian Access
+                  Free SSO and user provisioning with Agile Access
                 </List.Item>
               </List>
             </Card>
