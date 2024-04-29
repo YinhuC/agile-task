@@ -6,7 +6,7 @@ Welcome to the Agile Tasker App! This application helps you manage your tasks an
 Sign in with details below to see data and play around OR create your own account and start from scratch - https://www.agile-tasker.com
 
     email: johndoe@example.com
-    password: Password123
+    password: Password12345
     
 **Note:** Hosted on Render's free tier, so has a slight delay in backend startup due to automatic shutdown during inactivity, connection limit may also be reached.
 
