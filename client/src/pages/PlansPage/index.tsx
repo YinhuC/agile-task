@@ -1,51 +1,23 @@
 import React from 'react';
 import {
   Container,
-  BoxProps,
   Box,
   useMantineTheme,
   Title,
   Button,
   Stack,
-  Text,
 } from '@mantine/core';
-
 import Footer from '../../components/Footer';
-import PriceCompare from '../../components/PriceCompare';
+import PriceSection from './PriceSection';
+import AccordionSection from './AccordionSection';
 
-function PlansPage({ ...props }: BoxProps) {
+function PlansPage() {
   const theme = useMantineTheme();
   return (
     <>
+      <PriceSection />
+      <AccordionSection />
       <Box
-        id='views'
-        {...props}
-        sx={{
-          background: theme.fn.linearGradient(
-            180,
-            theme.colors.blue[0],
-            '#fff'
-          ),
-        }}
-      >
-        <Container size='lg' pt={80}>
-          <Stack align='center'>
-            <Title order={1} weight={500} align='center'>
-              Agile Tasker, tailored to you.
-            </Title>
-            <Text align='center' size='lg' maw={800}>
-              Trusted by millions worldwide, Agile Tasker empowers teams across
-              the globe. Explore the options to find the perfect fit for you.
-            </Text>
-          </Stack>
-        </Container>
-        <Container size='lg' py={80}>
-          <PriceCompare />
-        </Container>
-      </Box>
-
-      <Box
-        {...props}
         sx={{
           background: theme.fn.linearGradient(
             180,

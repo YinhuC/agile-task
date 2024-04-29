@@ -33,7 +33,6 @@ function HeaderSection({ projectId, ...props }: HeaderSectionProps) {
 
   return (
     <Container
-      {...props}
       size='xl'
       mb={30}
       px={40}
@@ -41,6 +40,7 @@ function HeaderSection({ projectId, ...props }: HeaderSectionProps) {
       sx={{
         userSelect: 'none',
       }}
+      {...props}
     >
       <Flex
         justify='space-between'

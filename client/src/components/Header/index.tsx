@@ -37,7 +37,6 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
 
   return (
     <Flex
-      {...props}
       mx={5}
       justify='space-around'
       align='center'
@@ -54,6 +53,7 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
           (prevScroll && scroll.y < prevScroll.y) || scroll.y < 50 ? 0 : -100,
         transition: 'margin-top 0.5s ease-out',
       }}
+      {...props}
     >
       <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
         <Flex align='center' justify='center'>
@@ -69,7 +69,7 @@ const Header: React.FC = ({ ...props }: ContainerProps) => {
               </Link>
               <Link to={'/plans'} style={{ textDecorationLine: 'none' }}>
                 <Text color={theme.colors.gray[8]} weight={500}>
-                  Plans
+                  Pricing
                 </Text>
               </Link>
             </>

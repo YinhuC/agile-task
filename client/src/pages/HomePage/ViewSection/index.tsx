@@ -20,7 +20,6 @@ function ViewSection({ ...props }: BoxProps) {
 
   return (
     <Box
-      {...props}
       sx={{
         background: theme.fn.linearGradient(
           90,
@@ -42,6 +41,7 @@ function ViewSection({ ...props }: BoxProps) {
           maxHeight: 1300,
         },
       }}
+      {...props}
     >
       <Container
         size='lg'

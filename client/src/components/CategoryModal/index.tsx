@@ -90,13 +90,13 @@ function CategoryModal({
   return (
     <>
       <Modal
-        {...props}
         padding='xl'
         opened={opened}
         onClose={close}
         title={type === 'add' ? 'Create New Category' : 'Edit Category'}
         centered
         size='lg'
+        {...props}
       >
         <form
           onSubmit={form.onSubmit((values) =>

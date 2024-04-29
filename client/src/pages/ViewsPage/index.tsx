@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Container,
-  BoxProps,
   Box,
   useMantineTheme,
   Title,
@@ -19,13 +18,12 @@ import ChartImg3 from '../../assets/images/chart-3.png';
 import ContentBlock from '../../components/ContentBlock';
 import Footer from '../../components/Footer';
 
-function ViewsPage({ ...props }: BoxProps) {
+function ViewsPage() {
   const theme = useMantineTheme();
   return (
     <>
       <Box
         id='views'
-        {...props}
         sx={{
           background: theme.fn.linearGradient(30, theme.colors.blue[1], '#fff'),
         }}
@@ -122,7 +120,6 @@ function ViewsPage({ ...props }: BoxProps) {
         />
       </Container>
       <Box
-        {...props}
         sx={{
           background: theme.fn.linearGradient(
             180,

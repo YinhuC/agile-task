@@ -15,7 +15,7 @@ import {
 function FeatureSection({ ...props }: ContainerProps) {
   const theme = useMantineTheme();
   return (
-    <Container {...props} size='lg' py={100}>
+    <Container size='lg' py={100} {...props}>
       <Flex>
         <Stack justify='center' spacing={5} mx={20}>
           <Text transform='uppercase' weight={700}>

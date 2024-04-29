@@ -24,7 +24,6 @@ function ProjectCard({ project, groupId, ...props }: ProjectCardProps) {
 
   return (
     <Card
-      {...props}
       shadow='sm'
       padding='lg'
       radius='sm'
@@ -34,6 +33,7 @@ function ProjectCard({ project, groupId, ...props }: ProjectCardProps) {
         flexDirection: 'column',
         justifyContent: 'space-between',
       }}
+      {...props}
     >
       <Box>
         <Flex justify='space-between'>

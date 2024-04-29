@@ -15,7 +15,7 @@ function LaptopSection({ ...props }: ContainerProps) {
 
   return (
     <BackgroundImage src={BackgroundWaveImage}>
-      <Container {...props} size='xl' py={30}>
+      <Container size='xl' py={30} {...props}>
         <Center>
           <Skeleton
             width={(window.innerWidth / 100) * 70}

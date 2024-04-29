@@ -20,16 +20,14 @@ import {
 } from 'react-icons/fa';
 import LogoLight from '../../assets/logos/logo-light.png';
 
-type FooterProps = BoxProps & {};
-
-function Footer({ ...props }: FooterProps) {
+function Footer({ ...props }: BoxProps) {
   const theme = useMantineTheme();
   return (
     <Box
-      {...props}
       sx={{
         background: theme.colors.gray[9],
       }}
+      {...props}
     >
       <Container size='lg' py={10}>
         <SimpleGrid

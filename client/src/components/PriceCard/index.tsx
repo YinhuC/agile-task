@@ -1,13 +1,22 @@
 import React from 'react';
-import { Text, useMantineTheme, Button, Card } from '@mantine/core';
+import {
+  Text,
+  useMantineTheme,
+  Button,
+  Card,
+  Sx,
+  CardProps,
+} from '@mantine/core';
 
-type PriceCardProps = {
+type PriceCardProps = Omit<CardProps, 'children'> & {
   tier: string;
   amount: number;
   amountDescription: string;
   tierDescription: string;
   buttonText: string;
   highlight?: boolean;
+  backgroundColor?: string;
+  sx?: Sx;
 };
 
 function PriceCard({
@@ -17,6 +26,9 @@ function PriceCard({
   tierDescription,
   buttonText,
   highlight = false,
+  backgroundColor = 'transparent',
+  sx,
+  ...props
 }: PriceCardProps) {
   const theme = useMantineTheme();
 
@@ -24,15 +36,22 @@ function PriceCard({
     <Card
       padding='lg'
       radius={0}
-      sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: theme.colors.gray[0],
-        border: highlight
-          ? `0.125rem solid ${theme.colors.pink[3]}`
-          : '0.0625rem solid #dee2e6',
-      }}
+      sx={[
+        {
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: backgroundColor,
+          border: highlight
+            ? `0.125rem solid ${theme.colors.pink[3]}`
+            : '0.0625rem solid #dee2e6',
+          [theme.fn.smallerThan('sm')]: {
+            height: 'auto',
+          },
+        },
+        sx,
+      ]}
+      {...props}
     >
       <Text transform='uppercase' weight={700} mb={30} mt={20}>
         {tier}

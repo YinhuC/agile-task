@@ -44,7 +44,6 @@ function ContentBlock({
   const theme = useMantineTheme();
   return (
     <Flex
-      {...props}
       gap={30}
       sx={[
         {
@@ -55,6 +54,7 @@ function ContentBlock({
         },
         sx,
       ]}
+      {...props}
     >
       <Stack
         justify='center'

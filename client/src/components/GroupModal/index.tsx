@@ -81,13 +81,13 @@ function GroupModal({ type, group, ...props }: GroupModalProps) {
   return (
     <>
       <Modal
-        {...props}
         padding='xl'
         opened={opened}
         onClose={close}
         title={type === 'add' ? 'Create New Group' : 'Edit Group'}
         centered
         size='lg'
+        {...props}
       >
         <form
           onSubmit={form.onSubmit((values) =>

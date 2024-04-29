@@ -39,7 +39,6 @@ function CategoryGrid({
     <Draggable draggableId={`cat-drag-${id}`} index={index}>
       {(provided) => (
         <Stack
-          {...props}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -56,6 +55,7 @@ function CategoryGrid({
             boxShadow:
               '0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05), 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.1)',
           }}
+          {...props}
         >
           <Flex justify='space-between' align='center'>
             <Title order={4} ml={5}>

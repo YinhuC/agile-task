@@ -57,7 +57,6 @@ function HeaderSection({ ...props }: BoxProps) {
 
   return (
     <Box
-      {...props}
       onMouseMove={(e) => throttledMouseMove(e)}
       sx={{
         background: theme.fn.linearGradient(
@@ -66,6 +65,7 @@ function HeaderSection({ ...props }: BoxProps) {
           theme.colors.teal[3]
         ),
       }}
+      {...props}
     >
       <Container
         size='xl'

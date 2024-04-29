@@ -16,7 +16,6 @@ function TaskCard({ task, index, ...props }: TaskCardProps) {
     <Draggable draggableId={`task-drag-${id}`} index={index}>
       {(provided) => (
         <Card
-          {...props}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -29,6 +28,7 @@ function TaskCard({ task, index, ...props }: TaskCardProps) {
             height: '100%',
             overflow: 'visible',
           }}
+          {...props}
         >
           <Flex justify='space-between' align='center'>
             <Title order={5} mb={10}>

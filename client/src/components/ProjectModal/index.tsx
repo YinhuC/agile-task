@@ -92,13 +92,13 @@ function ProjectModal({ groupId, type, project, ...props }: ProjectModalProps) {
   return (
     <>
       <Modal
-        {...props}
         padding='xl'
         opened={opened}
         onClose={close}
         title={type === 'add' ? 'Create New Project' : 'Edit Project'}
         centered
         size='lg'
+        {...props}
       >
         <form
           onSubmit={form.onSubmit((values) =>

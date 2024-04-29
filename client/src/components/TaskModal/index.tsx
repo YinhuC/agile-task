@@ -91,13 +91,13 @@ function TaskModal({ categoryId, type, task, ...props }: TaskModalProps) {
   return (
     <>
       <Modal
-        {...props}
         padding='xl'
         opened={opened}
         onClose={close}
         title={type === 'add' ? 'Create New Task' : 'Edit Task'}
         centered
         size='lg'
+        {...props}
       >
         <form
           onSubmit={form.onSubmit((values) =>

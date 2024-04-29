@@ -53,12 +53,12 @@ function ProjectGrid({ group, ...props }: ProjectGridProps) {
 
   return (
     <Stack
-      {...props}
       mb={40}
       px={40}
       pt={30}
       pb={40}
       sx={{ backgroundColor: theme.colors.gray[0], borderRadius: '0.3rem' }}
+      {...props}
     >
       <Flex
         justify='space-between'

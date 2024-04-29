@@ -18,7 +18,6 @@ function RegisterSection({ ...props }: BoxProps) {
 
   return (
     <Box
-      {...props}
       sx={{
         background: theme.fn.linearGradient(
           90,
@@ -26,6 +25,7 @@ function RegisterSection({ ...props }: BoxProps) {
           theme.colors.pink[5]
         ),
       }}
+      {...props}
     >
       <Container
         size='lg'

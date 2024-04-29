@@ -16,7 +16,6 @@ function ComponentSection({ ...props }: BoxProps) {
   const theme = useMantineTheme();
   return (
     <Box
-      {...props}
       sx={{
         background: theme.fn.linearGradient(180, '#fff', theme.colors.cyan[0]),
         marginTop: 140,
@@ -33,6 +32,7 @@ function ComponentSection({ ...props }: BoxProps) {
           marginTop: 300,
         },
       }}
+      {...props}
     >
       <Container
         size='lg'
@@ -76,8 +76,8 @@ function ComponentSection({ ...props }: BoxProps) {
                 </Title>
                 <Text color='dimmed' size='sm'>
                   Task stages simplified: Start with To Do, Doing, or Done—or
-                  craft a custom workflow tailored to your team. With Trello,
-                  there's no wrong approach.
+                  craft a custom workflow tailored to your team. With Agile
+                  Tasker, there's no wrong approach.
                 </Text>
               </Card>
               <Card shadow='sm' padding='lg' radius='md' withBorder>
