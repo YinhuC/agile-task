@@ -42,14 +42,10 @@ export class CategoryService {
   }
 
   async getCategoryById(categoryId: number): Promise<Category> {
-    const project = await this.categoryRepository.findOne({
+    return await this.categoryRepository.findOneOrFail({
       where: { id: categoryId },
       relations: ['project'],
     });
-    if (!project) {
-      throw new NotFoundException(`Category with ID ${categoryId} not found`);
-    }
-    return project;
   }
 
   async createCategory(

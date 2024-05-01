@@ -26,13 +26,7 @@ export class GroupService {
   }
 
   async getGroupById(groupId: number): Promise<Group> {
-    const group = await this.groupRepository.findOne({
-      where: { id: groupId },
-    });
-    if (!group) {
-      throw new NotFoundException('Group not found');
-    }
-    return group;
+    return await this.groupRepository.findOneOrFail({ where: { id: groupId } });
   }
 
   private async getGroupWithOwner(id: number): Promise<Group> {
@@ -99,7 +93,7 @@ export class GroupService {
   }
 
   async deleteGroup(id: number): Promise<Group> {
-    const group = this.getGroupById(id);
+    const group = await this.getGroupById(id);
     const result = await this.groupRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`Group with ID ${id} not found`);
